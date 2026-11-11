@@ -3,11 +3,11 @@ title: "Recipe: Send Multiple Documents to the Same Group of Signers"
 description: Batch several documents together and route them all to a signing group in one shot.
 ---
 
-For the case where the same set of people needs to sign several unrelated documents — payroll for a whole team, a stack of NDAs for the same two counterparties — rather than running the single-document flow N times.
+Use this when the same set of people must sign several unrelated documents. Examples: payroll for a whole team, or a stack of NDAs for the same two counterparties. It replaces running the single-document flow N times.
 
 ## 1. Look up the signing group
 
-Groups are created in the dashboard, not via the API — this just resolves the UUID of one you've already set up.
+You create groups in the dashboard, not via the API — this just resolves the UUID of one you've already set up.
 
 ```php
 $groups = $client->groups->find('{uuid_safe}'); // GET /groups/{uuid_safe}
@@ -40,7 +40,7 @@ $batch = $client->request('/batches', 'POST', ['keys' => json_encode($uuids)], 2
 ```
 
 :::caution
-`Batches`/`batches` as a service exists in the SDK's source but isn't wired into `Client` — `$client->batches` doesn't exist. `$client->request()` (shown above) is the `ClientBase` method every generated service method calls internally; it's public, so you can call it the same way for anything the SDK hasn't gotten around to wrapping. See [Using the PHP SDK](/d4sign-api/sdk/php/) for other gaps.
+The `Batches`/`batches` service class exists in the SDK's source, but `Client` never wires it in — `$client->batches` doesn't exist. `$client->request()` (shown above) is the `ClientBase` method every generated service method calls internally. It is public, so you can call it the same way for anything the SDK hasn't gotten around to wrapping. See [Using the PHP SDK](/d4sign-api/sdk/php/) for other gaps.
 :::
 
 Max 25 documents per batch.

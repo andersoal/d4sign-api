@@ -3,7 +3,7 @@ title: "Recipe: Upload, Send, and React to Completion"
 description: The most common end-to-end flow — upload a document, collect signatures, and get notified when it's done.
 ---
 
-The default path from "I have a PDF" to "it's signed and I have the final file," combining [Documents](/d4sign-api/guides/core-workflows/), [Webhooks](/d4sign-api/guides/webhooks/), and download. Each step links to the full parameter list instead of repeating it here.
+This is the default path from "I have a PDF" to "it is signed and I have the final file." It combines [Documents](/d4sign-api/guides/core-workflows/), [Webhooks](/d4sign-api/guides/webhooks/), and download. Each step links to the full parameter list instead of repeating it here.
 
 ## 1. Upload the document
 
@@ -19,7 +19,7 @@ See [Getting Started](/d4sign-api/guides/getting-started/) for the raw HTTP form
 
 ## 2. Register a webhook once, at the safe (not per document)
 
-Do this once per safe, not per document — every document uploaded into that safe is covered from then on.
+Do this once per safe, not per document. This webhook then covers every document you upload into that safe, from then on.
 
 ```http
 POST https://secure.d4sign.com.br/api/v1/webhooks/v2/
@@ -43,7 +43,7 @@ Full signer field list (ICP-Brasil certs, PIX auth, D4Sign Score, ...) in [Core 
 
 ## 4. Handle the webhook — don't poll
 
-Your endpoint receives a `POST` when the document is signed, finished, or canceled (`type_post` `1`/`3`/`4`). Check the `Content-Hmac` header before acting on it:
+Your endpoint receives a `POST` when the document is signed, finished, or canceled (`type_post` `1`/`3`/`4`). Verify the `Content-Hmac` header before acting on it:
 
 ```php
 // $secret = your account's webhook secret key

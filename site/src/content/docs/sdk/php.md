@@ -3,7 +3,7 @@ title: Using the PHP SDK
 description: Install and use the original D4Sign PHP client.
 ---
 
-This repository ships the original D4Sign PHP client, now living at [`sdk/php/`](https://github.com/andersoal/d4sign-api/tree/master/sdk/php). It's one way to call the API — see the [API Reference](/d4sign-api/reference/) if you'd rather call the REST endpoints directly, or [Bruno Collection](/d4sign-api/tools/bruno/) to explore them without writing code.
+This repository ships the original D4Sign PHP client, now living at [`sdk/php/`](https://github.com/andersoal/d4sign-api/tree/master/sdk/php). This is one way to call the API. See the [API Reference](/d4sign-api/reference/) if you would rather call the REST endpoints directly, or the [Bruno Collection](/d4sign-api/tools/bruno/) to explore them without writing code.
 
 :::caution
 Requires PHP ≥ 5.5. The SDK predates this documentation rewrite and covers a subset of the full API (documents, safes, templates, folders, account, users, groups, tags, certificates). For anything it doesn't expose, call the REST endpoint directly per the [API Reference](/d4sign-api/reference/).

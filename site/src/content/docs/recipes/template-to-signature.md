@@ -3,7 +3,7 @@ title: "Recipe: Generate a Document from a Template and Send It"
 description: Skip the upload step entirely — fill a template and send it straight for signature.
 ---
 
-For contracts that are mostly boilerplate with a few fields that change (name, CPF, amount, ...), generate the document from a template instead of uploading a PDF each time.
+Use this for contracts that are mostly boilerplate, with a few fields that change (name, CPF, amount, ...). Generate the document from a template instead of uploading a PDF each time.
 
 ## 1. Find the template's ID
 
