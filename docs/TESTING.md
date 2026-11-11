@@ -1,6 +1,6 @@
 # Testing against the real D4Sign API
 
-This repo uses [mise](https://mise.jdx.dev/) to manage `tokenAPI`/`cryptKey`/`baseUrl` as shell environment variables, shared between a plain terminal, the [Bruno](https://www.usebruno.com/) GUI, and the Bruno CLI (`bru`) — one place to set credentials, several ways to use them.
+This repo uses [mise](https://mise.jdx.dev/) to manage `tokenAPI`/`cryptKey`/`baseUrl` as shell environment variables. A plain terminal, the [Bruno](https://www.usebruno.com/) GUI, and the Bruno CLI (`bru`) all share these same variables. You set credentials in one place and use them in several ways.
 
 ## One-time setup
 
@@ -30,9 +30,9 @@ After this, any new PowerShell session opened inside this repo has `$env:tokenAP
 
 ## Running requests
 
-**Bruno GUI** — open `collections/bruno/` as a collection, pick the `Sandbox` or `Production` environment, and set `tokenAPI`/`cryptKey` as environment secrets (Bruno's own encrypted store — separate from mise, but you can paste the same values `mise env --values` prints).
+**Bruno GUI** — open `collections/bruno/` as a collection, pick the `Sandbox` or `Production` environment, and set `tokenAPI`/`cryptKey` as environment secrets. This is Bruno's own encrypted store, separate from mise, but you can paste in the same values that `mise env --values` prints.
 
-Alternative that skips re-entering secrets into Bruno entirely: **launch Bruno Desktop from a mise-activated PowerShell session** (`cd` into this repo first, then run `bruno`, not a pinned shortcut — a shortcut launched from Explorer never sees mise's env vars). Bruno resolves `{{process.env.tokenAPI}}`/`{{process.env.cryptKey}}` from its own OS process environment, so any field can reference those directly instead of `{{tokenAPI}}`. If Bruno was already running before you set this up, quit and relaunch it from that terminal — an already-running process keeps whatever env it started with.
+Alternative that skips re-entering secrets into Bruno entirely: **launch Bruno Desktop from a mise-activated PowerShell session.** `cd` into this repo first, then run `bruno`, not a pinned shortcut. A shortcut launched from Explorer never sees mise's env vars. Bruno resolves `{{process.env.tokenAPI}}`/`{{process.env.cryptKey}}` from its own OS process environment. Because of this, any field can reference those directly instead of `{{tokenAPI}}`. If Bruno was already running before you set this up, quit it and relaunch it from that terminal. An already-running process keeps the environment it had when you launched it.
 
 **Bruno CLI**, from `collections/bruno/`:
 
@@ -52,4 +52,4 @@ mise run bruno-smoke
 curl "$env:baseUrl/api/v1/safes?tokenAPI=$env:tokenAPI&cryptKey=$env:cryptKey"
 ```
 
-A `200` with your real safes back confirms the request/response shape documented in the [API Reference](../site/src/content/docs/guides/getting-started.md) and the [Bruno collection](../collections/bruno/README.md) matches the live API. A `401` means check the credentials and environment (Sandbox vs. Production — they're not interchangeable, see the [Environments guide](../site/src/content/docs/guides/environments.md)); a `429` means you've hit the 10-requests/hour rate limit.
+A `200` with your real safes back means the request/response shape documented in the [API Reference](../site/src/content/docs/guides/getting-started.md) and the [Bruno collection](../collections/bruno/README.md) matches the live API. A `401` means check the credentials and environment. Sandbox and Production are not interchangeable — see the [Environments guide](../site/src/content/docs/guides/environments.md). A `429` means you have hit the 10-requests/hour rate limit.
