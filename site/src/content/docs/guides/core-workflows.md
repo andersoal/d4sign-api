@@ -3,7 +3,7 @@ title: Core Workflows
 description: Register signers, send for signature, and manage documents end to end.
 ---
 
-Continuing from [Getting Started](/d4sign-api/guides/getting-started/): once a document is uploaded into a safe, these are the requests you'll use most. Full parameter lists live in the [API Reference](/d4sign-api/reference/).
+Continuing from [Getting Started](/d4sign-api/guides/getting-started/): once you upload a document into a safe, these are the requests you'll use most. Full parameter lists live in the [API Reference](/d4sign-api/reference/).
 
 ## Register signers
 
@@ -44,7 +44,7 @@ $signers = [
 $client->documents->createList('{uuid_document}', $signers);
 ```
 
-`act` sets what the signer does — the common ones are `1` sign, `2` approve, `3` acknowledge, `5` witness; D4Sign supports 13 values (sign as party, guarantor, etc.) — see the [reference](/d4sign-api/reference/operations/documentssignatoriescreate/) for the full list, plus options for ICP-Brasil certificates, document+selfie auth, PIX auth, and D4Sign Score.
+`act` sets what the signer does. The common ones are `1` sign, `2` approve, `3` acknowledge, `5` witness. D4Sign supports 13 values in total (sign as party, guarantor, etc.) — see the [reference](/d4sign-api/reference/operations/documentssignatoriescreate/) for the full list, plus options for ICP-Brasil certificates, document+selfie auth, PIX auth, and D4Sign Score.
 
 To put several signers in the same signing group instead of listing each one, look up an existing group's UUID:
 
@@ -103,7 +103,7 @@ Resend is rate-limited per signer: 1st resend after 1 minute, 2nd after 5 minute
 
 ## Batching documents
 
-Group up to 25 already-uploaded documents into a single batch (`POST /batches` with their UUIDs in `keys`) — useful for operations that work on a set of documents at once.
+Group up to 25 already-uploaded documents into a single batch: `POST /batches` with their UUIDs in `keys`. This is useful for operations that work on a set of documents at once.
 
 ## List users
 
@@ -116,5 +116,5 @@ Paginated with `pg`. See [Users](/d4sign-api/reference/) in the reference for `c
 :::note[Gotchas]
 - Always send `tokenAPI` and `cryptKey` — see [Authentication](/d4sign-api/guides/authentication/).
 - `skip_email` must be `1` when using EMBED or in-person signing (`assinatura_presencial`).
-- Uploads and some document operations run in the background; poll or use a [webhook](/d4sign-api/guides/webhooks/) instead of assuming immediate completion.
+- Uploads and some document operations run in the background. Poll, or use a [webhook](/d4sign-api/guides/webhooks/), instead of assuming immediate completion.
 :::

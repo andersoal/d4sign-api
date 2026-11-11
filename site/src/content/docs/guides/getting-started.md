@@ -38,7 +38,7 @@ uuid_folder={uuid_folder}   # optional
 workflow=2
 ```
 
-Every document lives inside a **safe** (`uuid_safe`), an encrypted vault — it's required. The upload runs in the background: you get a `uuid` back immediately, and the document is processed (encrypted, serial-stamped, preview generated) asynchronously.
+Every document lives inside a **safe** (`uuid_safe`), an encrypted vault. The safe is required. The upload runs in the background: you get a `uuid` back immediately, and D4Sign processes the document (encrypts it, serial-stamps it, generates a preview) asynchronously.
 
 Using the PHP SDK instead:
 

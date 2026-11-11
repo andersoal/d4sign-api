@@ -3,7 +3,7 @@ title: Authentication
 description: How tokenAPI and cryptKey work across the D4Sign API.
 ---
 
-Every request is authenticated with two account-level secrets:
+Two account-level secrets authenticate every request:
 
 - `tokenAPI`
 - `cryptKey`
@@ -16,7 +16,7 @@ tokenAPI: {tokenAPI}
 ```
 
 :::tip
-Sending `tokenAPI` as both a header and a query parameter is the documented recommendation (the header alone is not officially guaranteed to be enough on every endpoint). Always send both.
+Send `tokenAPI` as both a header and a query parameter. This is the documented recommendation. The header alone is not officially guaranteed to work on every endpoint. Always send both.
 :::
 
 `cryptKey` only needs to be sent if it's enabled on your account — find both values under **Dev API** in your D4Sign account settings. Contact suporte@d4sign.com.br if you can't locate them.

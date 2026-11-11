@@ -9,7 +9,7 @@ EMBED is D4Sign's front-end component: it shows the signing flow inside an ifram
 EMBED must be activated on your account first — contact suporte@d4sign.com.br.
 :::
 
-The document must already be in the **Awaiting Signatures** phase (sent via [`sendtosigner`](/d4sign-api/guides/core-workflows/) with `skip_email: 1`, since there's no need for an email link when the signer is right there in your UI). A document still in **Awaiting Signers** won't render.
+The document must already be in the **Awaiting Signatures** phase. Send it there via [`sendtosigner`](/d4sign-api/guides/core-workflows/) with `skip_email: 1` — you do not need an email link when the signer is already in your UI. A document still in **Awaiting Signers** will not render.
 
 ## Single document
 
@@ -57,7 +57,7 @@ The document must already be in the **Awaiting Signatures** phase (sent via [`se
 
 | Parameter | Required | Purpose |
 | --- | --- | --- |
-| `key` | Yes | UUID of the document to display. |
+| `key` | Yes | UUID of the document to show. |
 | `host` | Yes | `https://secure.d4sign.com.br/embed/viewblob`. |
 | `container` | Yes | DOM id of the `<div>` that receives the iframe. |
 | `signer_email` | Yes | Signer's email. |
@@ -71,8 +71,8 @@ The `message` event fires `"signed"` or `"wrong-data"` — handle both.
 
 ## Batches
 
-To embed a whole [batch](/d4sign-api/guides/core-workflows/#batching-documents) instead of one document: create it first with `POST /batches`, then use the same snippet with two changes — `key` is the batch's `uuid_batches`, and `host` is `https://secure.d4sign.com.br/embedlote/viewblob`. Every other parameter stays the same.
+To embed a whole [batch](/d4sign-api/guides/core-workflows/#batching-documents) instead of one document, create it first with `POST /batches`. Then use the same snippet with two changes: `key` is the batch's `uuid_batches`, and `host` is `https://secure.d4sign.com.br/embedlote/viewblob`. Every other parameter stays the same.
 
 ## SSO (SAML 2.0)
 
-Separate feature, unrelated to the REST API this repo documents — D4Sign supports SAML 2.0 single sign-on via Azure AD or Google Workspace for logging into the D4Sign dashboard itself, not for signing. See D4Sign's own guide: [Introdução ao SSO](https://docapi.d4sign.com.br/docs/introdução-ao-sso).
+This is a separate feature, unrelated to the REST API this repo documents. D4Sign supports SAML 2.0 single sign-on, via Azure AD or Google Workspace, for logging into the D4Sign dashboard itself — not for signing. See D4Sign's own guide: [Introdução ao SSO](https://docapi.d4sign.com.br/docs/introdução-ao-sso).
