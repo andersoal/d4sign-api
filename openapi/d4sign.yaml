@@ -390,9 +390,9 @@ paths:
 
         :::highlight orange 📌
 
-        Obs.: Para criar o documento em um cofre, é importante revisar a opção
-        **Compartilhar** nas **Opções do template** em um template HTML, será
-        preciso ter as permissões de acesso "Administrador" ou "Padrão".
+        Obs.: Para criar o documento em um cofre, revise a opção
+        **Compartilhar** nas **Opções do template**, em um template HTML. É
+        preciso ter a permissão de acesso "Administrador" ou "Padrão".
 
         :::
 
@@ -540,7 +540,7 @@ paths:
     post:
       summary: Make document by Template WORD
       deprecated: false
-      description: "Esse objeto irá gerar um documento em seu cofre a partir de um template word.\n\n\n:::highlight orange 📌\nPara criar o documento em um cofre, é importante revisar a opção **Compartilhar** nas **Opções do template** em um template Word, será preciso ter as permissões de acesso \"Administrador\" ou \"Padrão\".\n:::\n\n\n# Caso Documento a partir do template WORD com mais de 1 preenchedor\n\n```json\n{\n    \"name_document\": \"Nome do documento\",\n    \"uuid_folder (opcional)\": \"{UUID DA PASTA}\",\n  \n    \"templates\": {\n       \"id_template\": {\n         \n        \"persona 1\":{\n\t    \t\t\t\"variavel 1\": \"valor 1\",\n\t    \t\t\t\"variavel 2\": \"valor 2\",\n\t    \t{...},\n        \n        \"persona 2\":{\n\t    \t\t\t\"variavel 1\": \"valor 1\",\n\t    \t\t\t\"variavel 2\": \"valor 2\",\n\t    \t{...},\n         \n         \"tokens_gerais\":{\n\t    \t\t\t\"variavel 1\": \"valor 1\",\n\t    \t\t\t\"variavel 2\": \"valor 2\",\n\t    \t{...}\n        \n\t    }\n   }\n}\n```\nExemplo\n```json\n\n{\n   \"name_document\":\"Modelo template para contrato com 2 preenchedores API\",\n   \"templates\":\n      {\n         \"MTIwMDcy=\":{\n            \"organizador\": {\n               \"nome_completo\":\"VALOR TESTE\",\n                \"nome\":\"VALOR TESTE\",\n                \"endereco_organizador\":\"VALOR TESTE\",\n                \"valor_total\":\"VALOR TESTE\",\n                \"nome_da_empresa\":\"VALOR TESTE\",\n                \"nome_do_representante_da_empresa\":\"VALOR TESTE\",\n                \"endereco_da_empresa\":\"VALOR TESTE\",\n                \"telefone_da_empresa\":\"VALOR TESTE 2\",\n                \"cargo_do_representante_da_empresa\":\"VALOR TESTE\",\n                \"e_mail_do_organizador_do_evento\":\"VALOR TESTE\"\n            },\n            \"cliente\": {\n                \"nome_completo\":\"VALOR TESTE 1\",\n                \"nome\":\"VALOR TESTE 1\",\n                \"endereco_cliente\":\"VALOR TESTE 1\",\n                \"endereco_do_cliente\":\"VALOR TESTE 1\",\n                \"telefone_do_cliente\":\"VALOR TESTE 1\",\n                \"e_mail_do_cliente\":\"VALOR TESTE 1\",\n                \"numero_de_cpf_ou_cnpj_do_cliente\":\"VALOR TESTE 1\"\n            },\n            \"tokens_gerais\": {\n                \"endereco\":\"VALOR Tokens Gerais\",\n                \"nome_completo\":\"VALOR Tokens Gerais\",\n                \"nome_do_evento\":\"VALOR Tokens Gerais\",\n                \"data_assinatura\":\"VALOR Tokens Gerais\",\n                \"nome_evento\":\"VALOR Tokens Gerais\",\n                \"data_evento\":\"VALOR Tokens Gerais\",\n                \"hora_inicio_evento\":\"VALOR Tokens Gerais\",\n                \"hora_termino_evento\":\"VALOR Tokens Gerais\",\n                \"local_evento\":\"VALOR Tokens Gerais\",\n                \"descricao\":\"VALOR Tokens Gerais\",\n                \"estado\":\"VALOR Tokens Gerais\",\n                \"local_e_data_da_assinatura\":\"VALOR Tokens Gerais\"\n            }\n        }\n      }\n}\n```"
+      description: "Esse objeto irá gerar um documento em seu cofre a partir de um template word.\n\n\n:::highlight orange 📌\nPara criar o documento em um cofre, revise a opção **Compartilhar** nas **Opções do template**, em um template Word. É preciso ter a permissão de acesso \"Administrador\" ou \"Padrão\".\n:::\n\n\n# Caso Documento a partir do template WORD com mais de 1 preenchedor\n\n```json\n{\n    \"name_document\": \"Nome do documento\",\n    \"uuid_folder (opcional)\": \"{UUID DA PASTA}\",\n  \n    \"templates\": {\n       \"id_template\": {\n         \n        \"persona 1\":{\n\t    \t\t\t\"variavel 1\": \"valor 1\",\n\t    \t\t\t\"variavel 2\": \"valor 2\",\n\t    \t{...},\n        \n        \"persona 2\":{\n\t    \t\t\t\"variavel 1\": \"valor 1\",\n\t    \t\t\t\"variavel 2\": \"valor 2\",\n\t    \t{...},\n         \n         \"tokens_gerais\":{\n\t    \t\t\t\"variavel 1\": \"valor 1\",\n\t    \t\t\t\"variavel 2\": \"valor 2\",\n\t    \t{...}\n        \n\t    }\n   }\n}\n```\nExemplo\n```json\n\n{\n   \"name_document\":\"Modelo template para contrato com 2 preenchedores API\",\n   \"templates\":\n      {\n         \"MTIwMDcy=\":{\n            \"organizador\": {\n               \"nome_completo\":\"VALOR TESTE\",\n                \"nome\":\"VALOR TESTE\",\n                \"endereco_organizador\":\"VALOR TESTE\",\n                \"valor_total\":\"VALOR TESTE\",\n                \"nome_da_empresa\":\"VALOR TESTE\",\n                \"nome_do_representante_da_empresa\":\"VALOR TESTE\",\n                \"endereco_da_empresa\":\"VALOR TESTE\",\n                \"telefone_da_empresa\":\"VALOR TESTE 2\",\n                \"cargo_do_representante_da_empresa\":\"VALOR TESTE\",\n                \"e_mail_do_organizador_do_evento\":\"VALOR TESTE\"\n            },\n            \"cliente\": {\n                \"nome_completo\":\"VALOR TESTE 1\",\n                \"nome\":\"VALOR TESTE 1\",\n                \"endereco_cliente\":\"VALOR TESTE 1\",\n                \"endereco_do_cliente\":\"VALOR TESTE 1\",\n                \"telefone_do_cliente\":\"VALOR TESTE 1\",\n                \"e_mail_do_cliente\":\"VALOR TESTE 1\",\n                \"numero_de_cpf_ou_cnpj_do_cliente\":\"VALOR TESTE 1\"\n            },\n            \"tokens_gerais\": {\n                \"endereco\":\"VALOR Tokens Gerais\",\n                \"nome_completo\":\"VALOR Tokens Gerais\",\n                \"nome_do_evento\":\"VALOR Tokens Gerais\",\n                \"data_assinatura\":\"VALOR Tokens Gerais\",\n                \"nome_evento\":\"VALOR Tokens Gerais\",\n                \"data_evento\":\"VALOR Tokens Gerais\",\n                \"hora_inicio_evento\":\"VALOR Tokens Gerais\",\n                \"hora_termino_evento\":\"VALOR Tokens Gerais\",\n                \"local_evento\":\"VALOR Tokens Gerais\",\n                \"descricao\":\"VALOR Tokens Gerais\",\n                \"estado\":\"VALOR Tokens Gerais\",\n                \"local_e_data_da_assinatura\":\"VALOR Tokens Gerais\"\n            }\n        }\n      }\n}\n```"
       operationId: documentsTemplatePostWord
       tags:
       - Documents Templates
@@ -661,7 +661,7 @@ paths:
       description: |
         Gera um documento a partir de um template Word com rubricas posicionadas por token, no cofre informado.
 
-        Fluxo: liste os templates (`POST /templates`) para obter o `id`, liste os cofres (`GET /safes`) para obter o `uuid_safe`, e então use este endpoint informando `templates.{id}.{token}` = e-mail do signatário correspondente a cada rubrica.
+        Fluxo: liste os templates (`POST /templates`) para obter o `id`. Liste os cofres (`GET /safes`) para obter o `uuid_safe`. Então use este endpoint informando `templates.{id}.{token}` = e-mail do signatário correspondente a cada rubrica.
       operationId: documentsTemplateWordRubric
       tags:
       - Documents Templates
@@ -712,8 +712,8 @@ paths:
         realizado em background, ou seja, a requisição não ficará bloqueada.
 
 
-        Todos os documentos ficam armazenados em COFRES criptografados, ou seja,
-        o parâmetro `uuid_safe` é obrigatório e determina em qual cofre o
+        Todos os documentos ficam armazenados em COFRES criptografados. O
+        parâmetro `uuid_safe` é obrigatório. Ele determina em qual cofre o
         documento ficará armazenado.
 
 
@@ -820,8 +820,8 @@ paths:
         realizado em background, ou seja, a requisição não ficará bloqueada.
 
 
-        Todos os documentos ficam armazenados em COFRES criptografados, ou seja,
-        o parâmetro `uuid_safe` é obrigatório e determina em qual cofre o
+        Todos os documentos ficam armazenados em COFRES criptografados. O
+        parâmetro `uuid_safe` é obrigatório. Ele determina em qual cofre o
         documento ficará armazenado.
 
       operationId: documentsUploadFileBinary
@@ -1331,7 +1331,7 @@ paths:
         | Parâmetro | Descrição |
         | --- | --- |
         | `language` (opcional) | `pt` ou `en`. |
-        | `type` (opcional) | Omitir para PDF; `pdfa` para PDF/A. |
+        | `type` (opcional) | Omitir para PDF. Usar `pdfa` para PDF/A. |
         | `documents` (obrigatório) | Mapa `{uuid-documento: "1"|"0"}` — `1` inclui a hash/certificado junto ao documento. |
 
         > O documento precisa estar finalizado (todos os signatários assinaram).
@@ -1434,9 +1434,9 @@ paths:
         carimbado com um número de série.
 
 
-        Todos os documentos ficam armazenados em COFRES criptografados, ou seja,
-        o parâmetro UUID-SAFE é obrigatório e determina em qual cofre o hash de
-        documento ficará armazenado.
+        Todos os documentos ficam armazenados em COFRES criptografados. O
+        parâmetro UUID-SAFE é obrigatório. Ele determina em qual cofre o hash
+        de documento ficará armazenado.
       operationId: documentsUploadHash
       tags:
       - Documents Upload/Download
@@ -1667,9 +1667,9 @@ paths:
     post:
       summary: Create signature list (Add Signatories or Group)
       deprecated: false
-      description: "Esse objeto realizará o cadastro dos signatários do documento, ou seja, quais pessoas precisam assinar esse documento.\n\n<AccordionGroup>\n  <Accordion title=\"Case para Incluir Signatários\" defaultOpen>\n   <Columns>\n  \n      <Column>\n      Requisição\n    ```json\n{\n    \"signers\" : [\n        {\n            \"email\": \"email@dominio.com\",\n            \"act\": \"1\",\n            \"foreign\": \"1\",\n            \"certificadoicpbr\": \"0\",\n            \"assinatura_presencial\": \"0\",\n            \"docauth\": \"0\",\n            \"docauthandselfie\": \"0\",\n       \t    \"embed_methodauth\": \"email\",\n      \t    \"embed_smsnumber\": \"\",\n      \t    \"upload_allow\": \"0\",\n      \t    \"upload_obs\": \"Contrato Social e Conta de Luz\",\n      \t    \"whatsapp_number\": \"+5511981876540\" (opcional),\n      \t    \"uuid_grupo\": \"UUID DO GRUPO\" (opcional),\n      \t    \"certificadoicpbr_tipo\": \"2\" (opcional),\n      \t    \"certificadoicpbr_cpf\": \"CPF\" (opcional),\n      \t    \"certificadoicpbr_cnpj\": \"CNPJ\" (opcional),\n      \t    \"password_code\": \"Código de acesso\" (opcional),\n      \t    \"auth_pix\": \"0\" (opcional),\n      \t    \"auth_pix_nome\": \"Nome do signatário\" (opcional),\n      \t    \"auth_pix_cpf\": \"21917876280\" (opcional),\n      \t    \"videoselfie\": \"0\" (opcional),\n      \t    \"d4sign_score\": \"0\" (opcional),\n      \t    \"d4sign_score_nome\": \"Nome do signatário\" (opcional),\n      \t    \"d4sign_score_cpf\": \"21917876280\" (opcional),\n            \"d4sign_score_similarity\": \"90\" (min 70 - max 90)(opcional),\n            \"skipemail\": \"1\"(opcional)\n        },\n        {...}\n        ]\n}\n```\n  </Column>\n  <Column>\n      Resposta\n    ```json\n      {\n    \"key_signer\": \"NwYu=\",\n    \"email\": \"email@user.com.br\",\n    \"act\": \"1\",\n    \"foreign\": \"0\",\n    \"certificadoicpbr\": \"0\",\n    \"assinatura_presencial\": \"0\",\n    \"assinatura_presencial_link\": \"LINK PARA ASSINATURA PRESENCIAL\" - O link só será exibido depois que o documento for enviado para assinatura,\n    \"doc_auth\": \"0\",\n    \"embed_methodauth\": \"email\",\n    \"embed_smsnumber\": \"\",\n    \"upload_allow\": \"0\",\n    \"upload_obs\": \"Contrato Social e Conta de Luz\",\n    \"docauthandselfie\": \"0\",\n    \"skipemail\": \"0\",\n    \"whatsapp\": \"\",\n    \"password_code\": \"\",\n    \"status\": \"created\"\n}\n    ```\n  </Column>\n</Columns>\n\n| Parâmetro | Descrição |\n| --- | --- |\n| email (obrigatório) | E-mail do signatário |\n| act (obrigatório) | Ação da assinatura. Valores permitidos:   1 = Assinar   2 = Aprovar   3 = Reconhecer   4 = Assinar como parte   5 = Assinar como testemunha   6 = Assinar como interveniente   7 = Acusar recebimento   8 = Assinar como Emissor, Endossante e Avalista   9 = Assinar como Emissor, Endossante, Avalista, Fiador   10 = Assinar como fiador   11 = Assinar como parte e fiador   12 = Assinar como responsável solidário   13 = Assinar como parte e responsável solidário |\n| foreign (obrigatório) | Indica se o signatário é estrangeiro. 0 = Possui CPF; 1 = Não possui CPF |\n| foreign\\_lang | Idioma do estrangeiro: en = Inglês, es = Espanhol, pt = Português |\n| certificadoicpbr (obrigatório) | 0 = Assinatura padrão D4Sign   1 = Assinatura com Certificado ICP-Brasil |\n| assinatura\\_presencial (obrigatório) | 1 = Assinatura presencial   0 = Não presencial |\n| docauth (opcional) | 1 = Exige documento com foto   0 = Não exige |\n| docauthandselfie (opcional) | 1 = Documento + selfie   0 = Não exige selfie |\n| embed\\_methodauth (opcional) | Método de autenticação: email, password, sms, whats |\n| embed\\_smsnumber (opcional) | Número do SMS ou WhatsApp no padrão (ex.: +5511953020202) |\n| upload\\_allow (opcional) | Indica se o signatário pode enviar outros documentos |\n| upload\\_obs (opcional) | Quais documentos o signatário deve enviar (se upload\\_allow = 1) |\n| after\\_position (opcional) | Define a posição após a qual o signatário será inserido na ordem |\n| skipemail (opcional)
-        | 1 = Não enviar e-mails ao signatário |\n| whatsapp\\_number (opcional) | Número de WhatsApp para assinatura |\n| uuid\\_grupo (opcional) | UUID do grupo de assinatura |\n| certificadoicpbr\\_tipo (opcional) | 1 = Qualquer certificado   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (opcional) | CPF do signatário. Em branco = qualquer e-CPF |\n| certificadoicpbr\\_cnpj (opcional) | CNPJ do signatário. Em branco = qualquer e-CNPJ |\n| password\\_code (opcional) | Código de acesso do signatário. Em branco remove código anterior |\n| auth\\_pix (opcional) | 1 = Autenticação via PIX |\n| auth\\_pix\\_nome | Nome obrigatório se auth\\_pix = 1 |\n| auth\\_pix\\_cpf | CPF obrigatório se auth\\_pix = 1 |\n| sms-number (obrigatório) | NOVO número de SMS do signatário |\n| key-signer | Chave do signatário |\n| videoselfie | 1 = Exige vídeo selfie |\n| d4sign\\_score (opcional) | Ativa D4Sign Score. Requer CNH + docauthandselfie = 1 ou videoselfie = 1 |\n| d4sign\\_score\\_nome | Nome obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | CPF obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | Nível de similaridade exigida (min: 70, max: 90) |\n  </Accordion>\n  <Accordion title=\"Case para Inserir Grupos de Signatários a um Documento\">\n\n| Parâmetro | Descrição |\n| --- | --- |\n| email (obrigatório) | E-mail do signatário |\n| act (obrigatório) | Ação da assinatura. Valores permitidos:   1 = Assinar   2 = Aprovar   3 = Reconhecer   4 = Assinar como parte   5 = Assinar como testemunha   6 = Assinar como interveniente   7 = Acusar recebimento   8 = Assinar como Emissor, Endossante e Avalista   9 = Assinar como Emissor, Endossante, Avalista, Fiador   10 = Assinar como fiador   11 = Assinar como parte e fiador   12 = Assinar como responsável solidário   13 = Assinar como parte e responsável solidário |\n| foreign (obrigatório) | Indica se o signatário é estrangeiro. 0 = Possui CPF; 1 = Não possui CPF |\n| foreign\\_lang | Idioma do estrangeiro: en = Inglês, es = Espanhol, pt = Português |\n| certificadoicpbr (obrigatório) | 0 = Assinatura padrão D4Sign   1 = Assinatura com Certificado ICP-Brasil |\n| assinatura\\_presencial (obrigatório) | 1 = Assinatura presencial   0 = Não presencial |\n| docauth (opcional) | 1 = Exige documento com foto   0 = Não exige |\n| docauthandselfie (opcional) | 1 = Documento + selfie   0 = Não exige selfie |\n| embed\\_methodauth (opcional) | Método de autenticação: email, password, sms, whats |\n| embed\\_smsnumber (opcional) | Número do SMS ou WhatsApp no padrão (ex.: +5511953020202) |\n| upload\\_allow (opcional) | Indica se o signatário pode enviar outros documentos |\n| upload\\_obs (opcional) | Quais documentos o signatário deve enviar (se upload\\_allow = 1) |\n| after\\_position (opcional) | Define a posição após a qual o signatário será inserido na ordem |\n| skipemail (opcional) | 1 = Não enviar e-mails ao signatário |\n| whatsapp\\_number (opcional) | Número de WhatsApp para assinatura |\n| uuid\\_grupo (opcional) | UUID do grupo de assinatura |\n| certificadoicpbr\\_tipo (opcional) | 1 = Qualquer certificado   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (opcional) | CPF do signatário. Em branco = qualquer e-CPF |\n| certificadoicpbr\\_cnpj (opcional) | CNPJ do signatário. Em branco = qualquer e-CNPJ |\n| password\\_code (opcional) | Código de acesso do signatário. Em branco remove código anterior |\n| auth\\_pix (opcional) | 1 = Autenticação via PIX |\n| auth\\_pix\\_nome | Nome obrigatório se auth\\_pix = 1 |\n| auth\\_pix\\_cpf | CPF obrigatório se auth\\_pix = 1 |\n| sms-number (obrigatório) | NOVO número de SMS do signatário |\n| key-signer | Chave do signatário |\n| videoselfie | 1 = Exige vídeo selfie |\n| d4sign\\_score (opcional) | Ativa D4Sign Score. Requer CNH + docauthandselfie = 1 ou videoselfie = 1 |\n| d4sign\\_score\\_nome | Nome obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | CPF obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | Nível de similaridade exigida (min: 70, max: 90) |\n\nConforme imagem acima
-        (onde act significa o tipo de ação que este grupo terá no processo de assinatura, como assinar, aprovar, etc; e uuid\\_grupo é o uuid do grupo presente no mesmo cofre que este documento, que pode ser consultado a partir de outro endpoint já existente e funcional na documentação:\n      \n      \n  </Accordion>\n  <Accordion title=\"Case Adcionar Trust ID (Verificação Extra)\">\n    https://docapi.d4sign.com.br/docs/endpoints-2#adicionar-trust-id-verifica%C3%A7%C3%A3o-extra\n  </Accordion>\n</AccordionGroup>\n\n\n"
+      description: "Esse objeto realizará o cadastro dos signatários do documento, ou seja, quais pessoas precisam assinar esse documento.\n\n<AccordionGroup>\n  <Accordion title=\"Case para Incluir Signatários\" defaultOpen>\n   <Columns>\n  \n      <Column>\n      Requisição\n    ```json\n{\n    \"signers\" : [\n        {\n            \"email\": \"email@dominio.com\",\n            \"act\": \"1\",\n            \"foreign\": \"1\",\n            \"certificadoicpbr\": \"0\",\n            \"assinatura_presencial\": \"0\",\n            \"docauth\": \"0\",\n            \"docauthandselfie\": \"0\",\n       \t    \"embed_methodauth\": \"email\",\n      \t    \"embed_smsnumber\": \"\",\n      \t    \"upload_allow\": \"0\",\n      \t    \"upload_obs\": \"Contrato Social e Conta de Luz\",\n      \t    \"whatsapp_number\": \"+5511981876540\" (opcional),\n      \t    \"uuid_grupo\": \"UUID DO GRUPO\" (opcional),\n      \t    \"certificadoicpbr_tipo\": \"2\" (opcional),\n      \t    \"certificadoicpbr_cpf\": \"CPF\" (opcional),\n      \t    \"certificadoicpbr_cnpj\": \"CNPJ\" (opcional),\n      \t    \"password_code\": \"Código de acesso\" (opcional),\n      \t    \"auth_pix\": \"0\" (opcional),\n      \t    \"auth_pix_nome\": \"Nome do signatário\" (opcional),\n      \t    \"auth_pix_cpf\": \"21917876280\" (opcional),\n      \t    \"videoselfie\": \"0\" (opcional),\n      \t    \"d4sign_score\": \"0\" (opcional),\n      \t    \"d4sign_score_nome\": \"Nome do signatário\" (opcional),\n      \t    \"d4sign_score_cpf\": \"21917876280\" (opcional),\n            \"d4sign_score_similarity\": \"90\" (min 70 - max 90)(opcional),\n            \"skipemail\": \"1\"(opcional)\n        },\n        {...}\n        ]\n}\n```\n  </Column>\n  <Column>\n      Resposta\n    ```json\n      {\n    \"key_signer\": \"NwYu=\",\n    \"email\": \"email@user.com.br\",\n    \"act\": \"1\",\n    \"foreign\": \"0\",\n    \"certificadoicpbr\": \"0\",\n    \"assinatura_presencial\": \"0\",\n    \"assinatura_presencial_link\": \"LINK PARA ASSINATURA PRESENCIAL\" - O link só será exibido depois que o documento for enviado para assinatura,\n    \"doc_auth\": \"0\",\n    \"embed_methodauth\": \"email\",\n    \"embed_smsnumber\": \"\",\n    \"upload_allow\": \"0\",\n    \"upload_obs\": \"Contrato Social e Conta de Luz\",\n    \"docauthandselfie\": \"0\",\n    \"skipemail\": \"0\",\n    \"whatsapp\": \"\",\n    \"password_code\": \"\",\n    \"status\": \"created\"\n}\n    ```\n  </Column>\n</Columns>\n\n| Parâmetro | Descrição |\n| --- | --- |\n| email (obrigatório) | E-mail do signatário |\n| act (obrigatório) | Ação da assinatura. Valores permitidos:   1 = Assinar   2 = Aprovar   3 = Reconhecer   4 = Assinar como parte   5 = Assinar como testemunha   6 = Assinar como interveniente   7 = Acusar recebimento   8 = Assinar como Emissor, Endossante e Avalista   9 = Assinar como Emissor, Endossante, Avalista, Fiador   10 = Assinar como fiador   11 = Assinar como parte e fiador   12 = Assinar como responsável solidário   13 = Assinar como parte e responsável solidário |\n| foreign (obrigatório) | Indica se o signatário é estrangeiro. 0 = Possui CPF. 1 = Não possui CPF |\n| foreign\\_lang | Idioma do estrangeiro: en = Inglês, es = Espanhol, pt = Português |\n| certificadoicpbr (obrigatório) | 0 = Assinatura padrão D4Sign   1 = Assinatura com Certificado ICP-Brasil |\n| assinatura\\_presencial (obrigatório) | 1 = Assinatura presencial   0 = Não presencial |\n| docauth (opcional) | 1 = Exige documento com foto   0 = Não exige |\n| docauthandselfie (opcional) | 1 = Documento + selfie   0 = Não exige selfie |\n| embed\\_methodauth (opcional) | Método de autenticação: email, password, sms, whats |\n| embed\\_smsnumber (opcional) | Número do SMS ou WhatsApp no padrão (ex.: +5511953020202) |\n| upload\\_allow (opcional) | Indica se o signatário pode enviar outros documentos |\n| upload\\_obs (opcional) | Quais documentos o signatário deve enviar (se upload\\_allow = 1) |\n| after\\_position (opcional) | Define a posição após a qual o signatário será inserido na ordem |\n| skipemail (opcional)
+        | 1 = Não enviar e-mails ao signatário |\n| whatsapp\\_number (opcional) | Número de WhatsApp para assinatura |\n| uuid\\_grupo (opcional) | UUID do grupo de assinatura |\n| certificadoicpbr\\_tipo (opcional) | 1 = Qualquer certificado   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (opcional) | CPF do signatário. Em branco = qualquer e-CPF |\n| certificadoicpbr\\_cnpj (opcional) | CNPJ do signatário. Em branco = qualquer e-CNPJ |\n| password\\_code (opcional) | Código de acesso do signatário. Em branco remove código anterior |\n| auth\\_pix (opcional) | 1 = Autenticação via PIX |\n| auth\\_pix\\_nome | Nome obrigatório se auth\\_pix = 1 |\n| auth\\_pix\\_cpf | CPF obrigatório se auth\\_pix = 1 |\n| sms-number (obrigatório) | NOVO número de SMS do signatário |\n| key-signer | Chave do signatário |\n| videoselfie | 1 = Exige vídeo selfie |\n| d4sign\\_score (opcional) | Ativa D4Sign Score. Requer CNH + docauthandselfie = 1 ou videoselfie = 1 |\n| d4sign\\_score\\_nome | Nome obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | CPF obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | Nível de similaridade exigida (min: 70, max: 90) |\n  </Accordion>\n  <Accordion title=\"Case para Inserir Grupos de Signatários a um Documento\">\n\n| Parâmetro | Descrição |\n| --- | --- |\n| email (obrigatório) | E-mail do signatário |\n| act (obrigatório) | Ação da assinatura. Valores permitidos:   1 = Assinar   2 = Aprovar   3 = Reconhecer   4 = Assinar como parte   5 = Assinar como testemunha   6 = Assinar como interveniente   7 = Acusar recebimento   8 = Assinar como Emissor, Endossante e Avalista   9 = Assinar como Emissor, Endossante, Avalista, Fiador   10 = Assinar como fiador   11 = Assinar como parte e fiador   12 = Assinar como responsável solidário   13 = Assinar como parte e responsável solidário |\n| foreign (obrigatório) | Indica se o signatário é estrangeiro. 0 = Possui CPF. 1 = Não possui CPF |\n| foreign\\_lang | Idioma do estrangeiro: en = Inglês, es = Espanhol, pt = Português |\n| certificadoicpbr (obrigatório) | 0 = Assinatura padrão D4Sign   1 = Assinatura com Certificado ICP-Brasil |\n| assinatura\\_presencial (obrigatório) | 1 = Assinatura presencial   0 = Não presencial |\n| docauth (opcional) | 1 = Exige documento com foto   0 = Não exige |\n| docauthandselfie (opcional) | 1 = Documento + selfie   0 = Não exige selfie |\n| embed\\_methodauth (opcional) | Método de autenticação: email, password, sms, whats |\n| embed\\_smsnumber (opcional) | Número do SMS ou WhatsApp no padrão (ex.: +5511953020202) |\n| upload\\_allow (opcional) | Indica se o signatário pode enviar outros documentos |\n| upload\\_obs (opcional) | Quais documentos o signatário deve enviar (se upload\\_allow = 1) |\n| after\\_position (opcional) | Define a posição após a qual o signatário será inserido na ordem |\n| skipemail (opcional) | 1 = Não enviar e-mails ao signatário |\n| whatsapp\\_number (opcional) | Número de WhatsApp para assinatura |\n| uuid\\_grupo (opcional) | UUID do grupo de assinatura |\n| certificadoicpbr\\_tipo (opcional) | 1 = Qualquer certificado   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (opcional) | CPF do signatário. Em branco = qualquer e-CPF |\n| certificadoicpbr\\_cnpj (opcional) | CNPJ do signatário. Em branco = qualquer e-CNPJ |\n| password\\_code (opcional) | Código de acesso do signatário. Em branco remove código anterior |\n| auth\\_pix (opcional) | 1 = Autenticação via PIX |\n| auth\\_pix\\_nome | Nome obrigatório se auth\\_pix = 1 |\n| auth\\_pix\\_cpf | CPF obrigatório se auth\\_pix = 1 |\n| sms-number (obrigatório) | NOVO número de SMS do signatário |\n| key-signer | Chave do signatário |\n| videoselfie | 1 = Exige vídeo selfie |\n| d4sign\\_score (opcional) | Ativa D4Sign Score. Requer CNH + docauthandselfie = 1 ou videoselfie = 1 |\n| d4sign\\_score\\_nome | Nome obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | CPF obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | Nível de similaridade exigida (min: 70, max: 90) |\n\nConforme a tabela acima,
+        `act` é o tipo de ação que este grupo terá no processo de assinatura, como assinar ou aprovar. `uuid\\_grupo` é o UUID do grupo, presente no mesmo cofre deste documento. Você pode consultá-lo em outro endpoint, já existente e funcional, na documentação.\n      \n      \n  </Accordion>\n  <Accordion title=\"Case Adcionar Trust ID (Verificação Extra)\">\n    https://docapi.d4sign.com.br/docs/endpoints-2#adicionar-trust-id-verifica%C3%A7%C3%A3o-extra\n  </Accordion>\n</AccordionGroup>\n\n\n"
       operationId: documentsSignatoriesCreate
       tags:
       - Signatories
@@ -2447,7 +2447,7 @@ paths:
 
 
         É possível cadastrar um novo Assinar como que já exista (cadastrar um
-        Nome repetido), e cada vez que o cadastro é realizado ele gera um novo
+        Nome repetido). Cada vez que o cadastro é realizado, ele gera um novo
         número de Act.
 
 
@@ -3020,7 +3020,7 @@ paths:
       summary: Signature Link
       deprecated: false
       description: |
-        Retorna o link de assinatura de um signatário específico. Só disponível depois que o documento foi enviado para o signatário; requer ser dono do cofre ou ter permissão administrador/padrão em cofre compartilhado.
+        Retorna o link de assinatura de um signatário específico. Só disponível depois que o documento foi enviado para o signatário. Requer ser dono do cofre, ou ter permissão administrador/padrão em cofre compartilhado.
       operationId: documentsSignatureLinkGet
       tags:
       - Signatories
@@ -3064,7 +3064,7 @@ paths:
       description: |
         Reenvia o link de assinatura para o signatário (`email` ou WhatsApp + `key_signer`).
 
-        > Intervalos entre reenvios: 1º em 1 min, 2º em 5 min, 3º em 30 min; a partir do 4º, de 60 em 60 min.
+        > Intervalos entre reenvios: 1º em 1 min, 2º em 5 min, 3º em 30 min. A partir do 4º, de 60 em 60 min.
       operationId: documentsSignatoriesResend
       tags:
       - Signatories
@@ -3206,9 +3206,9 @@ paths:
       summary: Send document to signature
       deprecated: false
       description: >+
-        Esse objeto enviará o documento para assinatura, ou seja, o documento
-        entrará na fase 'Aguardando assinaturas', onde, a partir dessa fase, os
-        signatários poderão assinar os documentos.
+        Esse objeto enviará o documento para assinatura. O documento entrará
+        na fase 'Aguardando assinaturas'. A partir dessa fase, os signatários
+        poderão assinar os documentos.
 
       operationId: documentsSendToSigner
       tags:
@@ -3270,9 +3270,9 @@ paths:
         | Parâmetro | Descrição |
         | --- | --- |
         | `message` (opcional) | Mensagem enviada aos signatários no envio. |
-        | `workflow` (obrigatório) | `1` = não seguir a ordem de assinatura; `2` = seguir a ordem. |
+        | `workflow` (obrigatório) | `1` = não seguir a ordem de assinatura. `2` = seguir a ordem. |
         | `scheduling_date` (obrigatório) | Data (>= hoje), formato `aaaa/mm/dd`. |
-        | `scheduling_time` (obrigatório) | Hora cheia entre 06:00 e 22:00 (ex.: `11:00`); se a data for hoje, deve ser maior que a hora atual. |
+        | `scheduling_time` (obrigatório) | Hora cheia entre 06:00 e 22:00 (ex.: `11:00`). Se a data for hoje, deve ser maior que a hora atual. |
         | `urgent_document` (opcional) | `1` = documento urgente. |
       operationId: documentsSendToSignerScheduled
       tags:
@@ -4851,7 +4851,7 @@ paths:
       description: |
         Cadastra uma URL de webhook (POSTBack) no documento. D4Sign dispara um `POST` em form-data para essa URL quando o documento é assinado, finalizado, cancelado, ou quando um e-mail não é entregue a um signatário.
 
-        > Até 7 tentativas de reenvio caso a URL esteja indisponível (0 min, 1h, 1h, 1h, 6h, 6h, 12h) — o webhook só se perde se a URL ficar indisponível por mais de 27h. Veja segurança (HMAC) no guia.
+        > Até 7 tentativas de reenvio caso a URL esteja indisponível (0 min, 1h, 1h, 1h, 6h, 6h, 12h). O webhook só se perde se a URL ficar indisponível por mais de 27h. Veja segurança (HMAC) no guia.
       operationId: hookDocumentsAttach
       tags:
       - Webhooks
@@ -5519,7 +5519,7 @@ paths:
         | `key_signer` (obrigatório) | Chave do signatário. |
         | `document_type` (obrigatório) | `1` = qualquer certificado, `2` = e-CPF, `3` = e-CNPJ. |
         | `pades` (opcional) | `1` = PAdES e CAdES, `0` = apenas CAdES. |
-        | `document_number` (opcional) | CPF/CNPJ do signatário; em branco aceita qualquer e-CPF/e-CNPJ. |
+        | `document_number` (opcional) | CPF/CNPJ do signatário. Em branco, aceita qualquer e-CPF/e-CNPJ. |
       tags:
       - Certificates
       parameters:
