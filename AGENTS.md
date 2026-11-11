@@ -2,7 +2,7 @@
 
 ## Zero-PII policy
 - Never commit secrets (`mise.local.toml` with real `tokenAPI`/`cryptKey` stays gitignored, always).
-- Never commit a real person's personal email/name baked into example data. D4Sign's own public example accounts (e.g. `teste@gmail.com`) are fine to keep; anything captured from a live test with real credentials is not — scrub it to a generic placeholder before committing.
+- Never commit a real person's personal email or name baked into example data. D4Sign's own public example accounts (e.g. `teste@gmail.com`) are fine to keep. Scrub anything captured from a live test with real credentials to a generic placeholder before you commit it.
 - Before every commit, grep the diff for emails/secrets.
 
 ## Git
@@ -10,7 +10,7 @@
 - Never amend or rewrite history unless explicitly asked, and never if already pushed.
 
 ## Verifying API claims
-- A 401 from an invalid-credentials call proves nothing about whether an endpoint exists — D4Sign checks credentials before routing. Only the official reference nav or a live call with *valid* credentials confirms existence.
+- A 401 from an invalid-credentials call proves nothing about whether an endpoint exists. D4Sign verifies credentials before it routes the request. Only the official reference nav, or a live call with *valid* credentials, can verify that an endpoint exists.
 - Verify SDK behavior (param order, which services exist on `Client`) by reading `sdk/php/src/D4sign/**`, not by assuming from names.
 
 ## Bruno collection (`collections/bruno/`)

@@ -2,11 +2,11 @@
 
 This repository is three things, all generated from the same [`openapi/d4sign.yaml`](openapi/d4sign.yaml) spec:
 
-1. **[Documentation site](https://andersoal.github.io/d4sign-api/)** (`site/`) — guide + full API reference, built with [Astro Starlight](https://starlight.astro.build/). Unofficial, not produced or endorsed by D4Sign; see the official docs at [docapi.d4sign.com.br](https://docapi.d4sign.com.br/docs).
+1. **[Documentation site](https://andersoal.github.io/d4sign-api/)** (`site/`) — guide + full API reference, built with [Astro Starlight](https://starlight.astro.build/). This is unofficial. D4Sign does not produce or endorse it. See the official docs at [docapi.d4sign.com.br](https://docapi.d4sign.com.br/docs).
 2. **PHP SDK** (`sdk/php/`) — the original D4Sign PHP client. See [the SDK guide](https://andersoal.github.io/d4sign-api/sdk/php/) or [`sdk/php/README.md`](sdk/php/README.md).
 3. **Bruno collection** (`collections/bruno/`) — every endpoint, ready to run. See [`collections/bruno/README.md`](collections/bruno/README.md).
 
-Credentials for testing against the live API (Sandbox or Production) are managed with [mise](https://mise.jdx.dev/) and shared between your shell, the Bruno GUI, and the Bruno CLI — see [`docs/TESTING.md`](docs/TESTING.md).
+[mise](https://mise.jdx.dev/) manages the credentials for testing against the live API (Sandbox or Production). Your shell, the Bruno GUI, and the Bruno CLI all read the same credentials from mise. See [`docs/TESTING.md`](docs/TESTING.md).
 
 There's also a [`skill/d4sign-docs/SKILL.md`](skill/d4sign-docs/SKILL.md) packaging the same knowledge for AI coding agents.
 
@@ -43,4 +43,4 @@ npm run dev
 
 ## License
 
-MIT — see [LICENSE](LICENSE). D4Sign's own documentation and OpenAPI spec are their intellectual property; this repo adapts and reorganizes them for integration purposes.
+MIT — see [LICENSE](LICENSE). D4Sign's own documentation and OpenAPI spec remain their intellectual property. This repo adapts and reorganizes them for integration purposes.
