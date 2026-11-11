@@ -1,0 +1,32 @@
+info:
+  name: List All Users
+  type: http
+  seq: 63
+  tags:
+    - Users
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/users/list?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {}
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista todos os usuários do domínio validado da conta.
+  
+  > Paginado em blocos de 500 — use `pg` na URL.

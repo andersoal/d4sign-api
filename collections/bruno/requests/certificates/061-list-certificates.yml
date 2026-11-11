@@ -1,0 +1,29 @@
+info:
+  name: List Certificates
+  type: http
+  seq: 61
+  tags:
+    - Certificates
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/certificate/uuid-documento/list?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: content-type
+      value: application/json
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista o certificado definido para o signatário (`key_signer`).

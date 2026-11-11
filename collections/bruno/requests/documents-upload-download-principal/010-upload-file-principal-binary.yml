@@ -1,0 +1,46 @@
+info:
+  name: Upload File Principal Binary
+  type: http
+  seq: 10
+  tags:
+    - Documents Upload/Download/Principal
+    - Documents
+    - Documents Upload
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/uploadbinary?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "base64_binary_file": "JVhsdCAdwesAD2dsadfASDQW...",
+        "mime_type": "application/pdf",
+        "name": "Meu contrato de venda",
+        "uuid_folder": "{{uuid_folder}}"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Esse objeto realizará o UPLOAD do seu documento para os servidores da D4Sign.
+  
+  Após o UPLOAD, o documento será criptografado em nossos cofres e carimbado com um número de série.
+  
+  Após o processamento um preview será gerado. O processamento será realizado em background, ou seja, a requisição não ficará bloqueada.
+  
+  Todos os documentos ficam armazenados em COFRES criptografados, ou seja, o parâmetro `uuid_safe` é obrigatório e determina em qual cofre o documento ficará armazenado.

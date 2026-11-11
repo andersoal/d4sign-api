@@ -1,0 +1,26 @@
+info:
+  name: Show balance
+  type: http
+  seq: 67
+  tags:
+    - Account
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/account/balance?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Retorna o balanço (créditos) da conta.

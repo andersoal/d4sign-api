@@ -1,0 +1,42 @@
+info:
+  name: Add Watcher to a Document
+  type: http
+  seq: 58
+  tags:
+    - Watchers
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/watcher/:uuid_document/add?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "email": "exemplo@d4sign.com.br",
+        "permission": "0"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Adiciona um observador ao documento.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `email` (obrigatório) | E-mail do observador. |
+  | `permission` (opcional) | `0` = perfil básico (pode baixar), `1` = apenas visualização (sem download). |

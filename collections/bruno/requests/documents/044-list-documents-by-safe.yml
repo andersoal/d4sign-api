@@ -1,0 +1,35 @@
+info:
+  name: List documents by Safe
+  type: http
+  seq: 44
+  tags:
+    - Documents
+    - Safes
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/safe?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}&pg={{pg}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+    - name: pg
+      value: "{{pg}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista todos os documentos associados ao cofre (e pasta, se filtrado) informado. Para filtrar por pasta use `/documents/{uuid_safe}/safe/{uuid_folder}`.
+  
+  > Paginado em blocos de 500 documentos — use `pg` na URL.

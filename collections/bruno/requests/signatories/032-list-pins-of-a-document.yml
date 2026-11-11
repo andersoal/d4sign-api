@@ -1,0 +1,33 @@
+info:
+  name: List Pins of a Document
+  type: http
+  seq: 32
+  tags:
+    - Signatories
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/listpins?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {}
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista as assinaturas/rubricas posicionadas (pins) em um documento, com página e coordenadas.

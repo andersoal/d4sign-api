@@ -1,0 +1,30 @@
+info:
+  name: Erase All Watchers from a Document
+  type: http
+  seq: 60
+  tags:
+    - Watchers
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/watcher/:uuid_document/erase?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Remove TODOS os observadores do documento.

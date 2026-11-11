@@ -1,0 +1,53 @@
+info:
+  name: Upload File Principal Form-Data
+  type: http
+  seq: 9
+  tags:
+  - Documents Upload/Download/Principal
+  - Documents
+  - Documents Upload
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/upload?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+  - name: uuid_safe
+    value: "{{uuid_safe}}"
+    type: path
+  - name: tokenAPI
+    value: "{{tokenAPI}}"
+    type: query
+  - name: cryptKey
+    value: "{{cryptKey}}"
+    type: query
+  body:
+    type: multipart-form
+    data:
+    - name: file
+      type: file
+      value: [./example.pdf]
+    - name: uuid_folder
+      value: '{{uuid_folder}}'
+    - name: workflow
+      value: ''
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Esse objeto realizará o UPLOAD do seu documento para os servidores da D4Sign.
+
+  :::warning[]
+  Após o UPLOAD, o documento será criptografado em nossos cofres e carimbado com um número de série.
+  :::
+
+  Após o processamento um preview será gerado. O processamento será realizado em background, ou seja, a requisição não ficará bloqueada.
+
+  Todos os documentos ficam armazenados em COFRES criptografados, ou seja, o parâmetro `uuid_safe` é obrigatório e determina em qual cofre o documento ficará armazenado.
+
+  :::highlight blue 📌
+  ℹ️ Header `tokenAPI` não está documentado em explicar se não é necessário enviar pelos Parâmetros da Requisição (Query Parameters). A recomenda
+  cão é enviar em ambos.
+  :::

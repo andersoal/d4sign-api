@@ -1,0 +1,49 @@
+info:
+  name: Download Documents and Certificate (Splited)
+  type: http
+  seq: 17
+  tags:
+    - Documents Upload/Download
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/downloadlist?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "language": "pt",
+        "type": "pdf",
+        "documents": {
+          "uuid-slave-document1": "0",
+          "uuid-slave-document2": "0"
+        }
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Gera uma URL para download em lote de documentos (principal e/ou anexos) e, opcionalmente, suas hashes (certificados de assinatura).
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `language` (opcional) | `pt` ou `en`. |
+  | `type` (opcional) | Omitir para PDF; `pdfa` para PDF/A. |
+  | `documents` (obrigatório) | Mapa `{uuid-documento: "1"|"0"}` — `1` inclui a hash/certificado junto ao documento. |
+  
+  > O documento precisa estar finalizado (todos os signatários assinaram).

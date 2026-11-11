@@ -1,0 +1,39 @@
+info:
+  name: Add Trust ID
+  type: http
+  seq: 35
+  tags:
+    - Signatories
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/addtrustid?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {}
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Ativa o Trust ID (verificação extra de identidade via documento com foto, opcionalmente + selfie) para um ou mais signatários já cadastrados com `docauth` ou `docauthandselfie` habilitado.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `email` (obrigatório) | Signatário já cadastrado com ponto de autenticação por documento (+selfie). |
+  | `document_type` (obrigatório) | `1` = documento de identidade nacional, `2` = passaporte, `3` = permissão de residência, `4` = outro. |
+  | `name`/`last_name`/`document_number` (opcionais) | Dados do signatário. |

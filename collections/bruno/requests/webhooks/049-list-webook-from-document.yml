@@ -1,0 +1,30 @@
+info:
+  name: List Webook from Document
+  type: http
+  seq: 49
+  tags:
+    - Webhooks
+    - Documents
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/webhooks?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista o(s) webhook(s) (POSTBack) cadastrado(s) no documento.

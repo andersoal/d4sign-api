@@ -1,0 +1,46 @@
+info:
+  name: List Watches from a Document
+  type: http
+  seq: 57
+  tags:
+    - Watchers
+    - Documents
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/watcher/:uuid_document?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "uuid_arquivo": "c19cb80c-1233-4a1b-802e-3e6f3ffebed5",
+        "watchers": [
+          {
+            "email": "exemplo@d4sign.com.br",
+            "perfil": "0"
+          },
+          {
+            "email": "exemplo@d4sign.com.br",
+            "perfil": "1"
+          }
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista todos os observadores (watchers) do documento.

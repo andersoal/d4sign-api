@@ -1,0 +1,33 @@
+info:
+  name: Upload Big File
+  type: http
+  seq: 11
+  tags:
+    - Documents Upload/Download/Principal
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/uploadbigfile?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {}
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Upload de documento principal ACIMA de 20MB e menor que 500MB (mesmo contrato do `/upload` padrão).

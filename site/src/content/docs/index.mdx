@@ -1,0 +1,64 @@
+---
+title: D4Sign API
+description: Unofficial guide and API reference for the D4Sign electronic signature API.
+template: splash
+hero:
+  tagline: Guide, API reference, PHP SDK, and a ready-to-run Bruno collection for the D4Sign electronic signature API.
+  actions:
+    - text: Getting Started
+      link: /d4sign-api/guides/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: API Reference
+      link: /d4sign-api/reference/
+      icon: open-book
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="Unofficial, community-maintained docs">
+  This site is not produced or endorsed by D4Sign. It adapts and reorganizes public information from
+  D4Sign's own guide and reference (<a href="https://docapi.d4sign.com.br/docs">docs</a>,{' '}
+  <a href="https://docapi.d4sign.com.br/reference">reference</a>) plus this repository's PHP SDK. When in
+  doubt, the official docs are the source of truth.
+</Aside>
+
+D4Sign is an electronic signature platform compliant with Brazilian provisional measure **MP 2.200-2/01**,
+providing authenticity, integrity, and non-repudiation — and therefore legal validity — for every signature
+made through D4Sign.
+
+This is the integration guide for D4Sign's REST API: upload documents, send them for signature, and embed
+the signing flow in your own website while keeping the user on your domain.
+
+## Environments
+
+| Environment | Endpoint | Legal validity |
+| --- | --- | --- |
+| Production | `https://secure.d4sign.com.br/api/v1` | Yes |
+| Development / Sandbox | `https://sandbox.d4sign.com.br/api/v1` | No |
+
+<Aside type="danger" title="Endpoints are case-sensitive">
+  Paths must match the documentation exactly — most are `lowercase`. A wrong case can make the API respond
+  `200` with no useful content instead of an error.
+</Aside>
+
+<Aside type="note">
+  Documents created inside folders or subfolders may not be visible from a parent folder's listing.
+</Aside>
+
+## Where to start
+
+<CardGrid stagger>
+  <Card title="Getting Started" icon="rocket">
+    Authentication, the five-step signing flow, and your first request.
+  </Card>
+  <Card title="API Reference" icon="open-book">
+    Every endpoint, generated straight from the OpenAPI spec in [`openapi/d4sign.yaml`](https://github.com/andersoal/d4sign-api/blob/master/openapi/d4sign.yaml).
+  </Card>
+  <Card title="PHP SDK" icon="seti:php">
+    The original PHP client, now documented as one guide among several ways to call the API.
+  </Card>
+  <Card title="Bruno Collection" icon="external">
+    Clone the repo and open [`collections/bruno`](https://github.com/andersoal/d4sign-api/tree/master/collections/bruno) to try every endpoint without writing code.
+  </Card>
+</CardGrid>

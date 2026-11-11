@@ -1,0 +1,32 @@
+info:
+  name: Check User
+  type: http
+  seq: 64
+  tags:
+    - Users
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/users/check?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "email_user": "email@usuario.com.br"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Verifica o status (`email_user`) de um usuário do domínio validado.

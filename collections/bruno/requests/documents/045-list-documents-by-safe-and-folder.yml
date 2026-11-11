@@ -1,0 +1,39 @@
+info:
+  name: List documents by Safe and Folder
+  type: http
+  seq: 45
+  tags:
+    - Documents
+    - Safes
+    - Folders
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/safe/:uuid_folder?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}&pg={{pg}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: uuid_folder
+      value: "{{uuid_folder}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+    - name: pg
+      value: "{{pg}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista todos os documentos associados ao cofre e à pasta informados.
+  
+  > Paginado em blocos de 500 documentos — use `pg` na URL.

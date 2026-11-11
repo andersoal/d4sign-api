@@ -1,0 +1,8 @@
+name: Sandbox
+variables:
+  - name: baseUrl
+    value: https://sandbox.d4sign.com.br
+  - secret: true
+    name: tokenAPI
+  - secret: true
+    name: cryptKey

@@ -1,0 +1,44 @@
+info:
+  name: Upload only hash file
+  type: http
+  seq: 18
+  tags:
+    - Documents Upload/Download
+    - Documents
+    - Documents Upload
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/uploadhash?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "sha256": "13f2a91a9e85d5240ff32754eba41c02...",
+        "sha512": "9ddd2c2659ae6cd6790d1f31780c904145bd80272b51cb...",
+        "name": "Meu contrato de venda",
+        "uuid_folder": "{UUID DA PASTA}"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Esse recurso realizará o UPLOAD do hash de um documento para os servidores da D4Sign.
+  
+  Após o UPLOAD, o hash de documento será criptografado em nossos cofres e carimbado com um número de série.
+  
+  Todos os documentos ficam armazenados em COFRES criptografados, ou seja, o parâmetro UUID-SAFE é obrigatório e determina em qual cofre o hash de documento ficará armazenado.

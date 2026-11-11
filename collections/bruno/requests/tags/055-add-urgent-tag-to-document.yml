@@ -1,0 +1,32 @@
+info:
+  name: Add Urgent Tag to Document
+  type: http
+  seq: 55
+  tags:
+    - Tags
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/tags/:uuid_document/addurgent?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Este método irá adicionar a TAG URGENTE em seu documento.
+  
+  Lembrando que para conseguir fazer essa requisição, você precisa ser dono do cofre ou ter permissão de Administrador ou padrão, caso o cofre seja compartilhado.

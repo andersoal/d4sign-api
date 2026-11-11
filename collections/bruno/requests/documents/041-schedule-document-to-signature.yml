@@ -1,0 +1,47 @@
+info:
+  name: Schedule document to signature
+  type: http
+  seq: 41
+  tags:
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/scheduling?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "message": "Mensagem opcional de envio",
+        "workflow": "1",
+        "scheduling_date": "2026/09/10",
+        "scheduling_time": "21:00",
+        "urgent_document": "0"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Agenda o envio do documento para assinatura em uma data/hora futura.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `message` (opcional) | Mensagem enviada aos signatários no envio. |
+  | `workflow` (obrigatório) | `1` = não seguir a ordem de assinatura; `2` = seguir a ordem. |
+  | `scheduling_date` (obrigatório) | Data (>= hoje), formato `aaaa/mm/dd`. |
+  | `scheduling_time` (obrigatório) | Hora cheia entre 06:00 e 22:00 (ex.: `11:00`); se a data for hoje, deve ser maior que a hora atual. |
+  | `urgent_document` (opcional) | `1` = documento urgente. |

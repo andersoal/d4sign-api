@@ -1,0 +1,38 @@
+info:
+  name: Upload File Attachment Form-Data
+  type: http
+  seq: 13
+  tags:
+  - Documents Upload/Download/Secondary / Attachment
+  - Documents
+  - Documents Upload
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/uploadslave?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+  - name: uuid_document
+    value: "{{uuid_document}}"
+    type: path
+  - name: tokenAPI
+    value: "{{tokenAPI}}"
+    type: query
+  - name: cryptKey
+    value: "{{cryptKey}}"
+    type: query
+  body:
+    type: multipart-form
+    data:
+    - name: file
+      type: file
+      value: [./example.pdf]
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Esse objeto realizará o UPLOAD do seu documento para os servidores da D4Sign e ficará anexo ao documento principal.
+
+  Após o processamento um preview será gerado. O processamento será realizado em background, ou seja, a requisição não ficará bloqueada.

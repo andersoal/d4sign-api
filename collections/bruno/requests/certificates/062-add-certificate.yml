@@ -1,0 +1,36 @@
+info:
+  name: Add Certificate
+  type: http
+  seq: 62
+  tags:
+    - Certificates
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/certificate/uuid-documento/add?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: content-type
+      value: application/json
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Define o tipo de certificado digital exigido do signatário.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `key_signer` (obrigatório) | Chave do signatário. |
+  | `document_type` (obrigatório) | `1` = qualquer certificado, `2` = e-CPF, `3` = e-CNPJ. |
+  | `pades` (opcional) | `1` = PAdES e CAdES, `0` = apenas CAdES. |
+  | `document_number` (opcional) | CPF/CNPJ do signatário; em branco aceita qualquer e-CPF/e-CNPJ. |

@@ -16,7 +16,7 @@ class ComposerStaticInitf227904289dfa1f7c610053ab11afe11
     public static $prefixDirsPsr4 = array (
         'D4sign\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/sdk/src/D4sign',
+            0 => __DIR__ . '/../..' . '/src/D4sign',
         ),
     );
 

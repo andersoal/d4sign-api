@@ -1,0 +1,64 @@
+info:
+  name: Make document by Template HTML
+  type: http
+  seq: 6
+  tags:
+    - Documents Templates
+    - Templates
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/makedocumentbytemplate?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Accept
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name_document": "Nome do documento",
+        "uuid_folder": "{{uuid_folder}}",
+        "templates": {
+          "{{template_id}}": {
+            "{{variable_exemplo_nome}}": "valor 1",
+            "{{variable_exemplo_endereco}}": "valor 2",
+            "{{...}}": "valor n"
+          },
+          "OTgx": {
+            "RAZAO_SOCIAL": "D4SIGN COMPANY"
+          }
+        }
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Esse objeto irá gerar um documento em seu cofre a partir de um template.
+  
+  
+  :::highlight orange 📌
+  Obs.: Para criar o documento em um cofre, é importante revisar a opção **Compartilhar** nas **Opções do template** em um template HTML, será preciso ter as permissões de acesso "Administrador" ou "Padrão".
+  :::
+  
+  | Key | Description |
+  | --- | --- |
+  | name_document | (Opcional) Define o nome do documento. Se não for preenchido, o documento terá o nome "Documento" |
+  | uuid_folder | (opcional) Para que o documento fique armazenado dentro da pasta, informe o UUID dela. Se não for preenchido, o documento será salvo no cofre informado na requisição. |
+  | templates | (obrigatório) ID do template na CHAVE `id_template` e as variáveis em conjuntos de CHAVE e VALOR. |

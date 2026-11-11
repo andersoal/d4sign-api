@@ -1,0 +1,30 @@
+info:
+  name: Signatories Group List
+  type: http
+  seq: 19
+  tags:
+    - Signatories
+    - Documents
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/groups/:uuid_safe?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista todos os grupos de assinatura do cofre.

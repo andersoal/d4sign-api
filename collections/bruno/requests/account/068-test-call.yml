@@ -1,0 +1,26 @@
+info:
+  name: Test Call
+  type: http
+  seq: 68
+  tags:
+    - Account
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/testcall?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Endpoint simples para testar conectividade e credenciais (`tokenAPI`/`cryptKey`) sem efeitos colaterais.

@@ -1,0 +1,43 @@
+info:
+  name: List All Safes
+  type: http
+  seq: 1
+  tags:
+    - Safes
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/safes?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test('responds with a documented shape even on auth failure', function () {
+          const body = res.getBody();
+          if (res.getStatus() === 200) {
+            expect(body).to.be.an('array');
+          } else {
+            // D4Sign's error envelope: confirmed live as {message, mensagem_pt} for 401 —
+            // see guides/rate-limits-and-errors.md.
+            expect(body).to.have.property('message');
+          }
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista TODOS os cofres da conta.
+  
+  > Não esqueça de enviar `tokenAPI` e `cryptKey` na requisição.

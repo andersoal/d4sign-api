@@ -1,0 +1,133 @@
+info:
+  name: Make document by Template WORD
+  type: http
+  seq: 7
+  tags:
+    - Documents Templates
+    - Templates
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/makedocumentbytemplateword?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Accept
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name_document": "",
+        "uuid_folder": "",
+        "templates": {
+          "id_template 1": {
+            "variavel 1": "",
+            "variavel 2": "",
+            "{{...}}": ""
+          }
+        }
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Esse objeto irá gerar um documento em seu cofre a partir de um template word.
+  
+  
+  :::highlight orange 📌
+  Para criar o documento em um cofre, é importante revisar a opção **Compartilhar** nas **Opções do template** em um template Word, será preciso ter as permissões de acesso "Administrador" ou "Padrão".
+  :::
+  
+  
+  # Caso Documento a partir do template WORD com mais de 1 preenchedor
+  
+  ```json
+  {
+      "name_document": "Nome do documento",
+      "uuid_folder (opcional)": "{UUID DA PASTA}",
+    
+      "templates": {
+         "id_template": {
+           
+          "persona 1":{
+  	    			"variavel 1": "valor 1",
+  	    			"variavel 2": "valor 2",
+  	    	{...},
+          
+          "persona 2":{
+  	    			"variavel 1": "valor 1",
+  	    			"variavel 2": "valor 2",
+  	    	{...},
+           
+           "tokens_gerais":{
+  	    			"variavel 1": "valor 1",
+  	    			"variavel 2": "valor 2",
+  	    	{...}
+          
+  	    }
+     }
+  }
+  ```
+  Exemplo
+  ```json
+  
+  {
+     "name_document":"Modelo template para contrato com 2 preenchedores API",
+     "templates":
+        {
+           "MTIwMDcy=":{
+              "organizador": {
+                 "nome_completo":"VALOR TESTE",
+                  "nome":"VALOR TESTE",
+                  "endereco_organizador":"VALOR TESTE",
+                  "valor_total":"VALOR TESTE",
+                  "nome_da_empresa":"VALOR TESTE",
+                  "nome_do_representante_da_empresa":"VALOR TESTE",
+                  "endereco_da_empresa":"VALOR TESTE",
+                  "telefone_da_empresa":"VALOR TESTE 2",
+                  "cargo_do_representante_da_empresa":"VALOR TESTE",
+                  "e_mail_do_organizador_do_evento":"VALOR TESTE"
+              },
+              "cliente": {
+                  "nome_completo":"VALOR TESTE 1",
+                  "nome":"VALOR TESTE 1",
+                  "endereco_cliente":"VALOR TESTE 1",
+                  "endereco_do_cliente":"VALOR TESTE 1",
+                  "telefone_do_cliente":"VALOR TESTE 1",
+                  "e_mail_do_cliente":"VALOR TESTE 1",
+                  "numero_de_cpf_ou_cnpj_do_cliente":"VALOR TESTE 1"
+              },
+              "tokens_gerais": {
+                  "endereco":"VALOR Tokens Gerais",
+                  "nome_completo":"VALOR Tokens Gerais",
+                  "nome_do_evento":"VALOR Tokens Gerais",
+                  "data_assinatura":"VALOR Tokens Gerais",
+                  "nome_evento":"VALOR Tokens Gerais",
+                  "data_evento":"VALOR Tokens Gerais",
+                  "hora_inicio_evento":"VALOR Tokens Gerais",
+                  "hora_termino_evento":"VALOR Tokens Gerais",
+                  "local_evento":"VALOR Tokens Gerais",
+                  "descricao":"VALOR Tokens Gerais",
+                  "estado":"VALOR Tokens Gerais",
+                  "local_e_data_da_assinatura":"VALOR Tokens Gerais"
+              }
+          }
+        }
+  }
+  ```

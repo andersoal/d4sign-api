@@ -1,0 +1,38 @@
+info:
+  name: Register Webhook on Document
+  type: http
+  seq: 50
+  tags:
+    - Webhooks
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/webhooks?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "url": "http://seuendereco.com.br"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Cadastra uma URL de webhook (POSTBack) no documento. D4Sign dispara um `POST` em form-data para essa URL quando o documento é assinado, finalizado, cancelado, ou quando um e-mail não é entregue a um signatário.
+  
+  > Até 7 tentativas de reenvio caso a URL esteja indisponível (0 min, 1h, 1h, 1h, 6h, 6h, 12h) — o webhook só se perde se a URL ficar indisponível por mais de 27h. Veja segurança (HMAC) no guia.

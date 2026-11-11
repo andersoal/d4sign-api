@@ -1,0 +1,28 @@
+info:
+  name: List Templates
+  type: http
+  seq: 5
+  tags:
+    - Documents Templates
+    - Documents
+    - Templates
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/templates/?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Esse objeto irá retornar todos os templates criados em sua conta.

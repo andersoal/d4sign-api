@@ -1,0 +1,8 @@
+name: Production
+variables:
+  - name: baseUrl
+    value: https://secure.d4sign.com.br
+  - secret: true
+    name: tokenAPI
+  - secret: true
+    name: cryptKey

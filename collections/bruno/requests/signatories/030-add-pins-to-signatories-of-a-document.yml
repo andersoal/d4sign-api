@@ -1,0 +1,58 @@
+info:
+  name: Add Pins to Signatories of a Document
+  type: http
+  seq: 30
+  tags:
+    - Signatories
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/addpins?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "pins": [
+          {
+            "document": "uuid-do-documento",
+            "email": "emaila@dominio.com.br",
+            "page_width": 794,
+            "page_height": 1123,
+            "page": 1,
+            "position_x": 397,
+            "position_y": 560,
+            "type": 0
+          }
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Adiciona uma assinatura/rubrica/selo posicionado (pin) no documento principal ou anexo.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `document` (obrigatório) | UUID do documento principal ou anexo (slave). |
+  | `email` (obrigatório) | E-mail do signatário já cadastrado no documento. |
+  | `page_width`/`page_height` (obrigatório) | Dimensões da página, em px. |
+  | `page` (obrigatório) | Página onde o pin ficará. |
+  | `position_x`/`position_y` (obrigatório) | Posição do pin, em px. |
+  | `type` (opcional) | `0` = assinatura, `1` = rubrica, `2` = selo. |
+  
+  > Para o UUID de um anexo (slave), use `GET /documents/{uuid_document}/listslaves`.

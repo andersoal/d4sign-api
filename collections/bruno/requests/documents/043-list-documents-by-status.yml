@@ -1,0 +1,44 @@
+info:
+  name: List documents by Status
+  type: http
+  seq: 43
+  tags:
+    - Documents
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/documents/:id_status/status?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}&pg=2"
+  params:
+    - name: id_status
+      value: "{{id_status}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+    - name: pg
+      value: "2"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista todos os documentos que estiverem na fase informada.
+  
+  | ID | Fase |
+  | --- | --- |
+  | 1 | Processando |
+  | 2 | Aguardando Signatários |
+  | 3 | Aguardando Assinaturas |
+  | 4 | Finalizado |
+  | 5 | Arquivado |
+  | 6 | Cancelado |
+  | 7 | Editando |
+  
+  > Paginado em blocos de 500 documentos — use `pg` na URL.

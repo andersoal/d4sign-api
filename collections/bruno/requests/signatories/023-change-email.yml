@@ -1,0 +1,44 @@
+info:
+  name: Change email
+  type: http
+  seq: 23
+  tags:
+    - Signatories
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/changeemail?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "email-before": "antigoemail@dominio.com",
+        "email-after": "novoemail@dominio.com",
+        "key-signer": "NyWx="
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Atualiza o e-mail (ou WhatsApp) de um signatário já cadastrado.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `email-before` (obrigatório) | E-mail/WhatsApp atual do signatário. |
+  | `email-after` (obrigatório) | Novo e-mail/WhatsApp. |
+  | `key-signer` | Chave do signatário (obtida ao listar signatários do documento). |

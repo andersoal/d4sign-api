@@ -1,0 +1,10 @@
+# Copy to mise.local.toml (gitignored, never committed) and fill in real values,
+# or run instead:
+#   mise set --file mise.local.toml tokenAPI=<your-token>
+#   mise set --file mise.local.toml cryptKey=<your-crypt-key>
+[env]
+tokenAPI = ""
+cryptKey = ""
+
+# Point at Production instead of the Sandbox default in mise.toml:
+# baseUrl = "https://secure.d4sign.com.br"

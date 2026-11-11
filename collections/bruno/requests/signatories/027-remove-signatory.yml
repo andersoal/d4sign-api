@@ -1,0 +1,36 @@
+info:
+  name: Remove Signatory
+  type: http
+  seq: 27
+  tags:
+    - Signatories
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/removeemaillist?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "email-signer": "email@dominio.com",
+        "key-signer": "NyWx="
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Remove um signatário (`email-signer` + `key-signer`) do documento.

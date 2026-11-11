@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+
+# Local mise overrides — this is where real tokenAPI/cryptKey values go.
+mise.local.toml
+.mise.local.toml

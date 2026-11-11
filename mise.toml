@@ -1,0 +1,15 @@
+min_version = "2024.1.0"
+
+[env]
+# Non-secret default — safe to commit. Overridden by mise.local.toml if you set
+# `baseUrl` there too (e.g. to point at Production).
+baseUrl = "https://sandbox.d4sign.com.br"
+
+# Real credentials go in mise.local.toml (gitignored, never committed) — see
+# mise.local.toml.example. mise merges it with this file automatically once
+# the directory is trusted (`mise trust`).
+
+[tasks.bruno-smoke]
+description = "Smoke-test GET /safes against D4Sign using mise-managed credentials"
+dir = "collections/bruno"
+run = "bru run requests/safes -r --env Sandbox --env-var tokenAPI=$tokenAPI --env-var cryptKey=$cryptKey"

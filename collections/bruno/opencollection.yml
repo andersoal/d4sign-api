@@ -1,0 +1,45 @@
+opencollection: 1.0.0
+
+info:
+  name: D4Sign API
+  version: v1
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+# tokenAPI/cryptKey must both be sent on every request (OAS models this correctly as an
+# AND-combined security requirement: security: [{tokenAPI: [], cryptKey: []}]), but Bruno's
+# single-slot `auth: apikey` can only hold one key — filed upstream as usebruno/bruno#9817.
+# tokenAPI header below is shared by every request via inheritance; tokenAPI+cryptKey stay as
+# per-request query params (Bruno has no query-param inheritance). Don't disable the header
+# below — it's required, not optional, see docs/TESTING.md.
+request:
+  headers:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+    - name: Accept
+      value: application/json
+bundled: false
+extensions:
+  bruno:
+    presets:
+      request:
+        type: http
+      defaultEnvironment: Sandbox
+    openapi:
+      - sourceUrl: ../../openapi/d4sign.yaml
+        groupBy: tags
+        lastSyncDate: 2026-11-10T23:46:35.334Z
+        specHash: 33347ddf2d3ec6e2d728e40f43ef3811
+        # Re-syncing collapses tokenAPI+cryptKey into a single auth block (see note above) —
+        # re-run manually via Bruno's UI only after re-applying scripts/fix_bruno_*.py, not
+        # automatically.
+        autoCheck: false

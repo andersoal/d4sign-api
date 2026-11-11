@@ -1,0 +1,30 @@
+info:
+  name: List File Attachments (slaves)
+  type: http
+  seq: 15
+  tags:
+    - Documents Upload/Download/Secondary / Attachment
+    - Documents
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/listslaves?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista os anexos (documentos secundários) vinculados a um documento principal.

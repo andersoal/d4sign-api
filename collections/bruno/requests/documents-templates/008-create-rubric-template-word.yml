@@ -1,0 +1,35 @@
+info:
+  name: Create Rubric Template Word
+  type: http
+  seq: 8
+  tags:
+    - Documents Templates
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/createrubricintemplateword?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {}
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Gera um documento a partir de um template Word com rubricas posicionadas por token, no cofre informado.
+  
+  Fluxo: liste os templates (`POST /templates`) para obter o `id`, liste os cofres (`GET /safes`) para obter o `uuid_safe`, e então use este endpoint informando `templates.{id}.{token}` = e-mail do signatário correspondente a cada rubrica.

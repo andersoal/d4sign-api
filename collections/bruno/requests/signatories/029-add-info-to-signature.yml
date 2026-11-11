@@ -1,0 +1,43 @@
+info:
+  name: Add info to signature
+  type: http
+  seq: 29
+  tags:
+    - Signatories
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/addinfo?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "email": "teste@gmail.com",
+        "display_name": "Nome do signatario",
+        "documentation": "RG",
+        "birthday": "Data",
+        "key_signer": "NwYj="
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Cadastra nome, CPF e data de nascimento de um signatário — **apenas para assinatura presencial**. Útil para evitar que o signatário precise informar esses dados no momento da assinatura.

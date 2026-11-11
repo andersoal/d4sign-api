@@ -1,0 +1,36 @@
+info:
+  name: Signature Link
+  type: http
+  seq: 37
+  tags:
+    - Signatories
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/signaturelink/:id_link_assinatura?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: id_link_assinatura
+      value: "{{id_link_assinatura}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {}
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Retorna o link de assinatura de um signatário específico. Só disponível depois que o documento foi enviado para o signatário; requer ser dono do cofre ou ter permissão administrador/padrão em cofre compartilhado.

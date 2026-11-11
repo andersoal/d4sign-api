@@ -1,0 +1,31 @@
+info:
+  name: List All documents
+  type: http
+  seq: 42
+  tags:
+    - Documents
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/documents?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}&pg=2"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+    - name: pg
+      value: "2"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista TODOS os documentos da conta.
+  
+  > Paginado em blocos de 500 documentos. Use o parâmetro `pg` na URL para paginar (ex.: `?pg=2`). O primeiro bloco do resultado traz o total de páginas disponíveis.

@@ -1,0 +1,36 @@
+info:
+  name: Remove Watcher from a Document
+  type: http
+  seq: 59
+  tags:
+    - Watchers
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/watcher/:uuid_document/remove?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "email": "exemplo@d4sign.com.br"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Remove um observador (`email`) do documento.

@@ -1,0 +1,33 @@
+info:
+  name: Signatories Group Details
+  type: http
+  seq: 20
+  tags:
+    - Signatories
+    - Safes
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/groups/:uuid_safe/groupdetails/:uuid_group?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: uuid_group
+      value: "{{uuid_group}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista os detalhes de um grupo de assinatura — apenas se o `tokenAPI` é o dono da conta do `uuid_grupo`, ou se o grupo está compartilhado no `uuid_safe` informado.

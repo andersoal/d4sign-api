@@ -1,0 +1,42 @@
+info:
+  name: Create Folder or Subfolder on Safe
+  type: http
+  seq: 3
+  tags:
+    - Folders by Safe
+    - Folders
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/folders/:uuid_safe/create?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "uuid_folder": "487d4278-a8e6-4fd2-88ba-001a6906ad27",
+        "folder_name": "Novo Teste"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Cria uma pasta (ou subpasta) dentro do cofre informado.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `uuid_folder` (opcional) | UUID da pasta pai, para criar uma subpasta. |
+  | `folder_name` (obrigatório) | Nome da pasta ou subpasta. |

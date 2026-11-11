@@ -1,0 +1,77 @@
+info:
+  name: Add Tags to Document
+  type: http
+  seq: 51
+  tags:
+    - Tags
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/tags/:uuid_document/add?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "tag": "erp-financeiro:123,crm:789,correlationId:a1b2c3-b1c2a3"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Este método irá adicionar uma TAG em seu documento
+  
+  :::tip[]
+  Considerando que o registro é uma String.
+  A cada request é adicionado uma tag que é concatenada com as demais já registradas com separador `, ` (virgula + espaço em branco).
+  
+  Sendo assim, seria possível incluir mais de uma tag em uma única requisição.
+  
+  Exemplo:
+  Requisição A
+  ```json
+  { "tag": "erp-financeiro:123" }
+  ```
+  Resposta 
+  ```json
+  { "TAGs": "erp-financeiro:123" }
+  ```
+  
+  Requisição B
+  ```json
+  { "tag": "crm:789,correlationId:a1b2c3-b1c2a3" }
+  ```
+  Resposta 
+  ```json
+  { "TAGs": "erp-financeiro:123, crm:789,correlationId:a1b2c3-b1c2a3" }
+  ```
+  
+  Deve se assumir que eventualmente o registro cadastrado com `,` sem separador de espaço é convertido, assim por exemplo:
+  
+  Na requisição imediatamente responde:
+  
+  `erp-financeiro:123, crm:789,correlationId:a1b2c3-b1c2a3`
+  
+  Após alguns segundos pelo que é observado se transforma em:
+  
+  `erp-financeiro:123, crm:789, correlationId:a1b2c3-b1c2a3`
+  
+  Onde todas tags tem a vírgula e o espaço como único separador
+  :::

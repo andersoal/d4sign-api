@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'D4sign\\' => array($baseDir . '/sdk/src/D4sign'),
+    'D4sign\\' => array($baseDir . '/src/D4sign'),
 );

@@ -1,0 +1,43 @@
+info:
+  name: Change SMS number
+  type: http
+  seq: 25
+  tags:
+    - Signatories
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/changesmsnumber?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "email": "email@dominio.com",
+        "sms-number": "+5511953874555",
+        "key-signer": "NyWx="
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Atualiza o número de SMS/WhatsApp de um signatário.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `email` (obrigatório) | E-mail do signatário. |
+  | `sms-number` (obrigatório) | Novo número, formato `+5511953874555`. |
+  | `key-signer` | Chave do signatário. |

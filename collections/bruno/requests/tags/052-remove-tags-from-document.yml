@@ -1,0 +1,39 @@
+info:
+  name: Remove Tags from Document
+  type: http
+  seq: 52
+  tags:
+    - Tags
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/tags/:uuid_document/remove?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "tag": "minha tag"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Remove uma TAG (`tag`) do documento.

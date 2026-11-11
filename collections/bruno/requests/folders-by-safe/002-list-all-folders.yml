@@ -1,0 +1,30 @@
+info:
+  name: List All Folders
+  type: http
+  seq: 2
+  tags:
+    - Folders by Safe
+    - Folders
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/folders/:uuid_safe/find?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista TODAS as pastas do cofre informado.

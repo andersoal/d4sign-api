@@ -1,0 +1,29 @@
+info:
+  name: Verify Dimensions of a Document
+  type: http
+  seq: 47
+  tags:
+    - Documents
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/dimensions?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: 691d5700-7620-4c2b-97ad-2baf0fffe8fb
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Retorna as dimensões (largura/altura em px), por página, de um documento.

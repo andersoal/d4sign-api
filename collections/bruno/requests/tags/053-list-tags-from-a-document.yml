@@ -1,0 +1,30 @@
+info:
+  name: List Tags from a Document
+  type: http
+  seq: 53
+  tags:
+    - Tags
+    - Documents
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/tags/:uuid_document?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Lista todas as TAGs do documento.

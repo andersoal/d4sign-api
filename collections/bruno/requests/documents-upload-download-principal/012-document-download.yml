@@ -1,0 +1,57 @@
+info:
+  name: Document download
+  type: http
+  seq: 12
+  tags:
+    - Documents Upload/Download/Principal
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/download?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}&type={{type}}&language={{language}}&document={{document}}&encoding={{encoding}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+    - name: type
+      value: "{{type}}"
+      type: query
+    - name: language
+      value: "{{language}}"
+      type: query
+    - name: document
+      value: "{{document}}"
+      type: query
+    - name: encoding
+      value: "{{encoding}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "type": "zip"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Gera uma URL final para download do documento.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `type` (opcional) | `zip` para o arquivo completo, `pdf` para apenas o PDF, `pdfa` para PDF/A. |
+  | `language` (opcional) | `pt` ou `en`. |
+  | `document` (opcional) | `true` inclui no retorno, em base64, as fotos do documento de identidade/selfie usadas na autenticação (quando aplicável). |
+  | `encoding` (opcional) | `1` retorna a URL do arquivo em base64. |
+  
+  > A URL retornada pode conter `&` — trate-a (coloque entre aspas) antes de usar em shells como o PowerShell.

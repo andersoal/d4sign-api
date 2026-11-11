@@ -1,0 +1,242 @@
+info:
+  name: Create signature list (Add Signatories or Group)
+  type: http
+  seq: 21
+  tags:
+    - Signatories
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/createlist?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Accept
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "signers": [
+          {
+            "email": "email@dominio.com",
+            "act": "1",
+            "foreign": "1",
+            "certificadoicpbr": "0",
+            "assinatura_presencial": "0",
+            "docauth": "0",
+            "docauthandselfie": "0",
+            "embed_methodauth": "email",
+            "embed_smsnumber": "",
+            "upload_allow": "0",
+            "upload_obs": "Contrato Social e Conta de Luz",
+            "whatsapp_number": "+5511981876540(opcional)",
+            "uuid_grupo": "UUID DO GRUPO(opcional)",
+            "certificadoicpbr_tipo": "2(opcional)",
+            "certificadoicpbr_cpf": "CPF(opcional)",
+            "certificadoicpbr_cnpj": "CNPJ(opcional)",
+            "password_code": "C\u00f3digo de acesso(opcional)",
+            "auth_pix": "0(opcional)",
+            "auth_pix_nome": "Nome do signat\u00e1rio(opcional)",
+            "auth_pix_cpf": "21917876280(opcional)",
+            "videoselfie": "0(opcional)",
+            "d4sign_score": "0(opcional)",
+            "d4sign_score_nome": "Nome do signat\u00e1rio(opcional)",
+            "d4sign_score_cpf": "21917876280(opcional)",
+            "d4sign_score_similarity": "90(min 70 - max 90)(opcional)",
+            "skipemail": "1(opcional)"
+          },
+          {
+            "email": "email2@dominio.com",
+            "act": "1",
+            "foreign": "1",
+            "certificadoicpbr": "0",
+            "assinatura_presencial": "0",
+            "docauth": "0",
+            "docauthandselfie": "0",
+            "embed_methodauth": "email",
+            "embed_smsnumber": "",
+            "upload_allow": "0",
+            "upload_obs": "Contrato Social e Conta de Luz",
+            "whatsapp_number": "+5511981876540(opcional)",
+            "uuid_grupo": "UUID DO GRUPO(opcional)",
+            "certificadoicpbr_tipo": "2(opcional)",
+            "certificadoicpbr_cpf": "CPF(opcional)",
+            "certificadoicpbr_cnpj": "CNPJ(opcional)",
+            "password_code": "C\u00f3digo de acesso(opcional)",
+            "auth_pix": "0(opcional)",
+            "auth_pix_nome": "Nome do signat\u00e1rio(opcional)",
+            "auth_pix_cpf": "21917876280(opcional)",
+            "videoselfie": "0(opcional)",
+            "d4sign_score": "0(opcional)",
+            "d4sign_score_nome": "Nome do signat\u00e1rio(opcional)",
+            "d4sign_score_cpf": "21917876280(opcional)",
+            "d4sign_score_similarity": "90(min 70 - max 90)(opcional)",
+            "skipemail": "1(opcional)"
+          }
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Esse objeto realizará o cadastro dos signatários do documento, ou seja, quais pessoas precisam assinar esse documento.
+  
+  <AccordionGroup>
+    <Accordion title="Case para Incluir Signatários" defaultOpen>
+     <Columns>
+    
+        <Column>
+        Requisição
+      ```json
+  {
+      "signers" : [
+          {
+              "email": "email@dominio.com",
+              "act": "1",
+              "foreign": "1",
+              "certificadoicpbr": "0",
+              "assinatura_presencial": "0",
+              "docauth": "0",
+              "docauthandselfie": "0",
+         	    "embed_methodauth": "email",
+        	    "embed_smsnumber": "",
+        	    "upload_allow": "0",
+        	    "upload_obs": "Contrato Social e Conta de Luz",
+        	    "whatsapp_number": "+5511981876540" (opcional),
+        	    "uuid_grupo": "UUID DO GRUPO" (opcional),
+        	    "certificadoicpbr_tipo": "2" (opcional),
+        	    "certificadoicpbr_cpf": "CPF" (opcional),
+        	    "certificadoicpbr_cnpj": "CNPJ" (opcional),
+        	    "password_code": "Código de acesso" (opcional),
+        	    "auth_pix": "0" (opcional),
+        	    "auth_pix_nome": "Nome do signatário" (opcional),
+        	    "auth_pix_cpf": "21917876280" (opcional),
+        	    "videoselfie": "0" (opcional),
+        	    "d4sign_score": "0" (opcional),
+        	    "d4sign_score_nome": "Nome do signatário" (opcional),
+        	    "d4sign_score_cpf": "21917876280" (opcional),
+              "d4sign_score_similarity": "90" (min 70 - max 90)(opcional),
+              "skipemail": "1"(opcional)
+          },
+          {...}
+          ]
+  }
+  ```
+    </Column>
+    <Column>
+        Resposta
+      ```json
+        {
+      "key_signer": "NwYu=",
+      "email": "email@user.com.br",
+      "act": "1",
+      "foreign": "0",
+      "certificadoicpbr": "0",
+      "assinatura_presencial": "0",
+      "assinatura_presencial_link": "LINK PARA ASSINATURA PRESENCIAL" - O link só será exibido depois que o documento for enviado para assinatura,
+      "doc_auth": "0",
+      "embed_methodauth": "email",
+      "embed_smsnumber": "",
+      "upload_allow": "0",
+      "upload_obs": "Contrato Social e Conta de Luz",
+      "docauthandselfie": "0",
+      "skipemail": "0",
+      "whatsapp": "",
+      "password_code": "",
+      "status": "created"
+  }
+      ```
+    </Column>
+  </Columns>
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | email (obrigatório) | E-mail do signatário |
+  | act (obrigatório) | Ação da assinatura. Valores permitidos:   1 = Assinar   2 = Aprovar   3 = Reconhecer   4 = Assinar como parte   5 = Assinar como testemunha   6 = Assinar como interveniente   7 = Acusar recebimento   8 = Assinar como Emissor, Endossante e Avalista   9 = Assinar como Emissor, Endossante, Avalista, Fiador   10 = Assinar como fiador   11 = Assinar como parte e fiador   12 = Assinar como responsável solidário   13 = Assinar como parte e responsável solidário |
+  | foreign (obrigatório) | Indica se o signatário é estrangeiro. 0 = Possui CPF; 1 = Não possui CPF |
+  | foreign\_lang | Idioma do estrangeiro: en = Inglês, es = Espanhol, pt = Português |
+  | certificadoicpbr (obrigatório) | 0 = Assinatura padrão D4Sign   1 = Assinatura com Certificado ICP-Brasil |
+  | assinatura\_presencial (obrigatório) | 1 = Assinatura presencial   0 = Não presencial |
+  | docauth (opcional) | 1 = Exige documento com foto   0 = Não exige |
+  | docauthandselfie (opcional) | 1 = Documento + selfie   0 = Não exige selfie |
+  | embed\_methodauth (opcional) | Método de autenticação: email, password, sms, whats |
+  | embed\_smsnumber (opcional) | Número do SMS ou WhatsApp no padrão (ex.: +5511953020202) |
+  | upload\_allow (opcional) | Indica se o signatário pode enviar outros documentos |
+  | upload\_obs (opcional) | Quais documentos o signatário deve enviar (se upload\_allow = 1) |
+  | after\_position (opcional) | Define a posição após a qual o signatário será inserido na ordem |
+  | skipemail (opcional) | 1 = Não enviar e-mails ao signatário |
+  | whatsapp\_number (opcional) | Número de WhatsApp para assinatura |
+  | uuid\_grupo (opcional) | UUID do grupo de assinatura |
+  | certificadoicpbr\_tipo (opcional) | 1 = Qualquer certificado   2 = e-CPF   3 = e-CNPJ |
+  | certificadoicpbr\_cpf (opcional) | CPF do signatário. Em branco = qualquer e-CPF |
+  | certificadoicpbr\_cnpj (opcional) | CNPJ do signatário. Em branco = qualquer e-CNPJ |
+  | password\_code (opcional) | Código de acesso do signatário. Em branco remove código anterior |
+  | auth\_pix (opcional) | 1 = Autenticação via PIX |
+  | auth\_pix\_nome | Nome obrigatório se auth\_pix = 1 |
+  | auth\_pix\_cpf | CPF obrigatório se auth\_pix = 1 |
+  | sms-number (obrigatório) | NOVO número de SMS do signatário |
+  | key-signer | Chave do signatário |
+  | videoselfie | 1 = Exige vídeo selfie |
+  | d4sign\_score (opcional) | Ativa D4Sign Score. Requer CNH + docauthandselfie = 1 ou videoselfie = 1 |
+  | d4sign\_score\_nome | Nome obrigatório se d4sign\_score = 1 |
+  | d4sign\_score\_cpf | CPF obrigatório se d4sign\_score = 1 |
+  | d4sign\_score\_similarity | Nível de similaridade exigida (min: 70, max: 90) |
+    </Accordion>
+    <Accordion title="Case para Inserir Grupos de Signatários a um Documento">
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | email (obrigatório) | E-mail do signatário |
+  | act (obrigatório) | Ação da assinatura. Valores permitidos:   1 = Assinar   2 = Aprovar   3 = Reconhecer   4 = Assinar como parte   5 = Assinar como testemunha   6 = Assinar como interveniente   7 = Acusar recebimento   8 = Assinar como Emissor, Endossante e Avalista   9 = Assinar como Emissor, Endossante, Avalista, Fiador   10 = Assinar como fiador   11 = Assinar como parte e fiador   12 = Assinar como responsável solidário   13 = Assinar como parte e responsável solidário |
+  | foreign (obrigatório) | Indica se o signatário é estrangeiro. 0 = Possui CPF; 1 = Não possui CPF |
+  | foreign\_lang | Idioma do estrangeiro: en = Inglês, es = Espanhol, pt = Português |
+  | certificadoicpbr (obrigatório) | 0 = Assinatura padrão D4Sign   1 = Assinatura com Certificado ICP-Brasil |
+  | assinatura\_presencial (obrigatório) | 1 = Assinatura presencial   0 = Não presencial |
+  | docauth (opcional) | 1 = Exige documento com foto   0 = Não exige |
+  | docauthandselfie (opcional) | 1 = Documento + selfie   0 = Não exige selfie |
+  | embed\_methodauth (opcional) | Método de autenticação: email, password, sms, whats |
+  | embed\_smsnumber (opcional) | Número do SMS ou WhatsApp no padrão (ex.: +5511953020202) |
+  | upload\_allow (opcional) | Indica se o signatário pode enviar outros documentos |
+  | upload\_obs (opcional) | Quais documentos o signatário deve enviar (se upload\_allow = 1) |
+  | after\_position (opcional) | Define a posição após a qual o signatário será inserido na ordem |
+  | skipemail (opcional) | 1 = Não enviar e-mails ao signatário |
+  | whatsapp\_number (opcional) | Número de WhatsApp para assinatura |
+  | uuid\_grupo (opcional) | UUID do grupo de assinatura |
+  | certificadoicpbr\_tipo (opcional) | 1 = Qualquer certificado   2 = e-CPF   3 = e-CNPJ |
+  | certificadoicpbr\_cpf (opcional) | CPF do signatário. Em branco = qualquer e-CPF |
+  | certificadoicpbr\_cnpj (opcional) | CNPJ do signatário. Em branco = qualquer e-CNPJ |
+  | password\_code (opcional) | Código de acesso do signatário. Em branco remove código anterior |
+  | auth\_pix (opcional) | 1 = Autenticação via PIX |
+  | auth\_pix\_nome | Nome obrigatório se auth\_pix = 1 |
+  | auth\_pix\_cpf | CPF obrigatório se auth\_pix = 1 |
+  | sms-number (obrigatório) | NOVO número de SMS do signatário |
+  | key-signer | Chave do signatário |
+  | videoselfie | 1 = Exige vídeo selfie |
+  | d4sign\_score (opcional) | Ativa D4Sign Score. Requer CNH + docauthandselfie = 1 ou videoselfie = 1 |
+  | d4sign\_score\_nome | Nome obrigatório se d4sign\_score = 1 |
+  | d4sign\_score\_cpf | CPF obrigatório se d4sign\_score = 1 |
+  | d4sign\_score\_similarity | Nível de similaridade exigida (min: 70, max: 90) |
+  
+  Conforme imagem acima (onde act significa o tipo de ação que este grupo terá no processo de assinatura, como assinar, aprovar, etc; e uuid\_grupo é o uuid do grupo presente no mesmo cofre que este documento, que pode ser consultado a partir de outro endpoint já existente e funcional na documentação:
+        
+        
+    </Accordion>
+    <Accordion title="Case Adcionar Trust ID (Verificação Extra)">
+      https://docapi.d4sign.com.br/docs/endpoints-2#adicionar-trust-id-verifica%C3%A7%C3%A3o-extra
+    </Accordion>
+  </AccordionGroup>

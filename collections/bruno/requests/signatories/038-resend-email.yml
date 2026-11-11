@@ -1,0 +1,37 @@
+info:
+  name: Resend email
+  type: http
+  seq: 38
+  tags:
+    - Signatories
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/resend?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "email": "client@company.com"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Reenvia o link de assinatura para o signatário (`email` ou WhatsApp + `key_signer`).
+  
+  > Intervalos entre reenvios: 1º em 1 min, 2º em 5 min, 3º em 30 min; a partir do 4º, de 60 em 60 min.

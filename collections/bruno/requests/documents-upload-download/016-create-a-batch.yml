@@ -1,0 +1,40 @@
+info:
+  name: Create a batch
+  type: http
+  seq: 16
+  tags:
+    - Documents Upload/Download
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/batches?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "keys": [
+          "0b2ec469-6b49-42bb-809f-d977279baeeb",
+          "db75a09b-6b30-48b9-b9f0-873351a050ed",
+          "42334730-5a93-48ae-b5e4-e8e82d62610a"
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Cria um lote de documentos a partir de uma lista de UUIDs.
+  
+  | Parâmetro | Descrição |
+  | --- | --- |
+  | `keys` (obrigatório) | UUIDs dos documentos que farão parte do lote. **Máximo de 25 documentos por lote.** |

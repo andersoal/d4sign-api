@@ -1,0 +1,78 @@
+info:
+  name: Add Signature Type
+  type: http
+  seq: 28
+  tags:
+    - Signatories
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/addsignaturetype?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "tipo": "Testemunha Teste"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  O novo endpoint retorna um número “Act” usado para cadastrar signatários, modificando a descrição da assinatura (Assinar como).
+  
+  A verificação do uuid do usuário, está disponível em [Verificar usuários.](A verificação do uuid do usuário, está disponível em https://docapi.d4sign.com.br/docs/usu%C3%A1rios)
+  
+  Após usar o novo Endpoint e gerar um numero de Act (347), deve-se vinculá-lo a um novo signatário usando o endpoint Cadastrar Signatários. Disponível em Cadastro de signatário.
+  
+  O novo numero de Act é vinculado à plataforma, e não ao usuário. Qualquer conta que queira utilizar o número tem permissão para fazê-lo, contanto que conheça o número que já foi cadastrado.
+  
+  É possível cadastrar um novo Assinar como que já exista (cadastrar um Nome repetido), e cada vez que o cadastro é realizado ele gera um novo número de Act.
+  
+  Após cadastrar um novo Act que possua o mesmo nome de um que existia previamente, os dois funcionam normalmente (Não há conflito).
+  
+  A Act cadastrado deverá estar disponível na plataforma para utilização.
+  
+  Nossa Documentação disponibiliza 13 números de Act:
+  
+  | Código | Descrição |
+  | -- | -- | 
+  | 1            | Assinar  |
+  | 2            | Aprovar  |
+  | 3            | Reconhecer  |
+  | 4            | Assinar como parte  |
+  | 5            | Assinar como testemunha  |
+  | 6            | Assinar como interveniente  |
+  | 7            | Acusar recebimento  |
+  | 8            | Assinar como Emissor, Endossante e Avalista  |
+  | 9            | Assinar como Emissor, Endossante, Avalista, Fiador  |
+  | 10           | Assinar como fiador  |
+  | 11           | Assinar como parte e fiador  |
+  | 12           | Assinar como responsável solidário  |
+  | 13           | Assinar como parte e responsável solidário  |
+  | 14           | Assinar como fiel depositário  |
+  | 15           | Assinar como avalista  |
+  | 16           | Assinar como Anuente  |
+  | 17           | Assinar como Interveniente Garantidor  |
+  | 18           | Assinar como Parte e Avalista  |
+  | 19           | Assinar como Parte, Avalista e Interveniente Garantidor  |
+  | 20           | Assinar como Parte e Fiador  |
+  | 21           | Assinar como Parte, Avalista, Interv. Garantidor e Fiel Depositário  |
+  | 22           | Assinar como Parte e Fiel Depositário  |
+  | 23           | Assinar como Parte e Interveniente Garantidor  |
+  | 24           | Assinar como Fiduciante  |
+  | 25           | Assinar como Parte e Fiduciante  |
