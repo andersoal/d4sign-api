@@ -7,6 +7,8 @@ This repository ships the original D4Sign PHP client, now living at [`sdk/php/`]
 
 :::caution
 Requires PHP ≥ 5.5. The SDK predates this documentation rewrite and covers a subset of the full API (documents, safes, templates, folders, account, users, groups, tags, certificates). For anything it doesn't expose, call the REST endpoint directly per the [API Reference](/d4sign-api/reference/).
+
+`watcher`/`Watcher` service is wired into `Client` but not declared as a public property — it works (PHP doesn't enforce that), but your IDE won't autocomplete it. `Batches`/`batches` has the opposite problem: the service class exists in `sdk/php/src/D4sign/Services/Batches.php` but the `Client` constructor never instantiates it, so `$client->batches` doesn't exist at all — call `POST /batches` directly (see [Batching Documents](/d4sign-api/guides/core-workflows/#batching-documents)).
 :::
 
 ## Install
@@ -57,7 +59,7 @@ $client->documents->status('{id_status}');          // every document in a phase
 
 $client->documents->upload('{uuid_safe}', '/path/to/file.pdf');
 $client->documents->createList('{uuid_document}', $signers);
-$client->documents->sendToSigner('{uuid_document}', $message, $skip_email, $workflow);
+$client->documents->sendToSigner('{uuid_document}', $message, $workflow, $skip_email);
 $client->documents->listsignatures('{uuid_document}');
 $client->documents->cancel('{uuid_document}');
 $client->documents->resend('{uuid_document}', $email);

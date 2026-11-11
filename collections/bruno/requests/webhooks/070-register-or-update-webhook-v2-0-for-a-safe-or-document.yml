@@ -1,0 +1,36 @@
+info:
+  name: Register or Update Webhook v2.0 for a Safe or Document
+  type: http
+  seq: 70
+  tags:
+    - Webhooks
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/webhooks/v2/?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "type": "documento",
+        "uuid": "{{uuid}}",
+        "url": "https://seu-servidor.com/webhook"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Cadastra ou atualiza a URL de webhook de um cofre ou documento (API v2.0). Diferente da v1 (apenas por documento), permite registrar o webhook no nivel do COFRE, aplicando-se a todos os documentos dele.
+  
+  > Descoberto via busca na documentacao oficial em docapi.d4sign.com.br/reference/cadastrar-ou-atualizar-uma-url-de-webhook-20 - nao estava no export original deste spec.

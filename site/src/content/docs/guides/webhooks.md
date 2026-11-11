@@ -3,13 +3,13 @@ title: Webhooks
 description: Register a POSTBack URL to be notified of document status changes.
 ---
 
-D4Sign calls webhooks "POSTBack". You can register one per **document** or one per **safe**.
+D4Sign calls webhooks "POSTBack". You can register one per **document** or one per **safe** (a safe-level webhook applies to every document in it — you don't need to register it per document).
 
-:::note
-A safe-level webhook, configured from the D4Sign Dashboard, applies to every document registered in that safe — you don't need to register it per document.
+:::caution[v1 vs v2.0]
+There are two generations of this API: the original per-document-only endpoints below, and a newer `v2.0` endpoint that also supports safe-level registration via the API itself (previously that required the Dashboard). Prefer v2.0 for new integrations. This v2.0 endpoint isn't in D4Sign's exported OpenAPI spec that most of this reference is generated from — it was found by comparing against the live docs at [docapi.d4sign.com.br](https://docapi.d4sign.com.br/reference/cadastrar-ou-atualizar-uma-url-de-webhook-20) and added by hand. (Don't rely on live `401`-vs-`404` probing to confirm a path like this exists — D4Sign checks credentials before route matching, so an invalid `tokenAPI` returns the same `401` for a path that doesn't exist at all. Confirmed by testing a deliberately nonsense path. The official reference nav is the only trustworthy signal for "does this endpoint exist.")
 :::
 
-## List a document's webhook
+## v1 — per document
 
 ```http
 GET https://secure.d4sign.com.br/api/v1/documents/{uuid_document}/webhooks
@@ -18,8 +18,6 @@ GET https://secure.d4sign.com.br/api/v1/documents/{uuid_document}/webhooks
 ```php
 $client->documents->webhooklist('{uuid_document}');
 ```
-
-## Register a document webhook
 
 ```http
 POST https://secure.d4sign.com.br/api/v1/documents/{uuid_document}/webhooks
@@ -31,6 +29,23 @@ Content-Type: application/json
 ```php
 $client->documents->webhookadd('{uuid_document}', 'https://yourdomain.com/d4sign/webhook');
 ```
+
+## v2.0 — document or safe
+
+```http
+GET https://secure.d4sign.com.br/api/v1/webhooks/v2/?type=documento&uuid={uuid}
+```
+
+```http
+POST https://secure.d4sign.com.br/api/v1/webhooks/v2/
+Content-Type: application/json
+
+{ "type": "documento", "uuid": "{uuid}", "url": "https://yourdomain.com/d4sign/webhook" }
+```
+
+`type` is `documento` or `cofre` — same request shape either way, just point `uuid` at the safe instead of a document to register it at the safe level via the API.
+
+Not in the PHP SDK (it predates this endpoint) — call it directly, or see the [Bruno collection](/d4sign-api/tools/bruno/).
 
 ## What triggers a webhook, and what you get
 

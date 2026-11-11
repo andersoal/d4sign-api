@@ -1,6 +1,8 @@
 # D4Sign API — Bruno Collection
 
-68 requests covering the full D4Sign REST API, generated from [`openapi/d4sign.yaml`](../../openapi/d4sign.yaml) via `scripts/openapi_to_bruno_endpoints.py` + the Bruno OpenCollection scaffolder + `scripts/fix_bruno_multipart_bodies.py`. Regenerate it after the spec changes instead of hand-editing requests — see [`../../docs/REGENERATING.md`](../../docs/REGENERATING.md).
+72 requests covering the full D4Sign REST API, generated from [`openapi/d4sign.yaml`](../../openapi/d4sign.yaml) via `scripts/openapi_to_bruno_endpoints.py` + the Bruno OpenCollection scaffolder + `scripts/fix_bruno_multipart_bodies.py`. Regenerate it after the spec changes instead of hand-editing requests — see [`../../docs/REGENERATING.md`](../../docs/REGENERATING.md).
+
+A handful of these (webhooks v2.0, document view-URL generation, Word template upload) aren't in D4Sign's own OpenAPI export — they were found missing by comparing it against the live reference nav at [docapi.d4sign.com.br/v2.0/reference](https://docapi.d4sign.com.br/v2.0/reference) and added by hand. See `docs/COVERAGE.md` for the full audit.
 
 [<img src="https://fetch.usebruno.com/button.svg" alt="Fetch in Bruno" style="width: 130px; height: 30px;" width="128" height="32">](https://fetch.usebruno.com?url=https%3A%2F%2Fgithub.com%2Fandersoal%2Fd4sign-api.git "target=_blank rel=noopener noreferrer")
 
@@ -37,6 +39,8 @@ Bruno Desktop's checkbox state for a query param is driven by whether it's prese
 
 `requests/safes/001-list-all-safes.yml` carries a real test asserting the response shape — on success it's an array, on failure it has a `message` field (D4Sign's actual error envelope, confirmed live; see [`guides/rate-limits-and-errors.md`](../../site/src/content/docs/guides/rate-limits-and-errors.md)). The point: when you run a request against the real API, even a failing one, fold what actually came back into the docs instead of letting it disappear into a terminal scrollback. Add more via the `TESTS` dict in `scripts/openapi_to_bruno_endpoints.py` (hand-editing a generated request file gets overwritten on the next regen).
 
+**Caution**: don't use a live `401`-vs-`404` response to decide whether an endpoint exists — D4Sign validates `tokenAPI`/`cryptKey` before route matching, so an invalid credential pair returns the same `401` for a path that doesn't exist at all (confirmed by testing a deliberately nonsense path). The only reliable signal for "does this exist" is the official reference nav itself, or a `200`/`400`/`404` with *valid* credentials.
+
 ## Structure
 
 - `requests/<resource>/NNN-name.yml` — one OpenCollection YAML file per endpoint, grouped by the spec's own tags (`documents`, `safes`, `webhooks`, `signatories`, ...).
@@ -45,5 +49,6 @@ Bruno Desktop's checkbox state for a query param is driven by whether it's prese
 
 ## Known gaps
 
-- Multipart upload requests (`.../upload`, `.../uploadslave`) reference a placeholder `./example.pdf` — point it at a real file before sending.
+- Multipart upload requests (`.../upload`, `.../uploadslave`, `.../templates/upload`) reference a placeholder `./example.pdf` — point it at a real file before sending.
 - D4Sign rate-limits to 10 requests/hour per the original docs; back off on `429`.
+- The spec was exported at some point in the past and can drift from the live API — see `docs/COVERAGE.md` for the full comparison against the live docs, and `docs/REGENERATING.md` for how to update.

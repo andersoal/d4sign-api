@@ -73,7 +73,7 @@ Content-Type: application/json
 - `skip_email: 1` — don't send the default signing-link email, typically because you're using EMBED or in-person signing instead.
 
 ```php
-$client->documents->sendToSigner('{uuid_document}', 'Please sign the attached contract.', $skip_email = 1, $workflow = 0);
+$client->documents->sendToSigner('{uuid_document}', 'Please sign the attached contract.', $workflow = 0, $skip_email = 1);
 ```
 
 ## Document status

@@ -1,0 +1,37 @@
+info:
+  name: Generate Temporary View URL for a Document
+  type: http
+  seq: 71
+  tags:
+    - Documents
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/generate-document-view?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "with_attachments": false
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Gera uma URL temporaria (expira em 5 minutos) para visualizar o documento (e, opcionalmente, seus anexos) sem fazer download. Aceita apenas o UUID do documento principal, nao de anexos.
+  
+  > Encontrado comparando a navegacao da doc oficial (v2.0) contra o export original deste spec - nao estava presente. Veja docapi.d4sign.com.br/v2.0/reference/document-and-attachment-viewer.

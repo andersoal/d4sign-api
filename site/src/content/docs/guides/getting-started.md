@@ -9,7 +9,7 @@ D4Sign signing flows all follow the same five steps:
 2. Register a webhook (POSTBack) so your system hears about status changes.
 3. Register the signers.
 4. Send the document for signature.
-5. Optionally, use D4Sign's EMBED feature to show the signing UI on your own website.
+5. Optionally, use D4Sign's [EMBED feature](/d4sign-api/guides/embed/) to show the signing UI on your own website.
 
 This guide covers step 1 and the authentication every request needs. See [Core Workflows](/d4sign-api/guides/core-workflows/) for steps 2–5, and the [API Reference](/d4sign-api/reference/) for every parameter.
 

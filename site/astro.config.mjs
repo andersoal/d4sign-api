@@ -42,7 +42,17 @@ export default defineConfig({
 						{ label: 'Authentication', slug: 'guides/authentication' },
 						{ label: 'Core Workflows', slug: 'guides/core-workflows' },
 						{ label: 'Webhooks', slug: 'guides/webhooks' },
+						{ label: 'Embedding the Signing UI', slug: 'guides/embed' },
 						{ label: 'Rate Limits & Errors', slug: 'guides/rate-limits-and-errors' },
+					],
+				},
+				{
+					label: 'Recipes',
+					items: [
+						{ label: 'Upload, Send, and React to Completion', slug: 'recipes/send-and-track' },
+						{ label: 'Generate from a Template', slug: 'recipes/template-to-signature' },
+						{ label: 'Collect a Signature via EMBED', slug: 'recipes/embed-in-your-site' },
+						{ label: 'Batch + Group Signing', slug: 'recipes/batch-group-signing' },
 					],
 				},
 				{

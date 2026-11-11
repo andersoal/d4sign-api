@@ -21,6 +21,7 @@ skill/d4sign-docs/       Claude Skill packaging of the same docs
 scripts/                 openapi -> Bruno endpoint-list converter
 docs/REGENERATING.md     How to regenerate the reference + Bruno collection
 docs/TESTING.md          How to test against the real API (mise + Bruno)
+docs/COVERAGE.md         Audit of this repo's docs against the live docapi.d4sign.com.br
 mise.toml                Shared tokenAPI/cryptKey/baseUrl env vars (see docs/TESTING.md)
 ```
 

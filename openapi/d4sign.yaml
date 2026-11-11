@@ -2237,7 +2237,7 @@ paths:
                 required:
                 - status
               example:
-                status: 'List not founded: guarnier.anderson@gmail.com'
+                status: 'List not founded: teste@gmail.com'
           headers: {}
       security:
       - tokenAPI: []
@@ -5830,6 +5830,189 @@ paths:
               example:
                 message: OK
           headers: {}
+      security:
+      - tokenAPI: []
+        cryptKey: []
+  /api/v1/webhooks/v2/:
+    get:
+      summary: List Webhook v2.0 for a Safe or Document
+      deprecated: false
+      description: |
+        Lista o(s) webhook(s) cadastrado(s) para um cofre ou documento (API v2.0 - substitui/complementa a v1, que so cobria documentos).
+
+        > Descoberto via busca na documentacao oficial em docapi.d4sign.com.br/reference/listar-webhook-de-um-cofre-ou-documento-versao-20 - nao estava no export original deste spec.
+      operationId: hookWebhooksV2List
+      tags:
+      - Webhooks
+      parameters:
+      - name: type
+        in: query
+        description: "Tipo de recurso: 'cofre' ou 'documento'."
+        required: true
+        example: documento
+        schema:
+          type: string
+          enum:
+          - cofre
+          - documento
+      - name: uuid
+        in: query
+        description: UUID do cofre ou documento.
+        required: true
+        example: '{{uuid}}'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      type: string
+                    url:
+                      type: string
+          headers: {}
+        '400':
+          $ref: '#/components/responses/Bad_Request'
+        '401':
+          $ref: '#/components/responses/Not_Logged'
+      security:
+      - tokenAPI: []
+        cryptKey: []
+    post:
+      summary: Register or Update Webhook v2.0 for a Safe or Document
+      deprecated: false
+      description: |
+        Cadastra ou atualiza a URL de webhook de um cofre ou documento (API v2.0). Diferente da v1 (apenas por documento), permite registrar o webhook no nivel do COFRE, aplicando-se a todos os documentos dele.
+
+        > Descoberto via busca na documentacao oficial em docapi.d4sign.com.br/reference/cadastrar-ou-atualizar-uma-url-de-webhook-20 - nao estava no export original deste spec.
+      operationId: hookWebhooksV2Upsert
+      tags:
+      - Webhooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - cofre
+                  - documento
+                  description: Define o tipo de recurso monitorado.
+                uuid:
+                  type: string
+                  description: UUID do cofre ou documento.
+                url:
+                  type: string
+                  description: URL valida do seu sistema externo que recebera os disparos (POST) dos eventos de webhook.
+              required:
+              - type
+              - uuid
+              - url
+            example:
+              type: documento
+              uuid: '{{uuid}}'
+              url: https://seu-servidor.com/webhook
+      responses:
+        '200':
+          description: ''
+          content: {}
+          headers: {}
+        '400':
+          $ref: '#/components/responses/Bad_Request'
+        '401':
+          $ref: '#/components/responses/Not_Logged'
+      security:
+      - tokenAPI: []
+        cryptKey: []
+  /api/v1/documents/{uuid_document}/generate-document-view:
+    post:
+      summary: Generate Temporary View URL for a Document
+      deprecated: false
+      description: |
+        Gera uma URL temporaria (expira em 5 minutos) para visualizar o documento (e, opcionalmente, seus anexos) sem fazer download. Aceita apenas o UUID do documento principal, nao de anexos.
+
+        > Encontrado comparando a navegacao da doc oficial (v2.0) contra o export original deste spec - nao estava presente. Veja docapi.d4sign.com.br/v2.0/reference/document-and-attachment-viewer.
+      operationId: documentsGenerateView
+      tags:
+      - Documents
+      parameters:
+      - name: uuid_document
+        in: path
+        description: Identificador do Documento principal (anexos nao sao aceitos aqui).
+        required: true
+        example: '{{uuid_document}}'
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                with_attachments:
+                  type: boolean
+                  default: false
+                  description: Se true, a resposta tambem inclui URLs temporarias para os anexos do documento.
+            example:
+              with_attachments: false
+      responses:
+        '200':
+          description: URLs geradas; expiram em 5 minutos.
+          content: {}
+          headers: {}
+        '400':
+          $ref: '#/components/responses/Bad_Request'
+        '401':
+          $ref: '#/components/responses/Not_Logged'
+        '404':
+          $ref: '#/components/responses/Resource_Not_Found_Or_Unknown_Method'
+      security:
+      - tokenAPI: []
+        cryptKey: []
+  /api/v1/templates/upload:
+    post:
+      summary: Upload a Word Template
+      deprecated: false
+      description: |
+        Cria um novo template a partir de um arquivo .doc/.docx. Diferente de `makedocumentbytemplateword`, que GERA um documento a partir de um template ja existente - este endpoint CRIA o template em si.
+
+        > Encontrado comparando a navegacao da doc oficial (v2.0) contra o export original deste spec - nao estava presente. Veja docapi.d4sign.com.br/v2.0/reference/template-word-upload.
+      operationId: templatesUploadWord
+      tags:
+      - Templates
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Arquivo .doc ou .docx.
+                show_desk:
+                  type: integer
+                  default: 1
+                  description: 1 = visivel na secao "Templates Word" da plataforma; 0 = oculto.
+              required:
+              - file
+      responses:
+        '201':
+          description: ''
+          content: {}
+          headers: {}
+        '400':
+          $ref: '#/components/responses/Bad_Request'
+        '401':
+          $ref: '#/components/responses/Not_Logged'
       security:
       - tokenAPI: []
         cryptKey: []
