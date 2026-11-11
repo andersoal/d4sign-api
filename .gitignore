@@ -2,6 +2,10 @@ node_modules/
 dist/
 .astro/
 
+# Local symlink into .agents/skills/ (npx skills add); core.symlinks=false on
+# Windows would otherwise commit this as a duplicated real-file copy.
+.claude/skills/
+
 # Local mise overrides — this is where real tokenAPI/cryptKey values go.
 mise.local.toml
 .mise.local.toml
