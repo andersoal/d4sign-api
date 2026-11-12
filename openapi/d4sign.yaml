@@ -2,11 +2,11 @@ openapi: 3.1.0
 info:
   title: D4Sign v1.0.0
   description: |
-    A D4Sign é uma plataforma de assinatura eletrônica de documentos que atende os requisitos da Medida Provisória 2.200-2/01 (autenticidade, integridade e não repúdio), trazendo validade jurídica para as assinaturas realizadas através da D4Sign.
+    D4Sign is an electronic signature platform for documents. It meets the requirements of Provisional Measure 2.200-2/01 (authenticity, integrity, and non-repudiation), so signatures made through D4Sign carry full legal validity in Brazil.
 
-    API RESTful, respostas em JSON. Toda requisição deve enviar `tokenAPI` e `cryptKey` (`?tokenAPI={token}&cryptKey={cryptKey}`) — veja o esquema de segurança abaixo. Limite padrão: **10 requisições por hora** por conta; para aumentar, contato comercial@d4sign.com.br.
+    This is a RESTful API. All responses use JSON. Every request must send `tokenAPI` and `cryptKey` (`?tokenAPI={token}&cryptKey={cryptKey}`) — see the security scheme below. The default rate limit is **10 requests per hour** per account. To raise this limit, contact comercial@d4sign.com.br.
 
-    Collection Postman oficial: https://documenter.getpostman.com/view/1486030/d4sign-api/2TnpL3 (host padrão configurado é o de Sandbox).
+    Official Postman collection: https://documenter.getpostman.com/view/1486030/d4sign-api/2TnpL3 (it is configured to use the Sandbox host by default).
   version: 1.0.0
   summary: D4Sign Summary
 tags:
@@ -33,10 +33,10 @@ paths:
       summary: List All Safes
       deprecated: false
       description: |
-        Lista TODOS os cofres da conta.
+        Lists all safes in the account.
 
-        > Não esqueça de enviar `tokenAPI` e `cryptKey` na requisição.
-      operationId: safesList
+        > Remember to send `tokenAPI` and `cryptKey` with the request.
+      operationId: safes_list
       tags:
       - Safes
       parameters: []
@@ -77,15 +77,15 @@ paths:
       summary: List All Folders
       deprecated: false
       description: |
-        Lista TODAS as pastas do cofre informado.
-      operationId: foldersFindBySafe
+        Lists all folders in the given safe.
+      operationId: folders_list_by_safe
       tags:
       - Folders by Safe
       - Folders
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -128,20 +128,20 @@ paths:
       summary: Create Folder or Subfolder on Safe
       deprecated: false
       description: |
-        Cria uma pasta (ou subpasta) dentro do cofre informado.
+        Creates a folder, or a subfolder, inside the given safe.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `uuid_folder` (opcional) | UUID da pasta pai, para criar uma subpasta. |
-        | `folder_name` (obrigatório) | Nome da pasta ou subpasta. |
-      operationId: foldersCreate
+        | `uuid_folder` (optional) | The parent folder's UUID, to create a subfolder. |
+        | `folder_name` (required) | The folder's or subfolder's name. |
+      operationId: folders_create
       tags:
       - Folders by Safe
       - Folders
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -154,12 +154,11 @@ paths:
               properties:
                 folder_name:
                   type: string
-                  description: Nome da pasta ou sub pasta que será criada
+                  description: The name of the folder or subfolder to create.
                 uuid_folder:
                   type: string
                   description: >-
-                    (Opcional) Identificador (hierarquia pai) da pasta ou sub
-                    pasta onde quer criar o elemento novo.
+                    (Optional) The parent folder's UUID, to create a subfolder inside it.
               required:
               - folder_name
             example:
@@ -200,20 +199,20 @@ paths:
       summary: Rename Folder
       deprecated: false
       description: |
-        Renomeia uma pasta ou subpasta dentro do cofre informado.
+        Renames a folder or subfolder inside the given safe.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `folder_name` (obrigatório) | Novo nome da pasta ou subpasta. |
-        | `uuid_folder` (obrigatório) | UUID da pasta ou subpasta a renomear. |
-      operationId: foldersRename
+        | `folder_name` (required) | The folder's or subfolder's new name. |
+        | `uuid_folder` (required) | The UUID of the folder or subfolder to rename. |
+      operationId: folders_rename
       tags:
       - Folders by Safe
       - Folders
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -226,10 +225,10 @@ paths:
               properties:
                 folder_name:
                   type: string
-                  description: Novo Nome da Pasta ou Subpasta
+                  description: The folder's or subfolder's new name.
                 uuid_folder:
                   type: string
-                  description: Identificador da pasta ou subpasta que será renomeada
+                  description: The UUID of the folder or subfolder to rename.
               required:
               - folder_name
               - uuid_folder
@@ -265,8 +264,8 @@ paths:
     post:
       summary: List Templates
       deprecated: false
-      description: Esse objeto irá retornar todos os templates criados em sua conta.
-      operationId: documentsTemplatesListAll
+      description: Returns all templates created in your account.
+      operationId: documents_templates_list
       tags:
       - Documents Templates
       - Documents
@@ -384,15 +383,12 @@ paths:
       summary: Make document by Template HTML
       deprecated: false
       description: >+
-        Esse objeto irá gerar um documento em seu cofre a partir de um template.
-
+        Generates a document in your safe from an HTML template.
 
 
         :::highlight orange 📌
 
-        Obs.: Para criar o documento em um cofre, revise a opção
-        **Compartilhar** nas **Opções do template**, em um template HTML. É
-        preciso ter a permissão de acesso "Administrador" ou "Padrão".
+        Note: to create the document in a safe, check the **Share** option in the HTML template's **Template Options**. This requires "Administrator" or "Standard" access permission.
 
         :::
 
@@ -401,17 +397,13 @@ paths:
 
         | --- | --- |
 
-        | name_document | (Opcional) Define o nome do documento. Se não for
-        preenchido, o documento terá o nome "Documento" |
+        | name_document | (Optional) Sets the document's name. If you leave this blank, the document is named "Documento". |
 
-        | uuid_folder | (opcional) Para que o documento fique armazenado dentro
-        da pasta, informe o UUID dela. Se não for preenchido, o documento será
-        salvo no cofre informado na requisição. |
+        | uuid_folder | (Optional) To store the document inside a folder, set this to the folder's UUID. If you leave this blank, the document is saved directly in the safe set in the request. |
 
-        | templates | (obrigatório) ID do template na CHAVE `id_template` e as
-        variáveis em conjuntos de CHAVE e VALOR. |
+        | templates | (Required) The template ID as the KEY `id_template`, with the template's variables as KEY/VALUE pairs. |
 
-      operationId: documentsTemplatePostHtml
+      operationId: documents_template_html_create
       tags:
       - Documents Templates
       - Templates
@@ -419,7 +411,7 @@ paths:
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -447,13 +439,11 @@ paths:
                 name_document:
                   type: string
                   description: >-
-                    (opcional) Define o nome do documento. Se não for
-                    preenchido, o documento terá o nome "Documento"
+                    (Optional) Sets the document's name. If you leave this blank, the document is named "Documento".
                 uuid_folder:
                   type: string
                   description: >-
-                    (opcional) Para que o documento fique armazenado dentro da
-                    pasta, informe o UUID dela.
+                    (Optional) To store the document inside a folder, set this to the folder's UUID.
                 templates:
                   type: object
                   properties:
@@ -476,13 +466,7 @@ paths:
                   required:
                   - '{{template_id}}'
                   description: >-
-                    Lembrando que você deverá informar pelo menos um template.
-                    As variáveis dos campos personalizados (ex.: arrastando,
-                    bloco, NOME_CONTRATANTE, etc.) precisam ser informadas
-                    exatamente iguais ao cadastro. Ex.: 'NOME_CONTRATANTE' =>
-                    'fulano' irá substituir o campo personalizado
-                    NOME_CONTRATANTE por fulano. O sistema é case sensitive, ou
-                    seja, você deverá respeitar letras maiúsculas e minúsculas.
+                    You must set at least one template. The names of the custom fields (for example, NOME_CONTRATANTE) must match the template's registered field names exactly. For example, 'NOME_CONTRATANTE' => 'John Smith' replaces the custom field NOME_CONTRATANTE with John Smith. Field names are case-sensitive, so match the upper and lower case letters exactly.
               required:
               - templates
             example:
@@ -540,8 +524,8 @@ paths:
     post:
       summary: Make document by Template WORD
       deprecated: false
-      description: "Esse objeto irá gerar um documento em seu cofre a partir de um template word.\n\n\n:::highlight orange 📌\nPara criar o documento em um cofre, revise a opção **Compartilhar** nas **Opções do template**, em um template Word. É preciso ter a permissão de acesso \"Administrador\" ou \"Padrão\".\n:::\n\n\n# Caso Documento a partir do template WORD com mais de 1 preenchedor\n\n```json\n{\n    \"name_document\": \"Nome do documento\",\n    \"uuid_folder (opcional)\": \"{UUID DA PASTA}\",\n  \n    \"templates\": {\n       \"id_template\": {\n         \n        \"persona 1\":{\n\t    \t\t\t\"variavel 1\": \"valor 1\",\n\t    \t\t\t\"variavel 2\": \"valor 2\",\n\t    \t{...},\n        \n        \"persona 2\":{\n\t    \t\t\t\"variavel 1\": \"valor 1\",\n\t    \t\t\t\"variavel 2\": \"valor 2\",\n\t    \t{...},\n         \n         \"tokens_gerais\":{\n\t    \t\t\t\"variavel 1\": \"valor 1\",\n\t    \t\t\t\"variavel 2\": \"valor 2\",\n\t    \t{...}\n        \n\t    }\n   }\n}\n```\nExemplo\n```json\n\n{\n   \"name_document\":\"Modelo template para contrato com 2 preenchedores API\",\n   \"templates\":\n      {\n         \"MTIwMDcy=\":{\n            \"organizador\": {\n               \"nome_completo\":\"VALOR TESTE\",\n                \"nome\":\"VALOR TESTE\",\n                \"endereco_organizador\":\"VALOR TESTE\",\n                \"valor_total\":\"VALOR TESTE\",\n                \"nome_da_empresa\":\"VALOR TESTE\",\n                \"nome_do_representante_da_empresa\":\"VALOR TESTE\",\n                \"endereco_da_empresa\":\"VALOR TESTE\",\n                \"telefone_da_empresa\":\"VALOR TESTE 2\",\n                \"cargo_do_representante_da_empresa\":\"VALOR TESTE\",\n                \"e_mail_do_organizador_do_evento\":\"VALOR TESTE\"\n            },\n            \"cliente\": {\n                \"nome_completo\":\"VALOR TESTE 1\",\n                \"nome\":\"VALOR TESTE 1\",\n                \"endereco_cliente\":\"VALOR TESTE 1\",\n                \"endereco_do_cliente\":\"VALOR TESTE 1\",\n                \"telefone_do_cliente\":\"VALOR TESTE 1\",\n                \"e_mail_do_cliente\":\"VALOR TESTE 1\",\n                \"numero_de_cpf_ou_cnpj_do_cliente\":\"VALOR TESTE 1\"\n            },\n            \"tokens_gerais\": {\n                \"endereco\":\"VALOR Tokens Gerais\",\n                \"nome_completo\":\"VALOR Tokens Gerais\",\n                \"nome_do_evento\":\"VALOR Tokens Gerais\",\n                \"data_assinatura\":\"VALOR Tokens Gerais\",\n                \"nome_evento\":\"VALOR Tokens Gerais\",\n                \"data_evento\":\"VALOR Tokens Gerais\",\n                \"hora_inicio_evento\":\"VALOR Tokens Gerais\",\n                \"hora_termino_evento\":\"VALOR Tokens Gerais\",\n                \"local_evento\":\"VALOR Tokens Gerais\",\n                \"descricao\":\"VALOR Tokens Gerais\",\n                \"estado\":\"VALOR Tokens Gerais\",\n                \"local_e_data_da_assinatura\":\"VALOR Tokens Gerais\"\n            }\n        }\n      }\n}\n```"
-      operationId: documentsTemplatePostWord
+      description: "Generates a document in your safe from a Word template.\n\n:::highlight orange 📌\nTo create the document in a safe, check the **Share** option in the Word template's **Template Options**. This requires \"Administrator\" or \"Standard\" access permission.\n:::\n\n# Case: a document from a WORD template with more than 1 form-filler\n\n```json\n{\n    \"name_document\": \"Document name\",\n    \"uuid_folder (optional)\": \"{FOLDER UUID}\",\n  \n    \"templates\": {\n       \"id_template\": {\n         \n        \"person 1\":{\n\t    \t\t\t\"variable 1\": \"value 1\",\n\t    \t\t\t\"variable 2\": \"value 2\",\n\t    \t{...},\n        \n        \"person 2\":{\n\t    \t\t\t\"variable 1\": \"value 1\",\n\t    \t\t\t\"variable 2\": \"value 2\",\n\t    \t{...},\n         \n         \"general_tokens\":{\n\t    \t\t\t\"variable 1\": \"value 1\",\n\t    \t\t\t\"variable 2\": \"value 2\",\n\t    \t{...}\n        \n\t    }\n   }\n}\n```\nExample\n```json\n\n{\n   \"name_document\":\"Contract template for 2 form-fillers API\",\n   \"templates\":\n      {\n         \"MTIwMDcy=\":{\n            \"organizer\": {\n               \"full_name\":\"TEST VALUE\",\n                \"name\":\"TEST VALUE\",\n                \"organizer_address\":\"TEST VALUE\",\n                \"total_value\":\"TEST VALUE\",\n                \"company_name\":\"TEST VALUE\",\n                \"company_representative_name\":\"TEST VALUE\",\n                \"company_address\":\"TEST VALUE\",\n                \"company_phone\":\"TEST VALUE 2\",\n                \"company_representative_title\":\"TEST VALUE\",\n                \"event_organizer_email\":\"TEST VALUE\"\n            },\n            \"client\": {\n                \"full_name\":\"TEST VALUE 1\",\n                \"name\":\"TEST VALUE 1\",\n                \"client_address\":\"TEST VALUE 1\",\n                \"client_address_2\":\"TEST VALUE 1\",\n                \"client_phone\":\"TEST VALUE 1\",\n                \"client_email\":\"TEST VALUE 1\",\n                \"client_cpf_or_cnpj\":\"TEST VALUE 1\"\n            },\n            \"general_tokens\": {\n                \"address\":\"General Tokens VALUE\",\n                \"full_name\":\"General Tokens VALUE\",\n                \"event_name\":\"General Tokens VALUE\",\n                \"signature_date\":\"General Tokens VALUE\",\n                \"event_name_2\":\"General Tokens VALUE\",\n                \"event_date\":\"General Tokens VALUE\",\n                \"event_start_time\":\"General Tokens VALUE\",\n                \"event_end_time\":\"General Tokens VALUE\",\n                \"event_location\":\"General Tokens VALUE\",\n                \"description\":\"General Tokens VALUE\",\n                \"state\":\"General Tokens VALUE\",\n                \"signature_place_and_date\":\"General Tokens VALUE\"\n            }\n        }\n      }\n}\n```"
+      operationId: documents_template_word_create
       tags:
       - Documents Templates
       - Templates
@@ -549,7 +533,7 @@ paths:
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -577,13 +561,11 @@ paths:
                 name_document:
                   type: string
                   description: >-
-                    (opcional) Define o nome do documento. Se não for
-                    preenchido, o documento terá o nome "Documento"
+                    (Optional) Sets the document's name. If you leave this blank, the document is named "Documento".
                 uuid_folder:
                   type: string
                   description: >-
-                    (opcional) Para que o documento fique armazenado dentro da
-                    pasta, informe o UUID dela.
+                    (Optional) To store the document inside a folder, set this to the folder's UUID.
                 templates:
                   type: object
                   properties:
@@ -606,13 +588,7 @@ paths:
                   required:
                   - id_template 1
                   description: >-
-                    Lembrando que você deverá informar pelo menos um template.
-                    As variáveis dos campos personalizados (ex.: arrastando,
-                    bloco, NOME_CONTRATANTE, etc.) precisam ser informadas
-                    exatamente iguais ao cadastro. Ex.: 'NOME_CONTRATANTE' =>
-                    'fulano' irá substituir o campo personalizado
-                    NOME_CONTRATANTE por fulano. O sistema é case sensitive, ou
-                    seja, você deverá respeitar letras maiúsculas e minúsculas.
+                    You must set at least one template. The names of the custom fields (for example, NOME_CONTRATANTE) must match the template's registered field names exactly. For example, 'NOME_CONTRATANTE' => 'John Smith' replaces the custom field NOME_CONTRATANTE with John Smith. Field names are case-sensitive, so match the upper and lower case letters exactly.
               required:
               - name_document
               - uuid_folder
@@ -659,10 +635,10 @@ paths:
       summary: Create Rubric Template Word
       deprecated: false
       description: |
-        Gera um documento a partir de um template Word com rubricas posicionadas por token, no cofre informado.
+        Generates a document from a Word template, with initials placed by token, in the given safe.
 
-        Fluxo: liste os templates (`POST /templates`) para obter o `id`. Liste os cofres (`GET /safes`) para obter o `uuid_safe`. Então use este endpoint informando `templates.{id}.{token}` = e-mail do signatário correspondente a cada rubrica.
-      operationId: documentsTemplateWordRubric
+        Workflow: list the templates (`POST /templates`) to get the template `id`. List the safes (`GET /safes`) to get the `uuid_safe`. Then call this endpoint, setting `templates.{id}.{token}` to the email of the signer who owns each set of initials.
+      operationId: documents_template_word_rubric_create
       tags:
       - Documents Templates
       parameters:
@@ -696,37 +672,28 @@ paths:
       summary: Upload File Principal Form-Data
       deprecated: false
       description: >
-        Esse objeto realizará o UPLOAD do seu documento para os servidores da
-        D4Sign.
+        Uploads your document to D4Sign's servers.
 
 
         :::warning[]
 
-        Após o UPLOAD, o documento será criptografado em nossos cofres e
-        carimbado com um número de série.
+        After the upload, D4Sign encrypts the document in its safes and serial-stamps it.
 
         :::
 
 
-        Após o processamento um preview será gerado. O processamento será
-        realizado em background, ou seja, a requisição não ficará bloqueada.
+        After processing, D4Sign generates a preview. Processing runs in the background, so this request does not block.
 
 
-        Todos os documentos ficam armazenados em COFRES criptografados. O
-        parâmetro `uuid_safe` é obrigatório. Ele determina em qual cofre o
-        documento ficará armazenado.
+        All documents are stored in encrypted SAFES. The `uuid_safe` parameter is required. It sets which safe stores the document.
 
 
         :::highlight blue 📌
 
-        ℹ️ Header `tokenAPI` não está documentado em explicar se não é
-        necessário enviar pelos Parâmetros da Requisição (Query Parameters). A
-        recomenda
-
-        cão é enviar em ambos.
+        ℹ️ D4Sign's official docs do not state whether the `tokenAPI` header is required in addition to the query parameters. The recommendation is to send it in both places.
 
         :::
-      operationId: documentsUploadFile
+      operationId: documents_upload_file
       tags:
       - Documents Upload/Download/Principal
       - Documents
@@ -734,7 +701,7 @@ paths:
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -754,12 +721,11 @@ paths:
               properties:
                 file:
                   description: >-
-                    Arquivo que será enviado para os servidores da D4Sign. MIME
-                    Types aceitos PDF,DOC,DOCX,JPG,PNG,BMP
+                    The file to upload to D4Sign's servers. Accepted MIME types: PDF, DOC, DOCX, JPG, PNG, BMP.
                   type: string
                   format: binary
                 uuid_folder:
-                  description: (Opcional) Identificador da pasta ou sub pasta.
+                  description: (Optional) The folder's or subfolder's UUID.
                   example: '{{uuid_folder}}'
                   type: string
                 workflow:
@@ -771,10 +737,7 @@ paths:
                   - '1'
                   - '2'
                   description: >-
-                    1= Seguir a ordem de assinatura do parâmetro
-                    "after_position" na requisição de cadastrar signatários.
-                    \n2= Não seguir a ordem de assinatura do parâmetro
-                    "after_position" na requisição de cadastrar signatários.
+                    `1` = follow the signing order set by the `after_position` parameter when you add signers. `2` = do not follow that order.
                   example: ''
               required:
               - file
@@ -808,23 +771,18 @@ paths:
       summary: Upload File Principal Binary
       deprecated: false
       description: >+
-        Esse objeto realizará o UPLOAD do seu documento para os servidores da
-        D4Sign.
+        Uploads your document to D4Sign's servers.
 
 
-        Após o UPLOAD, o documento será criptografado em nossos cofres e
-        carimbado com um número de série.
+        After the upload, D4Sign encrypts the document in its safes and serial-stamps it.
 
 
-        Após o processamento um preview será gerado. O processamento será
-        realizado em background, ou seja, a requisição não ficará bloqueada.
+        After processing, D4Sign generates a preview. Processing runs in the background, so this request does not block.
 
 
-        Todos os documentos ficam armazenados em COFRES criptografados. O
-        parâmetro `uuid_safe` é obrigatório. Ele determina em qual cofre o
-        documento ficará armazenado.
+        All documents are stored in encrypted SAFES. The `uuid_safe` parameter is required. It sets which safe stores the document.
 
-      operationId: documentsUploadFileBinary
+      operationId: documents_upload_file_binary
       tags:
       - Documents Upload/Download/Principal
       - Documents
@@ -832,7 +790,7 @@ paths:
       parameters:
       - name: uuid_safe
         in: path
-        description: ID do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -846,9 +804,7 @@ paths:
                 base64_binary_file:
                   type: string
                   description: >-
-                    Arquivo que será enviado para os servidores da D4Sign.
-                    ATENÇÃO: Você deve enviar o binário do seu arquivo
-                    codificado em BASE64
+                    The file to upload to D4Sign's servers. ATTENTION: send your file's binary data base64-encoded.
                   enum:
                   - application/pdf
                   - application/msword
@@ -859,15 +815,14 @@ paths:
                   - image/bmp
                 mime_type:
                   type: string
-                  description: Informe o MIMETYPE do seu arquivo
+                  description: Your file's MIME type.
                 name:
                   type: string
-                  description: (Opcional) Informe o nome do seu arquivo
+                  description: (Optional) Your file's name.
                 uuid_folder:
                   type: string
                   description: >-
-                    (Opcional) Para que o documento fique armazenado dentro da
-                    pasta, informe o UUID dela.
+                    (Optional) To store the document inside a folder, set this to the folder's UUID.
               required:
               - base64_binary_file
               - mime_type
@@ -903,8 +858,8 @@ paths:
       summary: Upload Big File
       deprecated: false
       description: |
-        Upload de documento principal ACIMA de 20MB e menor que 500MB (mesmo contrato do `/upload` padrão).
-      operationId: documentsUploadBigFile
+        Uploads a main document ABOVE 20MB and under 500MB. It uses the same contract as the standard `/upload` endpoint.
+      operationId: documents_upload_big_file
       tags:
       - Documents Upload/Download/Principal
       parameters:
@@ -938,34 +893,31 @@ paths:
       summary: Document download
       deprecated: false
       description: |
-        Gera uma URL final para download do documento.
+        Generates the final URL to download the document.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `type` (opcional) | `zip` para o arquivo completo, `pdf` para apenas o PDF, `pdfa` para PDF/A. |
-        | `language` (opcional) | `pt` ou `en`. |
-        | `document` (opcional) | `true` inclui no retorno, em base64, as fotos do documento de identidade/selfie usadas na autenticação (quando aplicável). |
-        | `encoding` (opcional) | `1` retorna a URL do arquivo em base64. |
+        | `type` (optional) | `zip` for the complete file, `pdf` for the PDF only, `pdfa` for PDF/A. |
+        | `language` (optional) | `pt` or `en`. |
+        | `document` (optional) | `true` includes, base64-encoded, the ID document and selfie photos used for authentication, when the signer used that method. |
+        | `encoding` (optional) | `1` returns the file URL base64-encoded. |
 
-        > A URL retornada pode conter `&` — trate-a (coloque entre aspas) antes de usar em shells como o PowerShell.
-      operationId: documentsDownloadFile
+        > The returned URL can contain `&`. Quote it before you use it in a shell such as PowerShell.
+      operationId: documents_download_file
       tags:
       - Documents Upload/Download/Principal
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         schema:
           type: string
       - name: type
         in: query
         description: >-
-          Para realizar o download do arquivo completo, escolha `ZIP` nesse
-          atributo. Para realizar o download apenas do PDF, escolha `PDF`
-          nesse atributo. Para fazer download em formato PDF/A, escolha `pdfa`
-          neste atributo.
+          To download the complete file, set this to `ZIP`. To download only the PDF, set this to `PDF`. To download as PDF/A, set this to `pdfa`.
         required: false
         schema:
           type: string
@@ -976,9 +928,7 @@ paths:
       - name: language
         in: query
         description: >-
-          Para realizar o download do arquivo em inglês, escolha `en` nesse
-          atributo. Para realizar o download do arquivo em português, escolha
-          `pt` nesse atributo.
+          To download the file in English, set this to `en`. To download it in Portuguese, set this to `pt`.
         required: false
         schema:
           type: string
@@ -988,21 +938,16 @@ paths:
       - name: document
         in: query
         description: >-
-          `true` : Traz na resposta as fotos do documento do signatário em
-          base 64 caso tenho sido usada a autenticação documento com foto ou
-          foto e selfie. Trazendo assim 3 arquivos: a frente do documento, o
-          verso do documento e a foto selfie, caso tenho sido solicitada na
-          autenticação.
+          `true`: the response includes the signer's ID-document photos, base64-encoded, when the signer used photo-ID or photo-ID-plus-selfie authentication. This returns up to 3 files: the front of the ID document, the back of the ID document, and the selfie photo, when the authentication method required it.
 
 
-          `false` : não traz na resposta as fotos do documento do signatário
-          em base 64.
+          `false`: the response does not include the signer's ID-document photos.
         required: false
         schema:
           type: boolean
       - name: encoding
         in: query
-        description: 0 (false) download em pdf - 1 (true) download base 64
+        description: '`0` (false) = download as PDF. `1` (true) = download base64-encoded.'
         required: false
         schema:
           type: boolean
@@ -1036,14 +981,12 @@ paths:
       summary: Upload File Attachment Form-Data
       deprecated: false
       description: >+
-        Esse objeto realizará o UPLOAD do seu documento para os servidores da
-        D4Sign e ficará anexo ao documento principal.
+        Uploads your document to D4Sign's servers as an attachment to the main document.
 
 
-        Após o processamento um preview será gerado. O processamento será
-        realizado em background, ou seja, a requisição não ficará bloqueada.
+        After processing, D4Sign generates a preview. Processing runs in the background, so this request does not block.
 
-      operationId: documentsUploadAttachment
+      operationId: documents_upload_attachment
       tags:
       - Documents Upload/Download/Secondary / Attachment
       - Documents
@@ -1051,7 +994,7 @@ paths:
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -1071,8 +1014,7 @@ paths:
               properties:
                 file:
                   description: >-
-                    Arquivo que será enviado para os servidores da D4Sign. MIME
-                    Types aceitos PDF,DOC,DOCX,JPG,PNG,BMP
+                    The file to upload to D4Sign's servers. Accepted MIME types: PDF, DOC, DOCX, JPG, PNG, BMP.
                   example: file://./example.pdf
                   type: string
                   format: binary
@@ -1116,17 +1058,14 @@ paths:
       summary: Upload File Attachment Binary
       deprecated: false
       description: >-
-        Esse objeto realizará o UPLOAD do seu documento para os servidores da
-        D4Sign.
+        Uploads your document to D4Sign's servers.
 
 
-        Após o UPLOAD, o documento será criptografado em nossos cofres e
-        carimbado com um número de série.
+        After the upload, D4Sign encrypts the document in its safes and serial-stamps it.
 
 
-        Após o processamento um preview será gerado. O processamento será
-        realizado em background, ou seja, a requisição não ficará bloqueada.
-      operationId: documentsUploadAttachmentBinary
+        After processing, D4Sign generates a preview. Processing runs in the background, so this request does not block.
+      operationId: documents_upload_attachment_binary
       tags:
       - Documents Upload/Download/Secondary / Attachment
       - Documents
@@ -1134,7 +1073,7 @@ paths:
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -1148,15 +1087,13 @@ paths:
                 base64_binary_file:
                   type: string
                   description: >-
-                    Arquivo que será enviado para os servidores da D4Sign.
-                    ATENÇÃO: Você deve enviar o binário do seu arquivo
-                    codificado em BASE64
+                    The file to upload to D4Sign's servers. ATTENTION: send your file's binary data base64-encoded.
                 mime_type:
                   type: string
-                  description: Informe o MIMETYPE do seu arquivo
+                  description: Your file's MIME type.
                 name:
                   type: string
-                  description: (Opcional) Informe o nome do seu arquivo
+                  description: (Optional) Your file's name.
               required:
               - base64_binary_file
               - mime_type
@@ -1187,15 +1124,15 @@ paths:
       summary: List File Attachments (slaves)
       deprecated: false
       description: |
-        Lista os anexos (documentos secundários) vinculados a um documento principal.
-      operationId: documentsRelatedFilesList
+        Lists the attachments (secondary documents) linked to a main document.
+      operationId: documents_attachments_list
       tags:
       - Documents Upload/Download/Secondary / Attachment
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -1265,12 +1202,12 @@ paths:
       summary: Create a batch
       deprecated: false
       description: |
-        Cria um lote de documentos a partir de uma lista de UUIDs.
+        Creates a batch of documents from a list of UUIDs.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `keys` (obrigatório) | UUIDs dos documentos que farão parte do lote. **Máximo de 25 documentos por lote.** |
-      operationId: documentsBatch
+        | `keys` (required) | The UUIDs of the documents to include in the batch. **Maximum of 25 documents per batch.** |
+      operationId: documents_batch_create
       tags:
       - Documents Upload/Download
       parameters: []
@@ -1285,7 +1222,7 @@ paths:
                   items:
                     type: string
                     description: Identificador do documento que fará parte do lote.
-                  description: 'Atenção: O máximo são 25 documentos por lote.'
+                  description: 'Attention: the maximum is 25 documents per batch.'
                   maxItems: 25
               required:
               - keys
@@ -1326,23 +1263,23 @@ paths:
       summary: Download Documents and Certificate (Splited)
       deprecated: false
       description: |
-        Gera uma URL para download em lote de documentos (principal e/ou anexos) e, opcionalmente, suas hashes (certificados de assinatura).
+        Generates a URL to batch-download documents (main documents and/or attachments) and, optionally, their hashes (signature certificates).
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `language` (opcional) | `pt` ou `en`. |
-        | `type` (opcional) | Omitir para PDF. Usar `pdfa` para PDF/A. |
-        | `documents` (obrigatório) | Mapa `{uuid-documento: "1"|"0"}` — `1` inclui a hash/certificado junto ao documento. |
+        | `language` (optional) | `pt` or `en`. |
+        | `type` (optional) | Omit this for PDF. Use `pdfa` for PDF/A. |
+        | `documents` (required) | A map of `{document-uuid: "1"|"0"}`. `1` includes the hash/certificate together with the document. |
 
-        > O documento precisa estar finalizado (todos os signatários assinaram).
-      operationId: documentsRelatedFilesDownload
+        > The document must be finished (all signers have signed) before you call this endpoint.
+      operationId: documents_download_batch
       tags:
       - Documents Upload/Download
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -1363,14 +1300,11 @@ paths:
                 language:
                   type: string
                   description: >-
-                    Para realizar o download do arquivo em inglês, escolha `en`
-                    nesse atributo. Para realizar o download do arquivo em
-                    português, escolha `pt` nesse atributo.
+                    To download the file in English, set this to `en`. To download it in Portuguese, set this to `pt`.
                 type:
                   type: string
                   description: >-
-                    Para fazer em download em pdf, exclua o atributo, mas para
-                    baixar no formato pdf-a, escolha "pdfa" nesse atributo.
+                    To download as PDF, omit this attribute. To download as PDF/A, set this attribute to "pdfa".
                 documents:
                   type: object
                   properties:
@@ -1394,7 +1328,7 @@ paths:
                       enum:
                       - '0'
                       - '1'
-                  description: Pode-se colocar mais UUID de arquivos, caso necessário.
+                  description: You can add more document UUIDs here if needed.
               required:
               - documents
             example:
@@ -1426,18 +1360,14 @@ paths:
       summary: Upload only hash file
       deprecated: false
       description: >-
-        Esse recurso realizará o UPLOAD do hash de um documento para os
-        servidores da D4Sign.
+        Uploads a document's hash to D4Sign's servers.
 
 
-        Após o UPLOAD, o hash de documento será criptografado em nossos cofres e
-        carimbado com um número de série.
+        After the upload, D4Sign encrypts the document hash in its safes and serial-stamps it.
 
 
-        Todos os documentos ficam armazenados em COFRES criptografados. O
-        parâmetro UUID-SAFE é obrigatório. Ele determina em qual cofre o hash
-        de documento ficará armazenado.
-      operationId: documentsUploadHash
+        All documents are stored in encrypted SAFES. The `uuid_safe` parameter is required. It sets which safe stores the document hash.
+      operationId: documents_upload_hash
       tags:
       - Documents Upload/Download
       - Documents
@@ -1445,7 +1375,7 @@ paths:
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -1459,29 +1389,24 @@ paths:
                 sha256:
                   type: string
                   description: >-
-                    Informe o sha256 do arquivo em HEXADECIMAL. O sha256 deverá
-                    possuir 64 caracteres. Atenção: Não envie o sha256 em
-                    binário.
+                    The file's SHA-256 hash, in hexadecimal. It must be 64 characters long. Attention: do not send the hash as binary data.
                   minLength: 64
                   maxLength: 64
                   pattern: ^[a-fA-F0-9]{64}$
                 sha512:
                   type: string
                   description: >-
-                    Informe o sha256 do arquivo em HEXADECIMAL. O sha512 deverá
-                    possuir 64 caracteres. Atenção: Não envie o sha256 em
-                    binário.
+                    The file's SHA-512 hash, in hexadecimal. It must be 128 characters long. Attention: do not send the hash as binary data.
                   minLength: 64
                   maxLength: 64
                   pattern: ^[a-fA-F0-9]{64}$
                 name:
                   type: string
-                  description: (Opcional) Informe o nome do seu arquivo
+                  description: (Optional) Your file's name.
                 uuid_folder:
                   type: string
                   description: >-
-                    (Opcional) Para que o documento fique armazenado dentro da
-                    pasta, informe o UUID dela.
+                    (Optional) To store the document inside a folder, set this to the folder's UUID.
               required:
               - sha256
               - sha512
@@ -1513,15 +1438,15 @@ paths:
       summary: Signatories Group List
       deprecated: false
       description: |
-        Lista todos os grupos de assinatura do cofre.
-      operationId: signatoriesGroupsGet
+        Lists all signing groups in the safe.
+      operationId: documents_groups_list
       tags:
       - Signatories
       - Documents
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -1552,22 +1477,22 @@ paths:
       summary: Signatories Group Details
       deprecated: false
       description: |
-        Lista os detalhes de um grupo de assinatura — apenas se o `tokenAPI` é o dono da conta do `uuid_grupo`, ou se o grupo está compartilhado no `uuid_safe` informado.
-      operationId: signatoriesGroupsGetId
+        Lists the details of a signing group. This works only when the `tokenAPI` belongs to the account that owns the `uuid_grupo`, or when the group is shared with the given `uuid_safe`.
+      operationId: documents_groups_get
       tags:
       - Signatories
       - Safes
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
           type: string
       - name: uuid_group
         in: path
-        description: Identificador do Grupo de Assinatura
+        description: The signing group's UUID.
         required: true
         example: '{{uuid_group}}'
         schema:
@@ -1667,10 +1592,8 @@ paths:
     post:
       summary: Create signature list (Add Signatories or Group)
       deprecated: false
-      description: "Esse objeto realizará o cadastro dos signatários do documento, ou seja, quais pessoas precisam assinar esse documento.\n\n<AccordionGroup>\n  <Accordion title=\"Case para Incluir Signatários\" defaultOpen>\n   <Columns>\n  \n      <Column>\n      Requisição\n    ```json\n{\n    \"signers\" : [\n        {\n            \"email\": \"email@dominio.com\",\n            \"act\": \"1\",\n            \"foreign\": \"1\",\n            \"certificadoicpbr\": \"0\",\n            \"assinatura_presencial\": \"0\",\n            \"docauth\": \"0\",\n            \"docauthandselfie\": \"0\",\n       \t    \"embed_methodauth\": \"email\",\n      \t    \"embed_smsnumber\": \"\",\n      \t    \"upload_allow\": \"0\",\n      \t    \"upload_obs\": \"Contrato Social e Conta de Luz\",\n      \t    \"whatsapp_number\": \"+5511981876540\" (opcional),\n      \t    \"uuid_grupo\": \"UUID DO GRUPO\" (opcional),\n      \t    \"certificadoicpbr_tipo\": \"2\" (opcional),\n      \t    \"certificadoicpbr_cpf\": \"CPF\" (opcional),\n      \t    \"certificadoicpbr_cnpj\": \"CNPJ\" (opcional),\n      \t    \"password_code\": \"Código de acesso\" (opcional),\n      \t    \"auth_pix\": \"0\" (opcional),\n      \t    \"auth_pix_nome\": \"Nome do signatário\" (opcional),\n      \t    \"auth_pix_cpf\": \"21917876280\" (opcional),\n      \t    \"videoselfie\": \"0\" (opcional),\n      \t    \"d4sign_score\": \"0\" (opcional),\n      \t    \"d4sign_score_nome\": \"Nome do signatário\" (opcional),\n      \t    \"d4sign_score_cpf\": \"21917876280\" (opcional),\n            \"d4sign_score_similarity\": \"90\" (min 70 - max 90)(opcional),\n            \"skipemail\": \"1\"(opcional)\n        },\n        {...}\n        ]\n}\n```\n  </Column>\n  <Column>\n      Resposta\n    ```json\n      {\n    \"key_signer\": \"NwYu=\",\n    \"email\": \"email@user.com.br\",\n    \"act\": \"1\",\n    \"foreign\": \"0\",\n    \"certificadoicpbr\": \"0\",\n    \"assinatura_presencial\": \"0\",\n    \"assinatura_presencial_link\": \"LINK PARA ASSINATURA PRESENCIAL\" - O link só será exibido depois que o documento for enviado para assinatura,\n    \"doc_auth\": \"0\",\n    \"embed_methodauth\": \"email\",\n    \"embed_smsnumber\": \"\",\n    \"upload_allow\": \"0\",\n    \"upload_obs\": \"Contrato Social e Conta de Luz\",\n    \"docauthandselfie\": \"0\",\n    \"skipemail\": \"0\",\n    \"whatsapp\": \"\",\n    \"password_code\": \"\",\n    \"status\": \"created\"\n}\n    ```\n  </Column>\n</Columns>\n\n| Parâmetro | Descrição |\n| --- | --- |\n| email (obrigatório) | E-mail do signatário |\n| act (obrigatório) | Ação da assinatura. Valores permitidos:   1 = Assinar   2 = Aprovar   3 = Reconhecer   4 = Assinar como parte   5 = Assinar como testemunha   6 = Assinar como interveniente   7 = Acusar recebimento   8 = Assinar como Emissor, Endossante e Avalista   9 = Assinar como Emissor, Endossante, Avalista, Fiador   10 = Assinar como fiador   11 = Assinar como parte e fiador   12 = Assinar como responsável solidário   13 = Assinar como parte e responsável solidário |\n| foreign (obrigatório) | Indica se o signatário é estrangeiro. 0 = Possui CPF. 1 = Não possui CPF |\n| foreign\\_lang | Idioma do estrangeiro: en = Inglês, es = Espanhol, pt = Português |\n| certificadoicpbr (obrigatório) | 0 = Assinatura padrão D4Sign   1 = Assinatura com Certificado ICP-Brasil |\n| assinatura\\_presencial (obrigatório) | 1 = Assinatura presencial   0 = Não presencial |\n| docauth (opcional) | 1 = Exige documento com foto   0 = Não exige |\n| docauthandselfie (opcional) | 1 = Documento + selfie   0 = Não exige selfie |\n| embed\\_methodauth (opcional) | Método de autenticação: email, password, sms, whats |\n| embed\\_smsnumber (opcional) | Número do SMS ou WhatsApp no padrão (ex.: +5511953020202) |\n| upload\\_allow (opcional) | Indica se o signatário pode enviar outros documentos |\n| upload\\_obs (opcional) | Quais documentos o signatário deve enviar (se upload\\_allow = 1) |\n| after\\_position (opcional) | Define a posição após a qual o signatário será inserido na ordem |\n| skipemail (opcional)
-        | 1 = Não enviar e-mails ao signatário |\n| whatsapp\\_number (opcional) | Número de WhatsApp para assinatura |\n| uuid\\_grupo (opcional) | UUID do grupo de assinatura |\n| certificadoicpbr\\_tipo (opcional) | 1 = Qualquer certificado   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (opcional) | CPF do signatário. Em branco = qualquer e-CPF |\n| certificadoicpbr\\_cnpj (opcional) | CNPJ do signatário. Em branco = qualquer e-CNPJ |\n| password\\_code (opcional) | Código de acesso do signatário. Em branco remove código anterior |\n| auth\\_pix (opcional) | 1 = Autenticação via PIX |\n| auth\\_pix\\_nome | Nome obrigatório se auth\\_pix = 1 |\n| auth\\_pix\\_cpf | CPF obrigatório se auth\\_pix = 1 |\n| sms-number (obrigatório) | NOVO número de SMS do signatário |\n| key-signer | Chave do signatário |\n| videoselfie | 1 = Exige vídeo selfie |\n| d4sign\\_score (opcional) | Ativa D4Sign Score. Requer CNH + docauthandselfie = 1 ou videoselfie = 1 |\n| d4sign\\_score\\_nome | Nome obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | CPF obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | Nível de similaridade exigida (min: 70, max: 90) |\n  </Accordion>\n  <Accordion title=\"Case para Inserir Grupos de Signatários a um Documento\">\n\n| Parâmetro | Descrição |\n| --- | --- |\n| email (obrigatório) | E-mail do signatário |\n| act (obrigatório) | Ação da assinatura. Valores permitidos:   1 = Assinar   2 = Aprovar   3 = Reconhecer   4 = Assinar como parte   5 = Assinar como testemunha   6 = Assinar como interveniente   7 = Acusar recebimento   8 = Assinar como Emissor, Endossante e Avalista   9 = Assinar como Emissor, Endossante, Avalista, Fiador   10 = Assinar como fiador   11 = Assinar como parte e fiador   12 = Assinar como responsável solidário   13 = Assinar como parte e responsável solidário |\n| foreign (obrigatório) | Indica se o signatário é estrangeiro. 0 = Possui CPF. 1 = Não possui CPF |\n| foreign\\_lang | Idioma do estrangeiro: en = Inglês, es = Espanhol, pt = Português |\n| certificadoicpbr (obrigatório) | 0 = Assinatura padrão D4Sign   1 = Assinatura com Certificado ICP-Brasil |\n| assinatura\\_presencial (obrigatório) | 1 = Assinatura presencial   0 = Não presencial |\n| docauth (opcional) | 1 = Exige documento com foto   0 = Não exige |\n| docauthandselfie (opcional) | 1 = Documento + selfie   0 = Não exige selfie |\n| embed\\_methodauth (opcional) | Método de autenticação: email, password, sms, whats |\n| embed\\_smsnumber (opcional) | Número do SMS ou WhatsApp no padrão (ex.: +5511953020202) |\n| upload\\_allow (opcional) | Indica se o signatário pode enviar outros documentos |\n| upload\\_obs (opcional) | Quais documentos o signatário deve enviar (se upload\\_allow = 1) |\n| after\\_position (opcional) | Define a posição após a qual o signatário será inserido na ordem |\n| skipemail (opcional) | 1 = Não enviar e-mails ao signatário |\n| whatsapp\\_number (opcional) | Número de WhatsApp para assinatura |\n| uuid\\_grupo (opcional) | UUID do grupo de assinatura |\n| certificadoicpbr\\_tipo (opcional) | 1 = Qualquer certificado   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (opcional) | CPF do signatário. Em branco = qualquer e-CPF |\n| certificadoicpbr\\_cnpj (opcional) | CNPJ do signatário. Em branco = qualquer e-CNPJ |\n| password\\_code (opcional) | Código de acesso do signatário. Em branco remove código anterior |\n| auth\\_pix (opcional) | 1 = Autenticação via PIX |\n| auth\\_pix\\_nome | Nome obrigatório se auth\\_pix = 1 |\n| auth\\_pix\\_cpf | CPF obrigatório se auth\\_pix = 1 |\n| sms-number (obrigatório) | NOVO número de SMS do signatário |\n| key-signer | Chave do signatário |\n| videoselfie | 1 = Exige vídeo selfie |\n| d4sign\\_score (opcional) | Ativa D4Sign Score. Requer CNH + docauthandselfie = 1 ou videoselfie = 1 |\n| d4sign\\_score\\_nome | Nome obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | CPF obrigatório se d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | Nível de similaridade exigida (min: 70, max: 90) |\n\nConforme a tabela acima,
-        `act` é o tipo de ação que este grupo terá no processo de assinatura, como assinar ou aprovar. `uuid\\_grupo` é o UUID do grupo, presente no mesmo cofre deste documento. Você pode consultá-lo em outro endpoint, já existente e funcional, na documentação.\n      \n      \n  </Accordion>\n  <Accordion title=\"Case Adcionar Trust ID (Verificação Extra)\">\n    https://docapi.d4sign.com.br/docs/endpoints-2#adicionar-trust-id-verifica%C3%A7%C3%A3o-extra\n  </Accordion>\n</AccordionGroup>\n\n\n"
-      operationId: documentsSignatoriesCreate
+      description: "Registers the signers for the document: who needs to sign it.\n\n<AccordionGroup>\n  <Accordion title=\"Case: Add Signers\" defaultOpen>\n   <Columns>\n  \n      <Column>\n      Request\n    ```json\n{\n    \"signers\" : [\n        {\n            \"email\": \"email@domain.com\",\n            \"act\": \"1\",\n            \"foreign\": \"1\",\n            \"certificadoicpbr\": \"0\",\n            \"assinatura_presencial\": \"0\",\n            \"docauth\": \"0\",\n            \"docauthandselfie\": \"0\",\n       \t    \"embed_methodauth\": \"email\",\n      \t    \"embed_smsnumber\": \"\",\n      \t    \"upload_allow\": \"0\",\n      \t    \"upload_obs\": \"Articles of Incorporation and Utility Bill\",\n      \t    \"whatsapp_number\": \"+5511981876540\" (optional),\n      \t    \"uuid_grupo\": \"GROUP UUID\" (optional),\n      \t    \"certificadoicpbr_tipo\": \"2\" (optional),\n      \t    \"certificadoicpbr_cpf\": \"CPF\" (optional),\n      \t    \"certificadoicpbr_cnpj\": \"CNPJ\" (optional),\n      \t    \"password_code\": \"Access code\" (optional),\n      \t    \"auth_pix\": \"0\" (optional),\n      \t    \"auth_pix_nome\": \"Signer's name\" (optional),\n      \t    \"auth_pix_cpf\": \"21917876280\" (optional),\n      \t    \"videoselfie\": \"0\" (optional),\n      \t    \"d4sign_score\": \"0\" (optional),\n      \t    \"d4sign_score_nome\": \"Signer's name\" (optional),\n      \t    \"d4sign_score_cpf\": \"21917876280\" (optional),\n            \"d4sign_score_similarity\": \"90\" (min 70 - max 90)(optional),\n            \"skipemail\": \"1\"(optional)\n        },\n        {...}\n        ]\n}\n```\n  </Column>\n  <Column>\n      Response\n    ```json\n      {\n    \"key_signer\": \"NwYu=\",\n    \"email\": \"email@user.com.br\",\n    \"act\": \"1\",\n    \"foreign\": \"0\",\n    \"certificadoicpbr\": \"0\",\n    \"assinatura_presencial\": \"0\",\n    \"assinatura_presencial_link\": \"IN-PERSON SIGNING LINK\" - This link only appears after the document has been sent for signature,\n    \"doc_auth\": \"0\",\n    \"embed_methodauth\": \"email\",\n    \"embed_smsnumber\": \"\",\n    \"upload_allow\": \"0\",\n    \"upload_obs\": \"Articles of Incorporation and Utility Bill\",\n    \"docauthandselfie\": \"0\",\n    \"skipemail\": \"0\",\n    \"whatsapp\": \"\",\n    \"password_code\": \"\",\n    \"status\": \"created\"\n}\n    ```\n  </Column>\n</Columns>\n\n| Parameter | Description |\n| --- | --- |\n| email (required) | The signer's email |\n| act (required) | The signing action. Allowed values:   1 = Sign   2 = Approve   3 = Acknowledge   4 = Sign as a party   5 = Witness   6 = Sign as an intervening party   7 = Acknowledge receipt   8 = Sign as drawer, endorser, and guarantor (aval)   9 = Sign as drawer, endorser, guarantor (aval), and surety   10 = Sign as surety   11 = Sign as a party and surety   12 = Sign as a jointly liable party   13 = Sign as a party and jointly liable party |\n| foreign (required) | Whether the signer is a foreign national. 0 = has a CPF. 1 = does not have a CPF |\n| foreign\\_lang | The foreign signer's language: en = English, es = Spanish, pt = Portuguese |\n| certificadoicpbr (required) | 0 = standard D4Sign signature   1 = signature with an ICP-Brasil certificate |\n| assinatura\\_presencial (required) | 1 = in-person signature   0 = not in person |\n| docauth (optional) | 1 = requires a photo ID   0 = not required |\n| docauthandselfie (optional) | 1 = photo ID + selfie   0 = selfie not required |\n| embed\\_methodauth (optional) | Authentication method: email, password, sms, whats |\n| embed\\_smsnumber (optional) | The SMS or WhatsApp number, in standard format (for example, +5511953020202) |\n| upload\\_allow (optional) | Whether the signer can upload other documents |\n| upload\\_obs (optional) | Which documents the signer must upload (when upload\\_allow = 1) |\n| after\\_position (optional) | Sets the signing-order position after which this signer is inserted |\n| skipemail (optional) | 1 = do not send emails to this signer |\n| whatsapp\\_number (optional) | The WhatsApp number to use for signing |\n| uuid\\_grupo (optional) | The signing group's UUID |\n| certificadoicpbr\\_tipo (optional) | 1 = any certificate   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (optional) | The signer's CPF. Leave blank to accept any e-CPF |\n| certificadoicpbr\\_cnpj (optional) | The signer's CNPJ. Leave blank to accept any e-CNPJ |\n| password\\_code (optional) | The signer's access code. Leave blank to remove the previous code |\n| auth\\_pix (optional) | 1 = authenticate via PIX |\n| auth\\_pix\\_nome | Required if auth\\_pix = 1 |\n| auth\\_pix\\_cpf | Required if auth\\_pix = 1 |\n| sms-number (required) | The signer's NEW SMS number |\n| key-signer | The signer's key |\n| videoselfie | 1 = requires a video selfie |\n| d4sign\\_score (optional) | Turns on D4Sign Score. Requires a driver's license plus docauthandselfie = 1 or videoselfie = 1 |\n| d4sign\\_score\\_nome | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | The required similarity level (min: 70, max: 90) |\n  </Accordion>\n  <Accordion title=\"Case: Add Signer Groups to a Document\">\n\n| Parameter | Description |\n| --- | --- |\n| email (required) | The signer's email |\n| act (required) | The signing action. Allowed values:   1 = Sign   2 = Approve   3 = Acknowledge   4 = Sign as a party   5 = Witness   6 = Sign as an intervening party   7 = Acknowledge receipt   8 = Sign as drawer, endorser, and guarantor (aval)   9 = Sign as drawer, endorser, guarantor (aval), and surety   10 = Sign as surety   11 = Sign as a party and surety   12 = Sign as a jointly liable party   13 = Sign as a party and jointly liable party |\n| foreign (required) | Whether the signer is a foreign national. 0 = has a CPF. 1 = does not have a CPF |\n| foreign\\_lang | The foreign signer's language: en = English, es = Spanish, pt = Portuguese |\n| certificadoicpbr (required) | 0 = standard D4Sign signature   1 = signature with an ICP-Brasil certificate |\n| assinatura\\_presencial (required) | 1 = in-person signature   0 = not in person |\n| docauth (optional) | 1 = requires a photo ID   0 = not required |\n| docauthandselfie (optional) | 1 = photo ID + selfie   0 = selfie not required |\n| embed\\_methodauth (optional) | Authentication method: email, password, sms, whats |\n| embed\\_smsnumber (optional) | The SMS or WhatsApp number, in standard format (for example, +5511953020202) |\n| upload\\_allow (optional) | Whether the signer can upload other documents |\n| upload\\_obs (optional) | Which documents the signer must upload (when upload\\_allow = 1) |\n| after\\_position (optional) | Sets the signing-order position after which this signer is inserted |\n| skipemail (optional) | 1 = do not send emails to this signer |\n| whatsapp\\_number (optional) | The WhatsApp number to use for signing |\n| uuid\\_grupo (optional) | The signing group's UUID |\n| certificadoicpbr\\_tipo (optional) | 1 = any certificate   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (optional) | The signer's CPF. Leave blank to accept any e-CPF |\n| certificadoicpbr\\_cnpj (optional) | The signer's CNPJ. Leave blank to accept any e-CNPJ |\n| password\\_code (optional) | The signer's access code. Leave blank to remove the previous code |\n| auth\\_pix (optional) | 1 = authenticate via PIX |\n| auth\\_pix\\_nome | Required if auth\\_pix = 1 |\n| auth\\_pix\\_cpf | Required if auth\\_pix = 1 |\n| sms-number (required) | The signer's NEW SMS number |\n| key-signer | The signer's key |\n| videoselfie | 1 = requires a video selfie |\n| d4sign\\_score (optional) | Turns on D4Sign Score. Requires a driver's license plus docauthandselfie = 1 or videoselfie = 1 |\n| d4sign\\_score\\_nome | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | The required similarity level (min: 70, max: 90) |\n\nPer the table above, `act` sets the action this group performs in the signing process, such as signing or approving. `uuid_grupo` is the group's UUID. It must belong to the same safe as this document. You can look it up with the signing-groups endpoint documented elsewhere in this reference.\n      \n      \n  </Accordion>\n  <Accordion title=\"Case: Add Trust ID (Extra Verification)\">\n    https://docapi.d4sign.com.br/docs/endpoints-2#adicionar-trust-id-verifica%C3%A7%C3%A3o-extra\n  </Accordion>\n</AccordionGroup>\n\n\n"
+      operationId: documents_signatories_create
       tags:
       - Signatories
       parameters:
@@ -1841,15 +1764,15 @@ paths:
       summary: Document signatories list
       deprecated: false
       description: |
-        Lista todos os signatários de um documento, com status e dados de assinatura (IP, geolocalização, data).
-      operationId: documentsSignatoriesGetList
+        Lists all signers on a document, with their status and signing data (IP address, geolocation, date).
+      operationId: documents_signatories_list
       tags:
       - Signatories
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2093,14 +2016,14 @@ paths:
       summary: Change email
       deprecated: false
       description: |
-        Atualiza o e-mail (ou WhatsApp) de um signatário já cadastrado.
+        Updates the email or WhatsApp number of a signer already registered on the document.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `email-before` (obrigatório) | E-mail/WhatsApp atual do signatário. |
-        | `email-after` (obrigatório) | Novo e-mail/WhatsApp. |
-        | `key-signer` | Chave do signatário (obtida ao listar signatários do documento). |
-      operationId: documentsSignatoriesChangeEmail
+        | `email-before` (required) | The signer's current email or WhatsApp number. |
+        | `email-after` (required) | The new email or WhatsApp number. |
+        | `key-signer` | The signer's key (from the list-signers endpoint). |
+      operationId: documents_signatories_change_email
       tags:
       - Signatories
       - Documents
@@ -2120,15 +2043,15 @@ paths:
                 email-before:
                   type: string
                   default: antigoemail@dominio.com
-                  description: ANTIGO e-mail ou número de WhatsApp do signatário
+                  description: The signer's OLD email or WhatsApp number.
                 email-after:
                   type: string
                   default: novoemail@dominio.com
-                  description: NOVO e-mail ou número de WhatsApp do signatário
+                  description: The signer's NEW email or WhatsApp number.
                 key-signer:
                   type: string
                   default: NyWx=
-                  description: Chave do signatário (anterior - before)
+                  description: The signer's key (the one from before the change).
               required:
               - email-before
               - email-after
@@ -2161,16 +2084,15 @@ paths:
       summary: Add Highlight
       deprecated: false
       description: >-
-        Esse objeto cadastrará as informações (texto) para serem destacadas para
-        o signatário
-      operationId: documentsSignatoriesAddHighlight
+        Registers text to highlight for the signer when they view the document
+      operationId: documents_signatories_highlight_add
       tags:
       - Signatories
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2183,13 +2105,13 @@ paths:
               properties:
                 key_signer:
                   type: string
-                  description: Chave do signatário
+                  description: The signer's key.
                 email:
                   type: string
-                  description: E-mail do signatário cadastrado
+                  description: The email of a signer already registered on the document.
                 text:
                   type: string
-                  description: Cláusula que será destacada
+                  description: The clause text to highlight.
               required:
               - key_signer
               - email
@@ -2247,14 +2169,14 @@ paths:
       summary: Change SMS number
       deprecated: false
       description: |
-        Atualiza o número de SMS/WhatsApp de um signatário.
+        Updates a signer's SMS or WhatsApp number.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `email` (obrigatório) | E-mail do signatário. |
-        | `sms-number` (obrigatório) | Novo número, formato `+5511953874555`. |
-        | `key-signer` | Chave do signatário. |
-      operationId: documentsSignatoriesChangeSMS
+        | `email` (required) | The signer's email. |
+        | `sms-number` (required) | The new number, in `+5511953874555` format. |
+        | `key-signer` | The signer's key. |
+      operationId: documents_signatories_change_sms_number
       tags:
       - Signatories
       parameters:
@@ -2312,8 +2234,8 @@ paths:
       summary: Change Password Code
       deprecated: false
       description: |
-        Atualiza o código de acesso do signatário (deixe `password-code` em branco para remover o código atual).
-      operationId: documentsSignatoriesChangePassCode
+        Updates the signer's access code. Leave `password-code` blank to remove the current code.
+      operationId: documents_signatories_change_password_code
       tags:
       - Signatories
       - Documents
@@ -2372,14 +2294,14 @@ paths:
       summary: Remove Signatory
       deprecated: false
       description: |
-        Remove um signatário (`email-signer` + `key-signer`) do documento.
-      operationId: documentsSignatoriesRemove
+        Removes a signer (`email-signer` + `key-signer`) from the document.
+      operationId: documents_signatories_remove
       tags:
       - Signatories
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2427,104 +2349,92 @@ paths:
       summary: Add Signature Type
       deprecated: false
       description: >+
-        O novo endpoint retorna um número “Act” usado para cadastrar
-        signatários, modificando a descrição da assinatura (Assinar como).
+        Registers a new "Act" number. Use this number when you add signers, to set a custom signature role label (the "Sign as" text).
 
 
-        A verificação do uuid do usuário, está disponível em [Verificar
-        usuários.](A verificação do uuid do usuário, está disponível em
-        https://docapi.d4sign.com.br/docs/usu%C3%A1rios)
+        You can check a user's UUID at [Verify Users](https://docapi.d4sign.com.br/docs/usu%C3%A1rios).
 
 
-        Após usar o novo Endpoint e gerar um numero de Act (347), deve-se
-        vinculá-lo a um novo signatário usando o endpoint Cadastrar Signatários.
-        Disponível em Cadastro de signatário.
+        After you create a new Act number (for example, 347), link it to a signer with the Add Signatories endpoint (`POST /documents/{uuid_document}/createlist`).
 
 
-        O novo numero de Act é vinculado à plataforma, e não ao usuário.
-        Qualquer conta que queira utilizar o número tem permissão para fazê-lo,
-        contanto que conheça o número que já foi cadastrado.
+        An Act number belongs to the platform, not to the account that created it. Any account that knows an existing Act number may use it.
 
 
-        É possível cadastrar um novo Assinar como que já exista (cadastrar um
-        Nome repetido). Cada vez que o cadastro é realizado, ele gera um novo
-        número de Act.
+        You can register a new Act with a label that already exists (a duplicate name). Each registration still creates a new, distinct Act number.
 
 
-        Após cadastrar um novo Act que possua o mesmo nome de um que existia
-        previamente, os dois funcionam normalmente (Não há conflito).
+        When a new Act shares a label with an existing one, both work normally. There is no conflict.
 
 
-        A Act cadastrado deverá estar disponível na plataforma para utilização.
+        A registered Act must be available on the platform before you can use it.
 
 
-        Nossa Documentação disponibiliza 13 números de Act:
+        D4Sign's documentation lists 13 built-in Act numbers:
 
 
-        | Código | Descrição |
+        | Code | Meaning |
 
-        | -- | -- | 
+        | -- | -- |
 
-        | 1            | Assinar  |
+        | 1 | Sign |
 
-        | 2            | Aprovar  |
+        | 2 | Approve |
 
-        | 3            | Reconhecer  |
+        | 3 | Acknowledge |
 
-        | 4            | Assinar como parte  |
+        | 4 | Sign as a party |
 
-        | 5            | Assinar como testemunha  |
+        | 5 | Witness |
 
-        | 6            | Assinar como interveniente  |
+        | 6 | Sign as an intervening party |
 
-        | 7            | Acusar recebimento  |
+        | 7 | Acknowledge receipt |
 
-        | 8            | Assinar como Emissor, Endossante e Avalista  |
+        | 8 | Sign as drawer, endorser, and guarantor (aval) |
 
-        | 9            | Assinar como Emissor, Endossante, Avalista, Fiador  |
+        | 9 | Sign as drawer, endorser, guarantor (aval), and surety |
 
-        | 10           | Assinar como fiador  |
+        | 10 | Sign as surety |
 
-        | 11           | Assinar como parte e fiador  |
+        | 11 | Sign as a party and surety |
 
-        | 12           | Assinar como responsável solidário  |
+        | 12 | Sign as a jointly liable party |
 
-        | 13           | Assinar como parte e responsável solidário  |
+        | 13 | Sign as a party and jointly liable party |
 
-        | 14           | Assinar como fiel depositário  |
+        | 14 | Sign as custodian (fiel depositário) |
 
-        | 15           | Assinar como avalista  |
+        | 15 | Sign as guarantor (aval) |
 
-        | 16           | Assinar como Anuente  |
+        | 16 | Sign as a consenting party |
 
-        | 17           | Assinar como Interveniente Garantidor  |
+        | 17 | Sign as a guaranteeing intervening party |
 
-        | 18           | Assinar como Parte e Avalista  |
+        | 18 | Sign as a party and guarantor (aval) |
 
-        | 19           | Assinar como Parte, Avalista e Interveniente
-        Garantidor  |
+        | 19 | Sign as a party, guarantor (aval), and guaranteeing intervening party |
 
-        | 20           | Assinar como Parte e Fiador  |
+        | 20 | Sign as a party and surety |
 
-        | 21           | Assinar como Parte, Avalista, Interv. Garantidor e Fiel
-        Depositário  |
+        | 21 | Sign as a party, guarantor (aval), guaranteeing intervening party, and custodian |
 
-        | 22           | Assinar como Parte e Fiel Depositário  |
+        | 22 | Sign as a party and custodian |
 
-        | 23           | Assinar como Parte e Interveniente Garantidor  |
+        | 23 | Sign as a party and guaranteeing intervening party |
 
-        | 24           | Assinar como Fiduciante  |
+        | 24 | Sign as the fiduciary grantor (fiduciante) |
 
-        | 25           | Assinar como Parte e Fiduciante  |
+        | 25 | Sign as a party and fiduciary grantor (fiduciante) |
 
-      operationId: documentsSignatoriesAddSignatureType
+      operationId: documents_signature_type_add
       tags:
       - Signatories
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2537,7 +2447,7 @@ paths:
               properties:
                 tipo:
                   type: string
-                  description: Nome/Título que será adicionado ao Assinar como
+                  description: The name or title to add to the "Sign as" label.
               required:
               - tipo
             example:
@@ -2573,8 +2483,8 @@ paths:
       summary: Add info to signature
       deprecated: false
       description: |
-        Cadastra nome, CPF e data de nascimento de um signatário — **apenas para assinatura presencial**. Útil para evitar que o signatário precise informar esses dados no momento da assinatura.
-      operationId: documentsSignatoriesAddInfo
+        Registers a signer's name, CPF, and birth date — **for in-person signing only**. This saves the signer from entering that data again at signing time.
+      operationId: documents_signatories_info_add
       tags:
       - Signatories
       - Documents
@@ -2648,29 +2558,29 @@ paths:
         cryptKey: []
   /api/v1/documents/{uuid_document}/addpins:
     post:
-      summary: Add Pins to Signatories of a Document
+      summary: Add Pins to a Document's Signatories
       deprecated: false
       description: |
-        Adiciona uma assinatura/rubrica/selo posicionado (pin) no documento principal ou anexo.
+        Adds a placed signature, initials, or stamp (pin) to the main document or an attachment.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `document` (obrigatório) | UUID do documento principal ou anexo (slave). |
-        | `email` (obrigatório) | E-mail do signatário já cadastrado no documento. |
-        | `page_width`/`page_height` (obrigatório) | Dimensões da página, em px. |
-        | `page` (obrigatório) | Página onde o pin ficará. |
-        | `position_x`/`position_y` (obrigatório) | Posição do pin, em px. |
-        | `type` (opcional) | `0` = assinatura, `1` = rubrica, `2` = selo. |
+        | `document` (required) | The UUID of the main document or an attachment (slave). |
+        | `email` (required) | The email of a signer already registered on the document. |
+        | `page_width`/`page_height` (required) | The page dimensions, in pixels. |
+        | `page` (required) | The page the pin goes on. |
+        | `position_x`/`position_y` (required) | The pin's position, in pixels. |
+        | `type` (optional) | `0` = signature, `1` = initials, `2` = stamp. |
 
-        > Para o UUID de um anexo (slave), use `GET /documents/{uuid_document}/listslaves`.
-      operationId: documentsSignatoriesPinsAdd
+        > To get an attachment's (slave's) UUID, call `GET /documents/{uuid_document}/listslaves`.
+      operationId: documents_signatories_pins_add
       tags:
       - Signatories
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2731,22 +2641,22 @@ paths:
       summary: Add Pins with Replics to a Document Signatories
       deprecated: false
       description: |
-        Replica uma posição de assinatura em TODAS as páginas do documento principal e, opcionalmente, de anexos (`document_slaves`).
+        Replicates one signature position across ALL pages of the main document and, optionally, its attachments (`document_slaves`).
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `email` (obrigatório) | Signatário já cadastrado no documento. |
-        | `page_width`/`page_height` (obrigatório) | Dimensões da página, em px. |
-        | `position_x`/`position_y` (obrigatório) | Posição, em mm. |
-        | `type` (opcional) | `0` = assinatura, `1` = rubrica, `2` = selo. |
-      operationId: documentsSignatoriesPinsWithReplicsAdd
+        | `email` (required) | A signer already registered on the document. |
+        | `page_width`/`page_height` (required) | The page dimensions, in pixels. |
+        | `position_x`/`position_y` (required) | The position, in millimeters. |
+        | `type` (optional) | `0` = signature, `1` = initials, `2` = stamp. |
+      operationId: documents_signatories_pins_with_replics_add
       tags:
       - Signatories
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2807,14 +2717,14 @@ paths:
       summary: List Pins of a Document
       deprecated: false
       description: |
-        Lista as assinaturas/rubricas posicionadas (pins) em um documento, com página e coordenadas.
-      operationId: documentsSignatoriesPinsGetList
+        Lists the signatures and initials placed (pins) on a document, with their page and coordinates.
+      operationId: documents_signatories_pins_list
       tags:
       - Signatories
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2870,14 +2780,14 @@ paths:
       summary: Remove Pins of a Document
       deprecated: false
       description: |
-        Remove uma assinatura/rubrica posicionada (pin) do documento, por `email`, `page`, `position_x`, `position_y`.
-      operationId: documentsSignatoriesPinsRemove
+        Removes a placed signature or initials pin from the document, matched by `email`, `page`, `position_x`, `position_y`.
+      operationId: documents_signatories_pins_remove
       tags:
       - Signatories
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2906,14 +2816,14 @@ paths:
       summary: Remove Pins with Replics of a Document
       deprecated: false
       description: |
-        Remove as posições de assinatura replicadas (ver `addpinswithreplics`) no documento principal e anexos, por `email`, `position_x`, `position_y`.
-      operationId: documentsSignatoriesPinsWithReplicsRemove
+        Removes replicated signature positions (see `addpinswithreplics`) from the main document and its attachments, matched by `email`, `position_x`, `position_y`.
+      operationId: documents_signatories_pins_with_replics_remove
       tags:
       - Signatories
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2942,20 +2852,20 @@ paths:
       summary: Add Trust ID
       deprecated: false
       description: |
-        Ativa o Trust ID (verificação extra de identidade via documento com foto, opcionalmente + selfie) para um ou mais signatários já cadastrados com `docauth` ou `docauthandselfie` habilitado.
+        Turns on Trust ID for one or more signers. Trust ID is an extra identity check using a photo ID, optionally plus a selfie. The signer must already have `docauth` or `docauthandselfie` enabled.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `email` (obrigatório) | Signatário já cadastrado com ponto de autenticação por documento (+selfie). |
-        | `document_type` (obrigatório) | `1` = documento de identidade nacional, `2` = passaporte, `3` = permissão de residência, `4` = outro. |
-        | `name`/`last_name`/`document_number` (opcionais) | Dados do signatário. |
-      operationId: documentsTrustIdAdd
+        | `email` (required) | A signer already registered with photo-ID authentication (optionally plus selfie). |
+        | `document_type` (required) | `1` = national ID document, `2` = passport, `3` = residence permit, `4` = other. |
+        | `name`/`last_name`/`document_number` (optional) | The signer's data. |
+      operationId: documents_trust_id_add
       tags:
       - Signatories
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2984,14 +2894,14 @@ paths:
       summary: Remove Trust ID
       deprecated: false
       description: |
-        Remove a verificação Trust ID previamente adicionada a um ou mais signatários (`email`).
-      operationId: documentsTrustIdRemove
+        Removes the Trust ID verification previously added to one or more signers (`email`).
+      operationId: documents_trust_id_remove
       tags:
       - Signatories
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -3020,14 +2930,14 @@ paths:
       summary: Signature Link
       deprecated: false
       description: |
-        Retorna o link de assinatura de um signatário específico. Só disponível depois que o documento foi enviado para o signatário. Requer ser dono do cofre, ou ter permissão administrador/padrão em cofre compartilhado.
-      operationId: documentsSignatureLinkGet
+        Returns the signing link for a specific signer. This is available only after the document has been sent to the signer. It requires that you own the safe, or hold administrator or standard permission on a shared safe.
+      operationId: documents_signature_link_get
       tags:
       - Signatories
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -3062,10 +2972,10 @@ paths:
       summary: Resend email
       deprecated: false
       description: |
-        Reenvia o link de assinatura para o signatário (`email` ou WhatsApp + `key_signer`).
+        Resends the signing link to the signer (`email` or WhatsApp + `key_signer`).
 
-        > Intervalos entre reenvios: 1º em 1 min, 2º em 5 min, 3º em 30 min. A partir do 4º, de 60 em 60 min.
-      operationId: documentsSignatoriesResend
+        > Resend intervals: the 1st resend after 1 minute, the 2nd after 5 minutes, the 3rd after 30 minutes. From the 4th resend onward, every 60 minutes.
+      operationId: documents_signatories_resend
       tags:
       - Signatories
       parameters:
@@ -3105,14 +3015,14 @@ paths:
       summary: Cancel document
       deprecated: false
       description: |
-        Cancela o documento. O parâmetro `comment` (opcional) registra o motivo do cancelamento.
-      operationId: documentsCancel
+        Cancels the document. The optional `comment` parameter records the reason for the cancellation.
+      operationId: documents_cancel
       tags:
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         schema:
           type: string
@@ -3131,7 +3041,7 @@ paths:
               properties:
                 comment:
                   type: string
-                  description: (Opcional) Insira um comentário sobre o cancelamento.
+                  description: (Optional) A comment explaining the reason for the cancellation.
             example:
               comment: comentário sobre o cancelamento
       responses:
@@ -3206,17 +3116,15 @@ paths:
       summary: Send document to signature
       deprecated: false
       description: >+
-        Esse objeto enviará o documento para assinatura. O documento entrará
-        na fase 'Aguardando assinaturas'. A partir dessa fase, os signatários
-        poderão assinar os documentos.
+        Sends the document for signature. The document moves to the "Awaiting signatures" status. From this status onward, signers can sign the document.
 
-      operationId: documentsSendToSigner
+      operationId: documents_send_to_signer
       tags:
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -3265,22 +3173,22 @@ paths:
       summary: Schedule document to signature
       deprecated: false
       description: |
-        Agenda o envio do documento para assinatura em uma data/hora futura.
+        Schedules the document to be sent for signature at a future date and time.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `message` (opcional) | Mensagem enviada aos signatários no envio. |
-        | `workflow` (obrigatório) | `1` = não seguir a ordem de assinatura. `2` = seguir a ordem. |
-        | `scheduling_date` (obrigatório) | Data (>= hoje), formato `aaaa/mm/dd`. |
-        | `scheduling_time` (obrigatório) | Hora cheia entre 06:00 e 22:00 (ex.: `11:00`). Se a data for hoje, deve ser maior que a hora atual. |
-        | `urgent_document` (opcional) | `1` = documento urgente. |
-      operationId: documentsSendToSignerScheduled
+        | `message` (optional) | The message sent to signers when the document goes out. |
+        | `workflow` (required) | `1` = do not follow signing order. `2` = follow signing order. |
+        | `scheduling_date` (required) | The date (today or later), in `yyyy/mm/dd` format. |
+        | `scheduling_time` (required) | A full hour between 06:00 and 22:00 (for example, `11:00`). If the date is today, this must be later than the current time. |
+        | `urgent_document` (optional) | `1` = mark the document as urgent. |
+      operationId: documents_send_to_signer_scheduled
       tags:
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -3330,10 +3238,10 @@ paths:
       summary: List All documents
       deprecated: false
       description: |
-        Lista TODOS os documentos da conta.
+        Lists all documents in the account.
 
-        > Paginado em blocos de 500 documentos. Use o parâmetro `pg` na URL para paginar (ex.: `?pg=2`). O primeiro bloco do resultado traz o total de páginas disponíveis.
-      operationId: documentsList
+        > This endpoint paginates in blocks of 500 documents. Use the `pg` URL parameter to page through results (for example, `?pg=2`). The first page of the result includes the total number of pages available.
+      operationId: documents_list
       tags:
       - Documents
       parameters:
@@ -4075,20 +3983,20 @@ paths:
       summary: List documents by Status
       deprecated: false
       description: |
-        Lista todos os documentos que estiverem na fase informada.
+        Lists all documents in the given status.
 
-        | ID | Fase |
+        | ID | Status |
         | --- | --- |
-        | 1 | Processando |
-        | 2 | Aguardando Signatários |
-        | 3 | Aguardando Assinaturas |
-        | 4 | Finalizado |
-        | 5 | Arquivado |
-        | 6 | Cancelado |
-        | 7 | Editando |
+        | 1 | Processing |
+        | 2 | Awaiting signers |
+        | 3 | Awaiting signatures |
+        | 4 | Finished |
+        | 5 | Archived |
+        | 6 | Cancelled |
+        | 7 | Editing |
 
-        > Paginado em blocos de 500 documentos — use `pg` na URL.
-      operationId: documentsListByStatus
+        > This endpoint paginates in blocks of 500 documents. Use the `pg` URL parameter.
+      operationId: documents_list_by_status
       tags:
       - Documents
       parameters:
@@ -4108,7 +4016,7 @@ paths:
           - '7'
       - name: pg
         in: query
-        description: Page - Default 1 / Starts 1
+        description: 'The page number. Default: 1. The first page is page 1.'
         required: false
         example: '2'
         schema:
@@ -4136,17 +4044,17 @@ paths:
       summary: List documents by Safe
       deprecated: false
       description: |
-        Lista todos os documentos associados ao cofre (e pasta, se filtrado) informado. Para filtrar por pasta use `/documents/{uuid_safe}/safe/{uuid_folder}`.
+        Lists all documents linked to the given safe, and to the given folder if one is set. To filter by folder, use `/documents/{uuid_safe}/safe/{uuid_folder}`.
 
-        > Paginado em blocos de 500 documentos — use `pg` na URL.
-      operationId: documentsListBySafe
+        > This endpoint paginates in blocks of 500 documents. Use the `pg` URL parameter.
+      operationId: documents_list_by_safe
       tags:
       - Documents
       - Safes
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
@@ -4357,10 +4265,10 @@ paths:
       summary: List documents by Safe and Folder
       deprecated: false
       description: |
-        Lista todos os documentos associados ao cofre e à pasta informados.
+        Lists all documents linked to the given safe and folder.
 
-        > Paginado em blocos de 500 documentos — use `pg` na URL.
-      operationId: documentsListBySafeAndFolder
+        > This endpoint paginates in blocks of 500 documents. Use the `pg` URL parameter.
+      operationId: documents_list_by_safe_and_folder
       tags:
       - Documents
       - Safes
@@ -4368,14 +4276,14 @@ paths:
       parameters:
       - name: uuid_safe
         in: path
-        description: Identificador do Cofre
+        description: The safe's UUID.
         required: true
         example: '{{uuid_safe}}'
         schema:
           type: string
       - name: uuid_folder
         in: path
-        description: Identificador da Pasta
+        description: The folder's UUID.
         required: true
         example: '{{uuid_folder}}'
         schema:
@@ -4586,14 +4494,14 @@ paths:
       summary: List a specific Document
       deprecated: false
       description: |
-        Retorna apenas o documento solicitado.
-      operationId: documentsGet
+        Returns the single requested document.
+      operationId: documents_get
       tags:
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: 691d5700-7620-4c2b-97ad-2baf0fffe8fb
         schema:
@@ -4658,14 +4566,14 @@ paths:
       summary: Verify Dimensions of a Document
       deprecated: false
       description: |
-        Retorna as dimensões (largura/altura em px), por página, de um documento.
-      operationId: documentsGetDimensions
+        Returns the width and height, in pixels, of each page of a document.
+      operationId: documents_dimensions_get
       tags:
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: 691d5700-7620-4c2b-97ad-2baf0fffe8fb
         schema:
@@ -4721,14 +4629,14 @@ paths:
       summary: Power Form Responses
       deprecated: false
       description: |
-        Lista as respostas preenchidas em um Power Form (documento gerado a partir de um link público preenchível).
-      operationId: documentsGetPowerFormResponses
+        Lists the responses submitted to a Power Form (a document generated from a public, fillable link).
+      operationId: documents_power_form_responses_get
       tags:
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -4808,18 +4716,18 @@ paths:
         cryptKey: []
   /api/v1/documents/{uuid_document}/webhooks:
     get:
-      summary: List Webook from Document
+      summary: List Webhook from Document
       deprecated: false
       description: |
-        Lista o(s) webhook(s) (POSTBack) cadastrado(s) no documento.
-      operationId: hookDocumentsList
+        Lists the webhook(s) (POSTBack) registered on the document.
+      operationId: documents_webhooks_list
       tags:
       - Webhooks
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -4849,17 +4757,22 @@ paths:
       summary: Register Webhook on Document
       deprecated: false
       description: |
-        Cadastra uma URL de webhook (POSTBack) no documento. D4Sign dispara um `POST` em form-data para essa URL quando o documento é assinado, finalizado, cancelado, ou quando um e-mail não é entregue a um signatário.
+        Registers a webhook URL (POSTBack) on the document. D4Sign sends a `POST` request, as form data, to that URL on these events:
 
-        > Até 7 tentativas de reenvio caso a URL esteja indisponível (0 min, 1h, 1h, 1h, 6h, 6h, 12h). O webhook só se perde se a URL ficar indisponível por mais de 27h. Veja segurança (HMAC) no guia.
-      operationId: hookDocumentsAttach
+        - the document is signed
+        - the document is finished
+        - the document is cancelled
+        - an email fails to reach a signer
+
+        > D4Sign retries delivery up to 7 times if the URL is unavailable (after 0 min, 1h, 1h, 1h, 6h, 6h, 12h). A webhook is lost only if the URL stays unavailable for more than 27 hours. See the guide for webhook security (HMAC).
+      operationId: documents_webhooks_add
       tags:
       - Webhooks
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -4900,24 +4813,22 @@ paths:
       summary: Add Tags to Document
       deprecated: false
       description: >-
-        Este método irá adicionar uma TAG em seu documento
+        Adds a tag to your document.
 
 
         :::tip[]
 
-        Considerando que o registro é uma String.
+        D4Sign stores a document's tags as one string.
 
-        A cada request é adicionado uma tag que é concatenada com as demais já
-        registradas com separador `, ` (virgula + espaço em branco).
-
-
-        Sendo assim, seria possível incluir mais de uma tag em uma única
-        requisição.
+        Each request adds one tag, which D4Sign appends to the tags already registered, separated by `, ` (a comma and a space).
 
 
-        Exemplo:
+        You can include more than one tag in a single request.
 
-        Requisição A
+
+        Example:
+
+        Request A
 
         ```json
 
@@ -4925,7 +4836,7 @@ paths:
 
         ```
 
-        Resposta 
+        Response
 
         ```json
 
@@ -4934,7 +4845,7 @@ paths:
         ```
 
 
-        Requisição B
+        Request B
 
         ```json
 
@@ -4942,7 +4853,7 @@ paths:
 
         ```
 
-        Resposta 
+        Response
 
         ```json
 
@@ -4951,33 +4862,32 @@ paths:
         ```
 
 
-        Deve se assumir que eventualmente o registro cadastrado com `,` sem
-        separador de espaço é convertido, assim por exemplo:
+        If you send a tag with a comma and no following space, D4Sign normalizes it. For example:
 
 
-        Na requisição imediatamente responde:
+        The request's immediate response:
 
 
         `erp-financeiro:123, crm:789,correlationId:a1b2c3-b1c2a3`
 
 
-        Após alguns segundos pelo que é observado se transforma em:
+        A few seconds later, this becomes:
 
 
         `erp-financeiro:123, crm:789, correlationId:a1b2c3-b1c2a3`
 
 
-        Onde todas tags tem a vírgula e o espaço como único separador
+        After that, every tag is separated by a comma and a space.
 
         :::
-      operationId: documentsTagsAdd
+      operationId: documents_tags_add
       tags:
       - Tags
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         schema:
           type: string
@@ -4996,7 +4906,7 @@ paths:
               properties:
                 tag:
                   type: string
-                  description: Tag para ser adicionado no documento.
+                  description: The tag to add to the document.
               required:
               - tag
             example:
@@ -5029,8 +4939,8 @@ paths:
       summary: Remove Tags from Document
       deprecated: false
       description: |
-        Remove uma TAG (`tag`) do documento.
-      operationId: documentsTagsRemove
+        Removes a tag (`tag`) from the document.
+      operationId: documents_tags_remove
       tags:
       - Tags
       - Documents
@@ -5089,15 +4999,15 @@ paths:
       summary: List Tags from a Document
       deprecated: false
       description: |
-        Lista todas as TAGs do documento.
-      operationId: documentsTagsGet
+        Lists all tags on the document.
+      operationId: documents_tags_list
       tags:
       - Tags
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -5137,15 +5047,15 @@ paths:
       summary: Remove All Tags from Document
       deprecated: false
       description: |
-        Remove TODAS as TAGs do documento.
-      operationId: documentsTagsErase
+        Removes all tags from the document.
+      operationId: documents_tags_delete_all
       tags:
       - Tags
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -5173,20 +5083,18 @@ paths:
       summary: Add Urgent Tag to Document
       deprecated: false
       description: >-
-        Este método irá adicionar a TAG URGENTE em seu documento.
+        Adds the URGENT tag to your document.
 
 
-        Lembrando que para conseguir fazer essa requisição, você precisa ser
-        dono do cofre ou ter permissão de Administrador ou padrão, caso o cofre
-        seja compartilhado.
-      operationId: documentsTagsAddUrgent
+        This request requires that you own the safe, or hold Administrator or Standard permission if the safe is shared.
+      operationId: documents_tags_add_urgent
       tags:
       - Tags
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -5218,20 +5126,18 @@ paths:
       summary: Remove Urgent Tag from Document
       deprecated: false
       description: >-
-        Este método irá remover a TAG URGENTE em seu documento.
+        Removes the URGENT tag from your document.
 
 
-        Lembrando que para conseguir fazer essa requisição, você precisa ser
-        dono do cofre ou ter permissão de Administrador ou padrão, caso o cofre
-        seja compartilhado.
-      operationId: documentsTagsRemoveUrgent
+        This request requires that you own the safe, or hold Administrator or Standard permission if the safe is shared.
+      operationId: documents_tags_remove_urgent
       tags:
       - Tags
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -5263,15 +5169,15 @@ paths:
       summary: List Watches from a Document
       deprecated: false
       description: |
-        Lista todos os observadores (watchers) do documento.
-      operationId: documentsWatchersGetList
+        Lists all watchers on the document.
+      operationId: documents_watchers_list
       tags:
       - Watchers
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -5323,20 +5229,20 @@ paths:
       summary: Add Watcher to a Document
       deprecated: false
       description: |
-        Adiciona um observador ao documento.
+        Adds a watcher to the document.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `email` (obrigatório) | E-mail do observador. |
-        | `permission` (opcional) | `0` = perfil básico (pode baixar), `1` = apenas visualização (sem download). |
-      operationId: documentsWatchersAdd
+        | `email` (required) | The watcher's email. |
+        | `permission` (optional) | `0` = basic profile (can download), `1` = view only (no download). |
+      operationId: documents_watchers_add
       tags:
       - Watchers
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -5391,15 +5297,15 @@ paths:
       summary: Remove Watcher from a Document
       deprecated: false
       description: |
-        Remove um observador (`email`) do documento.
-      operationId: documentsWatchersRemove
+        Removes a watcher (`email`) from the document.
+      operationId: documents_watchers_remove
       tags:
       - Watchers
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -5443,15 +5349,15 @@ paths:
       summary: Erase All Watchers from a Document
       deprecated: false
       description: |
-        Remove TODOS os observadores do documento.
-      operationId: documentsWatchersErase
+        Removes all watchers from the document.
+      operationId: documents_watchers_delete_all
       tags:
       - Watchers
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento
+        description: The document's UUID.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -5479,7 +5385,7 @@ paths:
       summary: List Certificates
       deprecated: false
       description: |
-        Lista o certificado definido para o signatário (`key_signer`).
+        Lists the certificate set for the signer (`key_signer`).
       tags:
       - Certificates
       parameters:
@@ -5507,19 +5413,20 @@ paths:
       security:
       - tokenAPI: []
         cryptKey: []
+      operationId: documents_certificate_get
   /api/v1/certificate/uuid-documento/add:
     post:
       summary: Add Certificate
       deprecated: false
       description: |
-        Define o tipo de certificado digital exigido do signatário.
+        Sets which digital certificate the signer must use.
 
-        | Parâmetro | Descrição |
+        | Parameter | Description |
         | --- | --- |
-        | `key_signer` (obrigatório) | Chave do signatário. |
-        | `document_type` (obrigatório) | `1` = qualquer certificado, `2` = e-CPF, `3` = e-CNPJ. |
-        | `pades` (opcional) | `1` = PAdES e CAdES, `0` = apenas CAdES. |
-        | `document_number` (opcional) | CPF/CNPJ do signatário. Em branco, aceita qualquer e-CPF/e-CNPJ. |
+        | `key_signer` (required) | The signer's key. |
+        | `document_type` (required) | `1` = any certificate, `2` = e-CPF, `3` = e-CNPJ. |
+        | `pades` (optional) | `1` = PAdES and CAdES, `0` = CAdES only. |
+        | `document_number` (optional) | The signer's CPF/CNPJ. Leave it blank to accept any e-CPF/e-CNPJ. |
       tags:
       - Certificates
       parameters:
@@ -5547,15 +5454,16 @@ paths:
       security:
       - tokenAPI: []
         cryptKey: []
+      operationId: documents_certificate_set
   /api/v1/users/list:
     get:
       summary: List All Users
       deprecated: false
       description: |
-        Lista todos os usuários do domínio validado da conta.
+        Lists all users in the account's validated domain.
 
-        > Paginado em blocos de 500 — use `pg` na URL.
-      operationId: usersGetList
+        > This endpoint paginates in blocks of 500. Use the `pg` URL parameter.
+      operationId: users_list
       tags:
       - Users
       parameters: []
@@ -5601,8 +5509,8 @@ paths:
       summary: Check User
       deprecated: false
       description: |
-        Verifica o status (`email_user`) de um usuário do domínio validado.
-      operationId: usersCheck
+        Checks the status of a user (`email_user`) in the validated domain.
+      operationId: users_check
       tags:
       - Users
       parameters: []
@@ -5645,8 +5553,8 @@ paths:
       summary: Block User
       deprecated: false
       description: |
-        Bloqueia um usuário (`email_user`) do domínio validado.
-      operationId: usersBlock
+        Blocks a user (`email_user`) in the validated domain.
+      operationId: users_block
       tags:
       - Users
       parameters: []
@@ -5689,8 +5597,8 @@ paths:
       summary: Unblock User
       deprecated: false
       description: |
-        Desbloqueia um usuário (`email_user`) do domínio validado.
-      operationId: usersUnblock
+        Unblocks a user (`email_user`) in the validated domain.
+      operationId: users_unblock
       tags:
       - Users
       parameters: []
@@ -5733,8 +5641,8 @@ paths:
       summary: Show balance
       deprecated: false
       description: |
-        Retorna o balanço (créditos) da conta.
-      operationId: accountBalance
+        Returns the account balance: available credit, document and SMS/WhatsApp usage.
+      operationId: account_get_balance
       tags:
       - Account
       parameters: []
@@ -5814,8 +5722,8 @@ paths:
       summary: Test Call
       deprecated: false
       description: |
-        Endpoint simples para testar conectividade e credenciais (`tokenAPI`/`cryptKey`) sem efeitos colaterais.
-      operationId: testCall
+        A simple endpoint to test connectivity and credentials (`tokenAPI`/`cryptKey`). It has no side effects.
+      operationId: account_test_call
       tags:
       - Account
       parameters: []
@@ -5838,16 +5746,16 @@ paths:
       summary: List Webhook v2.0 for a Safe or Document
       deprecated: false
       description: |
-        Lista o(s) webhook(s) cadastrado(s) para um cofre ou documento (API v2.0 - substitui/complementa a v1, que so cobria documentos).
+        Lists the webhook(s) registered for a safe or a document (API v2.0 — this replaces and extends v1, which covered documents only).
 
-        > Descoberto via busca na documentacao oficial em docapi.d4sign.com.br/reference/listar-webhook-de-um-cofre-ou-documento-versao-20 - nao estava no export original deste spec.
-      operationId: hookWebhooksV2List
+        > This endpoint was found in D4Sign's official documentation at docapi.d4sign.com.br/reference/listar-webhook-de-um-cofre-ou-documento-versao-20. It was not in the original export of this spec.
+      operationId: webhooks_list
       tags:
       - Webhooks
       parameters:
       - name: type
         in: query
-        description: "Tipo de recurso: 'cofre' ou 'documento'."
+        description: "Resource type: 'cofre' (safe) or 'documento' (document)."
         required: true
         example: documento
         schema:
@@ -5857,7 +5765,7 @@ paths:
           - documento
       - name: uuid
         in: query
-        description: UUID do cofre ou documento.
+        description: The safe's or document's UUID.
         required: true
         example: '{{uuid}}'
         schema:
@@ -5888,10 +5796,10 @@ paths:
       summary: Register or Update Webhook v2.0 for a Safe or Document
       deprecated: false
       description: |
-        Cadastra ou atualiza a URL de webhook de um cofre ou documento (API v2.0). Diferente da v1 (apenas por documento), permite registrar o webhook no nivel do COFRE, aplicando-se a todos os documentos dele.
+        Registers or updates the webhook URL for a safe or a document (API v2.0). Unlike v1, which only works per document, this endpoint can register the webhook at the SAFE level. At that level, it applies to every document in the safe.
 
-        > Descoberto via busca na documentacao oficial em docapi.d4sign.com.br/reference/cadastrar-ou-atualizar-uma-url-de-webhook-20 - nao estava no export original deste spec.
-      operationId: hookWebhooksV2Upsert
+        > This endpoint was found in D4Sign's official documentation at docapi.d4sign.com.br/reference/cadastrar-ou-atualizar-uma-url-de-webhook-20. It was not in the original export of this spec.
+      operationId: webhooks_upsert
       tags:
       - Webhooks
       requestBody:
@@ -5905,13 +5813,13 @@ paths:
                   enum:
                   - cofre
                   - documento
-                  description: Define o tipo de recurso monitorado.
+                  description: "Sets the type of resource to watch: 'cofre' (safe) or 'documento' (document)."
                 uuid:
                   type: string
-                  description: UUID do cofre ou documento.
+                  description: The safe's or document's UUID.
                 url:
                   type: string
-                  description: URL valida do seu sistema externo que recebera os disparos (POST) dos eventos de webhook.
+                  description: A valid URL on your external system. D4Sign sends webhook event POST requests to this URL.
               required:
               - type
               - uuid
@@ -5937,16 +5845,16 @@ paths:
       summary: Generate Temporary View URL for a Document
       deprecated: false
       description: |
-        Gera uma URL temporaria (expira em 5 minutos) para visualizar o documento (e, opcionalmente, seus anexos) sem fazer download. Aceita apenas o UUID do documento principal, nao de anexos.
+        Generates a temporary URL (it expires after 5 minutes) to view the document, and optionally its attachments, without downloading it. This endpoint accepts only the main document's UUID, not an attachment's UUID.
 
-        > Encontrado comparando a navegacao da doc oficial (v2.0) contra o export original deste spec - nao estava presente. Veja docapi.d4sign.com.br/v2.0/reference/document-and-attachment-viewer.
-      operationId: documentsGenerateView
+        > This endpoint is documented in D4Sign's official v2.0 reference but was missing from the original export of this spec. See docapi.d4sign.com.br/v2.0/reference/document-and-attachment-viewer.
+      operationId: documents_generate_view
       tags:
       - Documents
       parameters:
       - name: uuid_document
         in: path
-        description: Identificador do Documento principal (anexos nao sao aceitos aqui).
+        description: The main document's UUID. Attachments are not accepted here.
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -5960,7 +5868,7 @@ paths:
                 with_attachments:
                   type: boolean
                   default: false
-                  description: Se true, a resposta tambem inclui URLs temporarias para os anexos do documento.
+                  description: If true, the response also includes temporary URLs for the document's attachments.
             example:
               with_attachments: false
       responses:
@@ -5982,10 +5890,10 @@ paths:
       summary: Upload a Word Template
       deprecated: false
       description: |
-        Cria um novo template a partir de um arquivo .doc/.docx. Diferente de `makedocumentbytemplateword`, que GERA um documento a partir de um template ja existente - este endpoint CRIA o template em si.
+        Creates a new template from a .doc or .docx file. This differs from `makedocumentbytemplateword`, which GENERATES a document from a template that already exists. This endpoint CREATES the template itself.
 
-        > Encontrado comparando a navegacao da doc oficial (v2.0) contra o export original deste spec - nao estava presente. Veja docapi.d4sign.com.br/v2.0/reference/template-word-upload.
-      operationId: templatesUploadWord
+        > This endpoint is documented in D4Sign's official v2.0 reference but was missing from the original export of this spec. See docapi.d4sign.com.br/v2.0/reference/template-word-upload.
+      operationId: templates_upload_word
       tags:
       - Templates
       requestBody:
@@ -5997,11 +5905,11 @@ paths:
                 file:
                   type: string
                   format: binary
-                  description: Arquivo .doc ou .docx.
+                  description: A .doc or .docx file.
                 show_desk:
                   type: integer
                   default: 1
-                  description: 1 = visivel na secao "Templates Word" da plataforma; 0 = oculto.
+                  description: "`1` = visible in the platform's \"Templates Word\" section. `0` = hidden."
               required:
               - file
       responses:
