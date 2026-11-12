@@ -44,6 +44,7 @@ Bruno Desktop sets a query param's checkbox state from whether the param text ap
 ## Structure
 
 - `requests/<resource>/NNN-name.yml` — one OpenCollection YAML file per endpoint, grouped by the spec's own tags (`documents`, `safes`, `webhooks`, `signatories`, ...).
+- `scenarios/<recipe-name>/NN-step.yml` — multi-step, chained Bruno versions of the recipes in [`../../site/src/content/docs/recipes/`](../../site/src/content/docs/recipes/), one request per step, with `runtime.scripts` passing `uuid_document` etc. from one step's response into the next step's request. Hand-written, untouched by regeneration — see [`scenarios/README.md`](scenarios/README.md).
 - `environments/*.yml` — `baseUrl` per environment. Each machine sets `tokenAPI`/`cryptKey` locally as secrets.
 - `opencollection.yml` — collection root marker (OpenCollection YAML format) + the inherited `tokenAPI` header. `bruno.json` is also kept for tools that only recognize the classic format.
 

@@ -1,0 +1,49 @@
+info:
+  name: "3. Add signers"
+  type: http
+  seq: 3
+  tags:
+    - Scenarios
+    - Template to Signature
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/createlist?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "signers": [
+          {
+            "email": "signer@example.com",
+            "act": "1",
+            "foreign": "0",
+            "certificadoicpbr": "0",
+            "assinatura_presencial": "0"
+          }
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 3 of 4. Uses `uuid_document` from step 2 (or 2-alt). Same
+  `createlist` call as the "Send and Track" scenario — once a document
+  exists, generated-from-template or uploaded makes no difference.

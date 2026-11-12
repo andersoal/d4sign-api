@@ -1,0 +1,43 @@
+info:
+  name: "4. Send for signature"
+  type: http
+  seq: 4
+  tags:
+    - Scenarios
+    - Template to Signature
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/sendtosigner?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "message": "Please sign the attached contract.",
+        "workflow": "0",
+        "skip_email": "0"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 4 of 4. Uses `uuid_document` from step 2 (or 2-alt). From here
+  on it is the same signer + send flow as the "Send and Track" scenario
+  — see that folder for download/webhook steps after this one.

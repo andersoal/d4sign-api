@@ -1,0 +1,46 @@
+info:
+  name: "1. Look up the signing group"
+  type: http
+  seq: 1
+  tags:
+    - Scenarios
+    - Batch Group Signing
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/groups/:uuid_safe?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const body = res.getBody();
+        if (res.getStatus() === 200 && Array.isArray(body) && body.length > 0) {
+          bru.setVar('uuid_grupo', body[0].uuid_grupo);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 1 of 8 in the "Send Multiple Documents to the Same Group of
+  Signers" recipe — see
+  `site/src/content/docs/recipes/batch-group-signing.md`.
+
+  You create groups in the dashboard, not via the API — this just
+  resolves the UUID of one you already set up, and saves the first
+  group found as `uuid_grupo`. Overwrite it by hand if you need a
+  specific group.

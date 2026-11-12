@@ -1,0 +1,47 @@
+info:
+  name: "1. Find the template's ID"
+  type: http
+  seq: 1
+  tags:
+    - Scenarios
+    - Template to Signature
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/templates/?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const body = res.getBody();
+        if (res.getStatus() === 200 && body) {
+          const firstKey = Object.keys(body)[0];
+          if (firstKey) {
+            bru.setVar('template_id', body[firstKey].id);
+          }
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 1 of 4 in the "Generate a Document from a Template and Send It"
+  recipe — see `site/src/content/docs/recipes/template-to-signature.md`.
+
+  Returns every template in the account, keyed `"1"`, `"2"`, ... For
+  this demo chain, the script just grabs the first one's `id` and
+  saves it as `template_id`. Pick a specific template deliberately
+  instead — note its variable names exactly (case-sensitive) — and
+  overwrite `template_id` by hand if the first one isn't the one you
+  want.

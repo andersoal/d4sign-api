@@ -40,6 +40,8 @@ Alternative that skips re-entering secrets into Bruno entirely: **launch Bruno D
 bru run requests -r --env Sandbox --env-var tokenAPI=$tokenAPI --env-var cryptKey=$cryptKey
 ```
 
+To run a whole recipe as a chained sequence instead of one endpoint at a time, see [`collections/bruno/scenarios/`](../collections/bruno/scenarios/README.md) — same command, pointed at `scenarios/<name>` instead of `requests`, plus `--env-var uuid_safe=...`.
+
 Or the pre-wired mise task (runs just `GET /safes` as a quick smoke test, from the repo root):
 
 ```powershell

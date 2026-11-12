@@ -1,0 +1,54 @@
+info:
+  name: "1. Upload the document"
+  type: http
+  seq: 1
+  tags:
+    - Scenarios
+    - Send and Track
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/upload?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: multipart-form
+    data:
+      - name: file
+        type: file
+        value: [./example.pdf]
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const body = res.getBody();
+        if (res.getStatus() === 200 && body && body.uuid) {
+          bru.setVar('uuid_document', body.uuid);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 1 of 5 in the "Upload, Send, and React to Completion" recipe —
+  see `site/src/content/docs/recipes/send-and-track.md`.
+
+  Uploads a document into `uuid_safe` and saves its UUID as the runtime
+  variable `uuid_document`, which every later step in this folder reuses.
+
+  Set `uuid_safe` before running this folder — as a runtime var in the
+  Bruno GUI, or with `--env-var uuid_safe=...` on the CLI. `file` points
+  at the placeholder `./example.pdf` — point it at a real file first
+  (see the collection's known gaps in `../../README.md`).

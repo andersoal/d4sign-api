@@ -1,0 +1,52 @@
+info:
+  name: "1. Upload the document"
+  type: http
+  seq: 1
+  tags:
+    - Scenarios
+    - Embed in Your Site
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/upload?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: multipart-form
+    data:
+      - name: file
+        type: file
+        value: [./example.pdf]
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const body = res.getBody();
+        if (res.getStatus() === 200 && body && body.uuid) {
+          bru.setVar('uuid_document', body.uuid);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 1 of 3 in the "Collect a Signature Without Leaving Your Site"
+  recipe — see
+  `site/src/content/docs/recipes/embed-in-your-site.md`.
+
+  EMBED must be activated on your account first — contact
+  suporte@d4sign.com.br. Saves the new document's UUID as
+  `uuid_document` for steps 2-3. `file` points at the placeholder
+  `./example.pdf` — point it at a real file first.

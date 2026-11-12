@@ -1,0 +1,48 @@
+info:
+  name: "2. Upload document 1 of 2"
+  type: http
+  seq: 2
+  tags:
+    - Scenarios
+    - Batch Group Signing
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_safe/upload?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_safe
+      value: "{{uuid_safe}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: multipart-form
+    data:
+      - name: file
+        type: file
+        value: [./example.pdf]
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const body = res.getBody();
+        if (res.getStatus() === 200 && body && body.uuid) {
+          bru.setVar('uuid_document_1', body.uuid);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 2 of 8. The recipe uploads N documents in a loop; this folder
+  demonstrates the loop with N=2 — this is document 1, saved as
+  `uuid_document_1`. `file` points at the placeholder `./example.pdf`
+  — point it at a real file first.

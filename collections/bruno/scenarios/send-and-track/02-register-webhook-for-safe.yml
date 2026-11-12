@@ -1,0 +1,43 @@
+info:
+  name: "2. Register a webhook once, at the safe"
+  type: http
+  seq: 2
+  tags:
+    - Scenarios
+    - Send and Track
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/webhooks/v2/?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "type": "cofre",
+        "uuid": "{{uuid_safe}}",
+        "url": "{{webhookUrl}}"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 2 of 5. Not chained to step 1 — it registers the webhook at the
+  safe level, so it covers every document uploaded into that safe from
+  then on, not just the one from step 1. In practice you run this once
+  per safe, not once per scenario run.
+
+  `type: "cofre"` is a literal API enum value (D4Sign's word for
+  "safe") — do not translate it. Set `webhookUrl` to your own endpoint
+  before running; see `guides/webhooks.md` for the retry schedule and
+  HMAC verification you must do on the receiving end.

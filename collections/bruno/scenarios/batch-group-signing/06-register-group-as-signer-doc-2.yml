@@ -1,0 +1,49 @@
+info:
+  name: "6. Register the group as signer on document 2"
+  type: http
+  seq: 6
+  tags:
+    - Scenarios
+    - Batch Group Signing
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/createlist?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document_2}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "signers": [
+          {
+            "act": "1",
+            "foreign": "0",
+            "certificadoicpbr": "0",
+            "assinatura_presencial": "0",
+            "uuid_grupo": "{{uuid_grupo}}"
+          }
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 6 of 8. Uses `uuid_document_2` (step 3) and `uuid_grupo`
+  (step 1). Same group, second document — this is the part of the loop
+  that repeats per document.

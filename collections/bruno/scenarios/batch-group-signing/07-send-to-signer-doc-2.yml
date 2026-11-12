@@ -1,0 +1,41 @@
+info:
+  name: "7. Send document 2 for signature"
+  type: http
+  seq: 7
+  tags:
+    - Scenarios
+    - Batch Group Signing
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/sendtosigner?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document_2}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "message": "Please review and sign.",
+        "workflow": "0",
+        "skip_email": "0"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 7 of 8. Uses `uuid_document_2`.

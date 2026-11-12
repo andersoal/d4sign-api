@@ -1,0 +1,49 @@
+info:
+  name: "4. Send for signature"
+  type: http
+  seq: 4
+  tags:
+    - Scenarios
+    - Send and Track
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/sendtosigner?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "message": "Please sign the attached contract.",
+        "workflow": "0",
+        "skip_email": "0"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 4 of 5. Uses `uuid_document` from step 1. Moves the document
+  into "Awaiting Signatures" and sends the signing-link email (this
+  recipe does not skip it — compare with the "Embed in Your Site"
+  scenario, which does).
+
+  After this call, your own webhook endpoint receives the step-2
+  callback when the document is signed, finished, or canceled. That
+  endpoint is server-side and outside Bruno's scope — see
+  `guides/webhooks.md`.

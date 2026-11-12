@@ -1,0 +1,49 @@
+info:
+  name: "4. Register the group as signer on document 1"
+  type: http
+  seq: 4
+  tags:
+    - Scenarios
+    - Batch Group Signing
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/createlist?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document_1}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "signers": [
+          {
+            "act": "1",
+            "foreign": "0",
+            "certificadoicpbr": "0",
+            "assinatura_presencial": "0",
+            "uuid_grupo": "{{uuid_grupo}}"
+          }
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 4 of 8. Uses `uuid_document_1` (step 2) and `uuid_grupo`
+  (step 1). Every member of the group gets added as a signer on this
+  document — no individual emails needed.

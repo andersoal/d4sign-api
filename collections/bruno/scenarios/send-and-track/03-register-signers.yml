@@ -1,0 +1,50 @@
+info:
+  name: "3. Add signers"
+  type: http
+  seq: 3
+  tags:
+    - Scenarios
+    - Send and Track
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/createlist?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "signers": [
+          {
+            "email": "signer@example.com",
+            "act": "1",
+            "foreign": "0",
+            "certificadoicpbr": "0",
+            "assinatura_presencial": "0"
+          }
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 3 of 5. Uses `uuid_document` from step 1.
+
+  See `guides/core-workflows.md#register-signers` for the full signer
+  field list (ICP-Brasil certs, PIX auth, D4Sign Score, groups, ...).

@@ -1,0 +1,50 @@
+info:
+  name: "3. Send without the email link"
+  type: http
+  seq: 3
+  tags:
+    - Scenarios
+    - Embed in Your Site
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/sendtosigner?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "message": "",
+        "workflow": "0",
+        "skip_email": "1"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 3 of 3. Uses `uuid_document` from step 1. `skip_email: 1` is
+  mandatory here — the signer is about to see the document in your own
+  UI via the EMBED iframe, not click a link in an email.
+
+  What comes after this call is not an API request, so it is not a
+  Bruno step: render the iframe client-side (full snippet, batch
+  variant, and the `signed`/`wrong-data` callback events at
+  `guides/embed.md`), and register a server-side webhook for the
+  authoritative completion signal — see the "Send and Track" scenario,
+  step 2.

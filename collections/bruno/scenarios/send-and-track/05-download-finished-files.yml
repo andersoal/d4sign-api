@@ -1,0 +1,44 @@
+info:
+  name: "5. Download the finished files"
+  type: http
+  seq: 5
+  tags:
+    - Scenarios
+    - Send and Track
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/documents/:uuid_document/download?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}&type=zip"
+  params:
+    - name: uuid_document
+      value: "{{uuid_document}}"
+      type: path
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+    - name: type
+      value: zip
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "type": "zip"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 5 of 5. Uses `uuid_document` from step 1.
+
+  Only returns the real file once the document is actually finished —
+  see the status table in `guides/core-workflows.md#document-status`.
+  Running this scenario straight through will not reach that state by
+  itself; a real signer still has to sign in between steps 4 and 5.

@@ -1,0 +1,50 @@
+info:
+  name: "8. Batch both documents together"
+  type: http
+  seq: 8
+  tags:
+    - Scenarios
+    - Batch Group Signing
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/batches?tokenAPI={{tokenAPI}}&cryptKey={{cryptKey}}"
+  params:
+    - name: tokenAPI
+      value: "{{tokenAPI}}"
+      type: query
+    - name: cryptKey
+      value: "{{cryptKey}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "keys": ["{{uuid_document_1}}", "{{uuid_document_2}}"]
+      }
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const body = res.getBody();
+        if (res.getStatus() === 200 && body && body.uuid_batches) {
+          bru.setVar('uuid_batches', body.uuid_batches);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Step 8 of 8. Uses `uuid_document_1` and `uuid_document_2` (steps 2
+  and 3), and saves the result as `uuid_batches`. Groups up to 25
+  already-uploaded documents into one batch — useful for operations
+  that act on a set of documents at once, such as the batch EMBED
+  iframe variant.
+
+  The batch iframe itself (`embedlote/viewblob`) is a client-side
+  snippet, not an API call — see
+  `guides/embed.md#batches`. Not represented here.
