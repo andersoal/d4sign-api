@@ -64,7 +64,7 @@ if ($_POST['type_post'] === '1') { // Finished
 $url = $client->documents->getfileurl($uuid_document, 'zip')->url; // or 'pdf', 'pdfa'
 ```
 
-Only works once the document is actually finished — see the [status table](/d4sign-api/guides/core-workflows/#document-status). For attachments + signature certificates together, use `downloadlist` instead (see the [reference](/d4sign-api/reference/operations/documentsrelatedfilesdownload/)).
+Only works once the document is actually finished — see the [status table](/d4sign-api/guides/core-workflows/#document-status). For attachments + signature certificates together, use `downloadlist` instead (see the [reference](/d4sign-api/reference/operations/documents_download_batch/)).
 
 ## What this combines
 

@@ -44,7 +44,7 @@ $signers = [
 $client->documents->createList('{uuid_document}', $signers);
 ```
 
-`act` sets what the signer does. The common ones are `1` sign, `2` approve, `3` acknowledge, `5` witness. D4Sign supports 13 values in total (sign as party, guarantor, etc.) — see the [reference](/d4sign-api/reference/operations/documentssignatoriescreate/) for the full list, plus options for ICP-Brasil certificates, document+selfie auth, PIX auth, and D4Sign Score.
+`act` sets what the signer does. The common ones are `1` sign, `2` approve, `3` acknowledge, `5` witness. D4Sign supports 13 values in total (sign as party, guarantor, etc.) — see the [reference](/d4sign-api/reference/operations/documents_signatories_create/) for the full list, plus options for ICP-Brasil certificates, document+selfie auth, PIX auth, and D4Sign Score.
 
 To put several signers in the same signing group instead of listing each one, look up an existing group's UUID:
 

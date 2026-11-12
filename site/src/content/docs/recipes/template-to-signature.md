@@ -27,7 +27,7 @@ $doc = $client->documents->makedocumentbytemplate('{uuid_safe}', 'Contrato — J
 ]);
 ```
 
-Word templates — same shape, different endpoint (and supports multiple "preenchedores" filling different sections — see the [reference](/d4sign-api/reference/operations/documentstemplatepostword/) for the multi-filler body shape):
+Word templates — same shape, different endpoint (and supports multiple "preenchedores" filling different sections — see the [reference](/d4sign-api/reference/operations/documents_template_word_create/) for the multi-filler body shape):
 
 ```php
 $doc = $client->documents->makedocumentbytemplateword('{uuid_safe}', 'Contrato — João', [
@@ -41,7 +41,7 @@ $doc = $client->documents->makedocumentbytemplateword('{uuid_safe}', 'Contrato �
 Either way you get back `{"uuid": "..."}` — the new document, already in the safe, ready for the same [signer + send](/d4sign-api/recipes/send-and-track/#3-add-signers-and-send) steps as an uploaded document.
 
 :::note
-Need a template that doesn't exist yet? `POST /templates/upload` creates one from a `.doc`/`.docx` file — see the [reference](/d4sign-api/reference/operations/templatesuploadword/). This is for *creating* a template, not generating a document from one.
+Need a template that doesn't exist yet? `POST /templates/upload` creates one from a `.doc`/`.docx` file — see the [reference](/d4sign-api/reference/operations/templates_upload_word/). This is for *creating* a template, not generating a document from one.
 :::
 
 ## What this combines

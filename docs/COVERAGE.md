@@ -31,7 +31,7 @@
 
 ## Endpoints documented in the guide but not in the reference nav
 
-The reverse direction: the Signatários **guide** page walks through plain "remove a positioned signature" (`removepins`) and "list positioned signatures" (`listpins`) as sub-steps of the pin-positioning workflow. Neither action has its own entry in `/v2.0/reference`'s Signers section. Only the *replicated*-position variants (`addpinswithreplics`/`removepinswithreplics`) and the base `addpins` show up there. Both actions are already in `openapi/d4sign.yaml` (`documentsSignatoriesPinsRemove`, `documentsSignatoriesPinsGetList`), with descriptions sourced from the guide text. No action is needed here. It is worth knowing this asymmetry exists, so a future "is X real" check does not stop at the reference nav alone.
+The reverse direction: the Signatários **guide** page walks through plain "remove a positioned signature" (`removepins`) and "list positioned signatures" (`listpins`) as sub-steps of the pin-positioning workflow. Neither action has its own entry in `/v2.0/reference`'s Signers section. Only the *replicated*-position variants (`addpinswithreplics`/`removepinswithreplics`) and the base `addpins` show up there. Both actions are already in `openapi/d4sign.yaml` (`documents_signatories_pins_remove`, `documents_signatories_pins_list`), with descriptions sourced from the guide text. No action is needed here. It is worth knowing this asymmetry exists, so a future "is X real" check does not stop at the reference nav alone.
 
 ## Duplicate reference entries (same endpoint, multiple pages)
 
