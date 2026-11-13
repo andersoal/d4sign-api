@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import starlightOpenAPI from 'starlight-openapi';
+import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi';
 import starlightLlmsTxt from 'starlight-llms-txt';
 
 // https://astro.build/config
@@ -29,6 +29,17 @@ export default defineConfig({
 						base: 'reference',
 						schema: '../openapi/d4sign.yaml',
 						sidebar: { label: 'API Reference', collapsed: false },
+						snippets: {
+							operation: {
+								clients: {
+									shell: ['curl'],
+									javascript: ['fetch', 'axios'],
+									go: ['nethttp'],
+									java: ['okhttp'],
+									csharp: ['httpclient'],
+								},
+							},
+						},
 					},
 				]),
 				starlightLlmsTxt({ projectName: 'D4Sign API (unofficial docs)' }),
@@ -46,6 +57,7 @@ export default defineConfig({
 						{ label: 'Rate Limits & Errors', slug: 'guides/rate-limits-and-errors' },
 					],
 				},
+				...openAPISidebarGroups,
 				{
 					label: 'Recipes',
 					items: [
