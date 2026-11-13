@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi';
 import starlightLlmsTxt from 'starlight-llms-txt';
+import starlightLlmActions from 'starlight-llm-actions';
 
 // https://astro.build/config
 export default defineConfig({
@@ -43,6 +44,7 @@ export default defineConfig({
 					},
 				]),
 				starlightLlmsTxt({ projectName: 'D4Sign API (unofficial docs)' }),
+				starlightLlmActions(),
 			],
 			sidebar: [
 				{
