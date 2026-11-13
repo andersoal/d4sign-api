@@ -6,6 +6,13 @@
       "sourceType": "github",
       "skillPath": "SKILL.md",
       "computedHash": "c899343c6dc12b58046b0d38c3b330dbad4a42cea14260241b8bf97195963ac1"
+    },
+    "writing-openapi-specs": {
+      "source": "speakeasy-api/sdk-generation-skills",
+      "ref": "master",
+      "sourceType": "github",
+      "skillPath": "skills/writing-openapi-specs/SKILL.md",
+      "computedHash": "87d98cdf13bce923493b2c93435fed77691b18a97bee2d3e44c0bf6c3d5a267a"
     }
   }
 }
