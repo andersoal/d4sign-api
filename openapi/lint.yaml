@@ -1,0 +1,71 @@
+extends: all
+
+# Every rule below is disabled with a reason, not because it's wrong, but
+# because satisfying it on this file would mean inventing facts the live
+# D4Sign API doesn't document or doesn't support — the one thing AGENTS.md's
+# "Verifying API claims" rule forbids. See docs/LINTING.md for the full
+# rationale and the process for re-enabling any of these once confirmed.
+rules:
+  # D4Sign's real API passes tokenAPI/cryptKey as query params and accepts
+  # HTTP Basic for webhook callbacks. That's the live API's actual design,
+  # confirmed against docapi.d4sign.com.br — not something this doc can fix.
+  - id: owasp-no-api-keys-in-url
+    disabled: true
+  - id: owasp-no-http-basic
+    disabled: true
+
+  # D4Sign's live reference uses these exact paths, including the trailing
+  # slash (/api/v1/templates/, /api/v1/webhooks/v2/). Dropping the slash would
+  # describe an endpoint that doesn't exist.
+  - id: style-path-trailing-slash
+    disabled: true
+
+  # D4Sign documents no numeric bounds, string length limits, or rate-limit
+  # response headers for any field. Adding maxLength/min/max/format values
+  # would fabricate constraints the live API doesn't enforce or publish.
+  - id: owasp-string-limit
+    disabled: true
+  - id: owasp-string-restricted
+    disabled: true
+  - id: owasp-integer-limit
+    disabled: true
+  - id: owasp-integer-format
+    disabled: true
+  - id: owasp-array-limit
+    disabled: true
+  - id: owasp-rate-limit
+    disabled: true
+
+  # We've only confirmed D4Sign's actual error envelope for the responses
+  # already in this spec (400/401/404, see collections/bruno/README.md).
+  # Adding 429/500/4XX response schemas for all 72 operations without a live
+  # call to verify each one would be inventing API behavior, not documenting it.
+  - id: owasp-define-error-responses-401
+    disabled: true
+  - id: owasp-define-error-responses-429
+    disabled: true
+  - id: owasp-define-error-responses-500
+    disabled: true
+  - id: owasp-define-error-validation
+    disabled: true
+  - id: style-operation-error-response
+    disabled: true
+
+  # Operations that carry more than one tag (e.g. "Documents" plus "Documents
+  # Upload/Download/Principal") do so on purpose: the extra tags mirror
+  # D4Sign's own reference nav and drive the Bruno collection's generated
+  # folder structure (docs/REGENERATING.md). Collapsing to one tag per
+  # operation would restructure that collection.
+  - id: style-operation-singular-tag
+    disabled: true
+
+  # Real per-field examples would be valuable, but 148 of them need writing
+  # from verified live responses, not fabricating placeholder values to
+  # silence a hint. Tracked as backlog in docs/LINTING.md, not faked here.
+  - id: oas3-example-missing
+    disabled: true
+
+  # "Proprietary" has no canonical URL to cite, and we don't guess URLs
+  # (AGENTS.md). Add one only if D4Sign publishes a real terms-of-service page.
+  - id: style-license-url
+    disabled: true

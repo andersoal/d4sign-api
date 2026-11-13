@@ -24,3 +24,5 @@ python scripts/fix_bruno_multipart_bodies.py
 The scaffold script also overwrites `collections/bruno/README.md` with its own generic template — restore the real one with `git checkout -- collections/bruno/README.md` after regenerating.
 
 Review the diff — folder names come from the spec's own `tags`, so a retagged or renamed operation in the spec moves or renames its request file.
+
+After any edit to `openapi/d4sign.yaml`, run `openapi spec validate` and `openapi spec lint --config openapi/lint.yaml` on it before committing — see [`docs/LINTING.md`](LINTING.md).
