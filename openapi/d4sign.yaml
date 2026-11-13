@@ -9,24 +9,47 @@ info:
     Official Postman collection: https://documenter.getpostman.com/view/1486030/d4sign-api/2TnpL3 (it is configured to use the Sandbox host by default).
   version: 1.0.0
   summary: D4Sign Summary
+  contact:
+    name: D4Sign Support
+    email: suporte@d4sign.com.br
+    url: https://d4sign.com.br
+  license:
+    name: Proprietary
 tags:
-- name: Safes
-- name: Folders by Safe
-- name: Documents Templates
-- name: Documents Upload/Download
-- name: Documents Upload/Download/Principal
-- name: Documents Upload/Download/Secondary / Attachment
-- name: Signatories
-- name: Documents
-- name: Webhooks
-- name: Tags
-- name: Watchers
-- name: Certificates
-- name: Users
-- name: Folders
-- name: Templates
-- name: Documents Upload
 - name: Account
+  description: Your D4Sign account settings.
+- name: Certificates
+  description: The digital certificate a signer must use.
+- name: Documents
+  description: Documents stored in a safe, and their status and metadata.
+- name: Documents Templates
+  description: Documents generated from a saved template.
+- name: Documents Upload
+  description: Uploading a document as a raw binary file.
+- name: Documents Upload/Download
+  description: Uploading documents to, and downloading documents from, a safe.
+- name: Documents Upload/Download/Principal
+  description: Uploading and downloading a document's main file.
+- name: Documents Upload/Download/Secondary / Attachment
+  description: Uploading and downloading a document's extra attachment files.
+- name: Folders
+  description: Folders that organize documents inside a safe.
+- name: Folders by Safe
+  description: Folders that belong to a specific safe.
+- name: Safes
+  description: A safe is a top-level folder that holds documents and sub-folders.
+- name: Signatories
+  description: The people who sign a document, and their signature links.
+- name: Tags
+  description: Labels you attach to a document to organize it.
+- name: Templates
+  description: Reusable document templates.
+- name: Users
+  description: Accounts that can sign in to D4Sign.
+- name: Watchers
+  description: People who get a copy of a document's notifications without signing it.
+- name: Webhooks
+  description: Callbacks that D4Sign sends your server when a document's state changes.
 paths:
   /api/v1/safes:
     get:
@@ -42,7 +65,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -65,10 +88,8 @@ paths:
           headers: {}
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
         '404':
           $ref: '#/components/responses/Resource_Not_Found_Or_Unknown_Method'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -92,7 +113,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -116,10 +137,8 @@ paths:
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
-          description: ''
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -167,7 +186,7 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -187,10 +206,8 @@ paths:
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
-          description: ''
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -238,7 +255,7 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -253,10 +270,8 @@ paths:
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
-          description: ''
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -273,7 +288,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -418,14 +433,14 @@ paths:
           type: string
       - name: Content-Type
         in: header
-        description: ''
+        description: 'The request body''s media type. Use `application/json`.'
         required: true
         example: application/json
         schema:
           type: string
       - name: Accept
         in: header
-        description: ''
+        description: 'The response media type you accept. Use `application/json`.'
         required: true
         example: application/json
         schema:
@@ -482,7 +497,7 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -500,7 +515,7 @@ paths:
                 uuid: 9ce0abc7-d5ae-4765-bfec-e627b51179be
           headers: {}
         '400':
-          description: ''
+          description: 'Error response. The `message` field explains why the request failed.'
           content:
             application/json:
               schema:
@@ -540,14 +555,14 @@ paths:
           type: string
       - name: Content-Type
         in: header
-        description: ''
+        description: 'The request body''s media type. Use `application/json`.'
         required: true
         example: application/json
         schema:
           type: string
       - name: Accept
         in: header
-        description: ''
+        description: 'The response media type you accept. Use `application/json`.'
         required: true
         example: application/json
         schema:
@@ -610,7 +625,7 @@ paths:
                 summary: Example
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -644,7 +659,7 @@ paths:
       parameters:
       - name: uuid_safe
         in: path
-        description: ''
+        description: 'The safe''s UUID.'
         required: true
         schema:
           type: string
@@ -657,7 +672,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -708,7 +723,7 @@ paths:
           type: string
       - name: tokenAPI
         in: header
-        description: ''
+        description: 'Your account''s API token.'
         required: true
         example: '{{tokenAPI}}'
         schema:
@@ -746,7 +761,7 @@ paths:
               workflow: ''
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -833,7 +848,7 @@ paths:
               uuid_folder: '{{uuid_folder}}'
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -865,7 +880,7 @@ paths:
       parameters:
       - name: uuid_safe
         in: path
-        description: ''
+        description: 'The safe''s UUID.'
         required: true
         schema:
           type: string
@@ -878,7 +893,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -966,7 +981,7 @@ paths:
               type: zip
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1001,7 +1016,7 @@ paths:
           type: string
       - name: tokenAPI
         in: header
-        description: ''
+        description: 'Your account''s API token.'
         required: true
         example: '{{tokenAPI}}'
         schema:
@@ -1024,7 +1039,7 @@ paths:
               file: file://./example.pdf
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1038,7 +1053,7 @@ paths:
                 message: File created
           headers: {}
         '400':
-          description: ''
+          description: 'Error response. The `message` field explains why the request failed.'
           content:
             application/json:
               schema:
@@ -1103,7 +1118,7 @@ paths:
               name: Meu contrato de venda
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1139,7 +1154,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1234,7 +1249,7 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1286,7 +1301,7 @@ paths:
           type: string
       - name: tokenAPI
         in: header
-        description: ''
+        description: 'Your account''s API token.'
         required: true
         example: '{{tokenAPI}}'
         schema:
@@ -1339,7 +1354,7 @@ paths:
                 uuid-slave-document2: '0'
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1417,7 +1432,7 @@ paths:
               uuid_folder: '{UUID DA PASTA}'
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1453,7 +1468,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1499,7 +1514,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1592,41 +1607,43 @@ paths:
     post:
       summary: Create signature list (Add Signatories or Group)
       deprecated: false
-      description: "Registers the signers for the document: who needs to sign it.\n\n<AccordionGroup>\n  <Accordion title=\"Case: Add Signers\" defaultOpen>\n   <Columns>\n  \n      <Column>\n      Request\n    ```json\n{\n    \"signers\" : [\n        {\n            \"email\": \"email@domain.com\",\n            \"act\": \"1\",\n            \"foreign\": \"1\",\n            \"certificadoicpbr\": \"0\",\n            \"assinatura_presencial\": \"0\",\n            \"docauth\": \"0\",\n            \"docauthandselfie\": \"0\",\n       \t    \"embed_methodauth\": \"email\",\n      \t    \"embed_smsnumber\": \"\",\n      \t    \"upload_allow\": \"0\",\n      \t    \"upload_obs\": \"Articles of Incorporation and Utility Bill\",\n      \t    \"whatsapp_number\": \"+5511981876540\" (optional),\n      \t    \"uuid_grupo\": \"GROUP UUID\" (optional),\n      \t    \"certificadoicpbr_tipo\": \"2\" (optional),\n      \t    \"certificadoicpbr_cpf\": \"CPF\" (optional),\n      \t    \"certificadoicpbr_cnpj\": \"CNPJ\" (optional),\n      \t    \"password_code\": \"Access code\" (optional),\n      \t    \"auth_pix\": \"0\" (optional),\n      \t    \"auth_pix_nome\": \"Signer's name\" (optional),\n      \t    \"auth_pix_cpf\": \"21917876280\" (optional),\n      \t    \"videoselfie\": \"0\" (optional),\n      \t    \"d4sign_score\": \"0\" (optional),\n      \t    \"d4sign_score_nome\": \"Signer's name\" (optional),\n      \t    \"d4sign_score_cpf\": \"21917876280\" (optional),\n            \"d4sign_score_similarity\": \"90\" (min 70 - max 90)(optional),\n            \"skipemail\": \"1\"(optional)\n        },\n        {...}\n        ]\n}\n```\n  </Column>\n  <Column>\n      Response\n    ```json\n      {\n    \"key_signer\": \"NwYu=\",\n    \"email\": \"email@user.com.br\",\n    \"act\": \"1\",\n    \"foreign\": \"0\",\n    \"certificadoicpbr\": \"0\",\n    \"assinatura_presencial\": \"0\",\n    \"assinatura_presencial_link\": \"IN-PERSON SIGNING LINK\" - This link only appears after the document has been sent for signature,\n    \"doc_auth\": \"0\",\n    \"embed_methodauth\": \"email\",\n    \"embed_smsnumber\": \"\",\n    \"upload_allow\": \"0\",\n    \"upload_obs\": \"Articles of Incorporation and Utility Bill\",\n    \"docauthandselfie\": \"0\",\n    \"skipemail\": \"0\",\n    \"whatsapp\": \"\",\n    \"password_code\": \"\",\n    \"status\": \"created\"\n}\n    ```\n  </Column>\n</Columns>\n\n| Parameter | Description |\n| --- | --- |\n| email (required) | The signer's email |\n| act (required) | The signing action. Allowed values:   1 = Sign   2 = Approve   3 = Acknowledge   4 = Sign as a party   5 = Witness   6 = Sign as an intervening party   7 = Acknowledge receipt   8 = Sign as drawer, endorser, and guarantor (aval)   9 = Sign as drawer, endorser, guarantor (aval), and surety   10 = Sign as surety   11 = Sign as a party and surety   12 = Sign as a jointly liable party   13 = Sign as a party and jointly liable party |\n| foreign (required) | Whether the signer is a foreign national. 0 = has a CPF. 1 = does not have a CPF |\n| foreign\\_lang | The foreign signer's language: en = English, es = Spanish, pt = Portuguese |\n| certificadoicpbr (required) | 0 = standard D4Sign signature   1 = signature with an ICP-Brasil certificate |\n| assinatura\\_presencial (required) | 1 = in-person signature   0 = not in person |\n| docauth (optional) | 1 = requires a photo ID   0 = not required |\n| docauthandselfie (optional) | 1 = photo ID + selfie   0 = selfie not required |\n| embed\\_methodauth (optional) | Authentication method: email, password, sms, whats |\n| embed\\_smsnumber (optional) | The SMS or WhatsApp number, in standard format (for example, +5511953020202) |\n| upload\\_allow (optional) | Whether the signer can upload other documents |\n| upload\\_obs (optional) | Which documents the signer must upload (when upload\\_allow = 1) |\n| after\\_position (optional) | Sets the signing-order position after which this signer is inserted |\n| skipemail (optional) | 1 = do not send emails to this signer |\n| whatsapp\\_number (optional) | The WhatsApp number to use for signing |\n| uuid\\_grupo (optional) | The signing group's UUID |\n| certificadoicpbr\\_tipo (optional) | 1 = any certificate   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (optional) | The signer's CPF. Leave blank to accept any e-CPF |\n| certificadoicpbr\\_cnpj (optional) | The signer's CNPJ. Leave blank to accept any e-CNPJ |\n| password\\_code (optional) | The signer's access code. Leave blank to remove the previous code |\n| auth\\_pix (optional) | 1 = authenticate via PIX |\n| auth\\_pix\\_nome | Required if auth\\_pix = 1 |\n| auth\\_pix\\_cpf | Required if auth\\_pix = 1 |\n| sms-number (required) | The signer's NEW SMS number |\n| key-signer | The signer's key |\n| videoselfie | 1 = requires a video selfie |\n| d4sign\\_score (optional) | Turns on D4Sign Score. Requires a driver's license plus docauthandselfie = 1 or videoselfie = 1 |\n| d4sign\\_score\\_nome | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | The required similarity level (min: 70, max: 90) |\n  </Accordion>\n  <Accordion title=\"Case: Add Signer Groups to a Document\">\n\n| Parameter | Description |\n| --- | --- |\n| email (required) | The signer's email |\n| act (required) | The signing action. Allowed values:   1 = Sign   2 = Approve   3 = Acknowledge   4 = Sign as a party   5 = Witness   6 = Sign as an intervening party   7 = Acknowledge receipt   8 = Sign as drawer, endorser, and guarantor (aval)   9 = Sign as drawer, endorser, guarantor (aval), and surety   10 = Sign as surety   11 = Sign as a party and surety   12 = Sign as a jointly liable party   13 = Sign as a party and jointly liable party |\n| foreign (required) | Whether the signer is a foreign national. 0 = has a CPF. 1 = does not have a CPF |\n| foreign\\_lang | The foreign signer's language: en = English, es = Spanish, pt = Portuguese |\n| certificadoicpbr (required) | 0 = standard D4Sign signature   1 = signature with an ICP-Brasil certificate |\n| assinatura\\_presencial (required) | 1 = in-person signature   0 = not in person |\n| docauth (optional) | 1 = requires a photo ID   0 = not required |\n| docauthandselfie (optional) | 1 = photo ID + selfie   0 = selfie not required |\n| embed\\_methodauth (optional) | Authentication method: email, password, sms, whats |\n| embed\\_smsnumber (optional) | The SMS or WhatsApp number, in standard format (for example, +5511953020202) |\n| upload\\_allow (optional) | Whether the signer can upload other documents |\n| upload\\_obs (optional) | Which documents the signer must upload (when upload\\_allow = 1) |\n| after\\_position (optional) | Sets the signing-order position after which this signer is inserted |\n| skipemail (optional) | 1 = do not send emails to this signer |\n| whatsapp\\_number (optional) | The WhatsApp number to use for signing |\n| uuid\\_grupo (optional) | The signing group's UUID |\n| certificadoicpbr\\_tipo (optional) | 1 = any certificate   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (optional) | The signer's CPF. Leave blank to accept any e-CPF |\n| certificadoicpbr\\_cnpj (optional) | The signer's CNPJ. Leave blank to accept any e-CNPJ |\n| password\\_code (optional) | The signer's access code. Leave blank to remove the previous code |\n| auth\\_pix (optional) | 1 = authenticate via PIX |\n| auth\\_pix\\_nome | Required if auth\\_pix = 1 |\n| auth\\_pix\\_cpf | Required if auth\\_pix = 1 |\n| sms-number (required) | The signer's NEW SMS number |\n| key-signer | The signer's key |\n| videoselfie | 1 = requires a video selfie |\n| d4sign\\_score (optional) | Turns on D4Sign Score. Requires a driver's license plus docauthandselfie = 1 or videoselfie = 1 |\n| d4sign\\_score\\_nome | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | The required similarity level (min: 70, max: 90) |\n\nPer the table above, `act` sets the action this group performs in the signing process, such as signing or approving. `uuid_grupo` is the group's UUID. It must belong to the same safe as this document. You can look it up with the signing-groups endpoint documented elsewhere in this reference.\n      \n      \n  </Accordion>\n  <Accordion title=\"Case: Add Trust ID (Extra Verification)\">\n    https://docapi.d4sign.com.br/docs/endpoints-2#adicionar-trust-id-verifica%C3%A7%C3%A3o-extra\n  </Accordion>\n</AccordionGroup>\n\n\n"
+      description: "Registers the signers for the document: who needs to sign it.\n\n<AccordionGroup>\n  <Accordion title=\"Case: Add Signers\" defaultOpen>\n   <Columns>\n  \n      <Column>\n      Request\n    ```json\n{\n    \"signers\" : [\n        {\n            \"email\": \"email@domain.com\",\n            \"act\": \"1\",\n            \"foreign\": \"1\",\n            \"certificadoicpbr\": \"0\",\n            \"assinatura_presencial\": \"0\",\n            \"docauth\": \"0\",\n            \"docauthandselfie\": \"0\",\n       \t    \"embed_methodauth\": \"email\",\n      \t    \"embed_smsnumber\": \"\",\n      \t    \"upload_allow\": \"0\",\n      \t    \"upload_obs\": \"Articles of Incorporation and Utility Bill\",\n      \t    \"whatsapp_number\": \"+5511981876540\" (optional),\n      \t    \"uuid_grupo\": \"GROUP UUID\" (optional),\n      \t    \"certificadoicpbr_tipo\": \"2\" (optional),\n      \t    \"certificadoicpbr_cpf\": \"CPF\" (optional),\n      \t    \"certificadoicpbr_cnpj\": \"CNPJ\" (optional),\n      \t    \"password_code\": \"Access code\" (optional),\n      \t    \"auth_pix\": \"0\" (optional),\n      \t    \"auth_pix_nome\": \"Signer's name\" (optional),\n      \t    \"auth_pix_cpf\": \"21917876280\" (optional),\n      \t    \"videoselfie\": \"0\" (optional),\n      \t    \"d4sign_score\": \"0\" (optional),\n      \t    \"d4sign_score_nome\": \"Signer's name\" (optional),\n      \t    \"d4sign_score_cpf\": \"21917876280\" (optional),\n            \"d4sign_score_similarity\": \"90\" (min 70 - max 90)(optional),\n            \"skipemail\": \"1\"(optional)\n        },\n        {...}\n        ]\n}\n```\n  </Column>\n  <Column>\n      Response\n    ```json\n      {\n    \"key_signer\": \"NwYu=\",\n    \"email\": \"email@user.com.br\",\n    \"act\": \"1\",\n    \"foreign\": \"0\",\n    \"certificadoicpbr\": \"0\",\n    \"assinatura_presencial\": \"0\",\n    \"assinatura_presencial_link\": \"IN-PERSON SIGNING LINK\" - This link only appears after the document has been sent for signature,\n    \"doc_auth\": \"0\",\n    \"embed_methodauth\": \"email\",\n    \"embed_smsnumber\": \"\",\n    \"upload_allow\": \"0\",\n    \"upload_obs\": \"Articles of Incorporation and Utility Bill\",\n    \"docauthandselfie\": \"0\",\n    \"skipemail\": \"0\",\n    \"whatsapp\": \"\",\n    \"password_code\": \"\",\n    \"status\": \"created\"\n}\n    ```\n  </Column>\n</Columns>\n\n| Parameter | Description |\n| --- | --- |\n| email (required) | The signer's email |\n| act (required) | The signing action. Allowed values:   1 = Sign   2 = Approve   3 = Acknowledge   4 = Sign as a party   5 = Witness   6 = Sign as an intervening party   7 = Acknowledge receipt   8 = Sign as drawer, endorser, and guarantor (aval)   9 = Sign as drawer, endorser, guarantor (aval), and surety   10 = Sign as surety   11 = Sign as a party and surety   12 = Sign as a jointly liable party   13 = Sign as a party and jointly liable party |\n| foreign (required) | Whether the signer is a foreign national. 0 = has a CPF. 1 = does not have a CPF |\n| foreign\\_lang | The foreign signer's language: en = English, es = Spanish, pt = Portuguese |\n| certificadoicpbr (required) | 0 = standard D4Sign signature   1 = signature with an ICP-Brasil certificate |\n| assinatura\\_presencial (required) | 1 = in-person signature   0 = not in person |\n| docauth (optional) | 1 = requires a photo ID   0 = not required |\n| docauthandselfie (optional) | 1 = photo ID + selfie   0 = selfie not required |\n| embed\\_methodauth (optional) | Authentication method: email, password, sms, whats |\n| embed\\_smsnumber (optional) | The SMS or WhatsApp number, in standard format (for example, +5511953020202) |\n| upload\\_allow (optional) | Whether the signer can upload other documents |\n| upload\\_obs (optional) | Which documents the signer must upload (when upload\\_allow = 1) |\n| after\\_position (optional) | Sets the signing-order position after which this signer is inserted |\n| skipemail (optional) | 1 = do not send emails to this signer |\n| whatsapp\\_number (optional) | The WhatsApp
+        number to use for signing |\n| uuid\\_grupo (optional) | The signing group's UUID |\n| certificadoicpbr\\_tipo (optional) | 1 = any certificate   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (optional) | The signer's CPF. Leave blank to accept any e-CPF |\n| certificadoicpbr\\_cnpj (optional) | The signer's CNPJ. Leave blank to accept any e-CNPJ |\n| password\\_code (optional) | The signer's access code. Leave blank to remove the previous code |\n| auth\\_pix (optional) | 1 = authenticate via PIX |\n| auth\\_pix\\_nome | Required if auth\\_pix = 1 |\n| auth\\_pix\\_cpf | Required if auth\\_pix = 1 |\n| sms-number (required) | The signer's NEW SMS number |\n| key-signer | The signer's key |\n| videoselfie | 1 = requires a video selfie |\n| d4sign\\_score (optional) | Turns on D4Sign Score. Requires a driver's license plus docauthandselfie = 1 or videoselfie = 1 |\n| d4sign\\_score\\_nome | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | The required similarity level (min: 70, max: 90) |\n  </Accordion>\n  <Accordion title=\"Case: Add Signer Groups to a Document\">\n\n| Parameter | Description |\n| --- | --- |\n| email (required) | The signer's email |\n| act (required) | The signing action. Allowed values:   1 = Sign   2 = Approve   3 = Acknowledge   4 = Sign as a party   5 = Witness   6 = Sign as an intervening party   7 = Acknowledge receipt   8 = Sign as drawer, endorser, and guarantor (aval)   9 = Sign as drawer, endorser, guarantor (aval), and surety   10 = Sign as surety   11 = Sign as a party and surety   12 = Sign as a jointly liable party   13 = Sign as a party and jointly liable party |\n| foreign (required) | Whether the signer is a foreign national. 0 = has a CPF. 1 = does not have a CPF |\n| foreign\\_lang | The foreign signer's language: en = English, es = Spanish, pt = Portuguese |\n| certificadoicpbr (required) | 0 = standard D4Sign signature   1 = signature with an ICP-Brasil certificate |\n| assinatura\\_presencial (required) | 1 = in-person signature   0 = not in person |\n| docauth (optional) | 1 = requires a photo ID   0 = not required |\n| docauthandselfie (optional) | 1 = photo ID + selfie   0 = selfie not required |\n| embed\\_methodauth (optional) | Authentication method: email, password, sms, whats |\n| embed\\_smsnumber (optional) | The SMS or WhatsApp number, in standard format (for example, +5511953020202) |\n| upload\\_allow (optional) | Whether the signer can upload other documents |\n| upload\\_obs (optional) | Which documents the signer must upload (when upload\\_allow = 1) |\n| after\\_position (optional) | Sets the signing-order position after which this signer is inserted |\n| skipemail (optional) | 1 = do not send emails to this signer |\n| whatsapp\\_number (optional) | The WhatsApp number to use for signing |\n| uuid\\_grupo (optional) | The signing group's UUID |\n| certificadoicpbr\\_tipo (optional) | 1 = any certificate   2 = e-CPF   3 = e-CNPJ |\n| certificadoicpbr\\_cpf (optional) | The signer's CPF. Leave blank to accept any e-CPF |\n| certificadoicpbr\\_cnpj (optional) | The signer's CNPJ. Leave blank to accept any e-CNPJ |\n| password\\_code (optional) | The signer's access code. Leave blank to remove the previous code |\n| auth\\_pix (optional) | 1 = authenticate via PIX |\n| auth\\_pix\\_nome | Required if auth\\_pix = 1 |\n| auth\\_pix\\_cpf | Required if auth\\_pix = 1 |\n| sms-number (required) | The signer's NEW SMS number |\n| key-signer | The signer's key |\n| videoselfie | 1 = requires a video selfie |\n| d4sign\\_score (optional) | Turns on D4Sign Score. Requires a driver's license plus docauthandselfie = 1 or videoselfie = 1 |\n| d4sign\\_score\\_nome | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_cpf | Required if d4sign\\_score = 1 |\n| d4sign\\_score\\_similarity | The required similarity level (min: 70, max: 90) |\n\nPer the table above, `act` sets the action this group performs in the signing process, such as signing or approving. `uuid_grupo` is the group's UUID.
+        It must belong to the same safe as this document. You can look it up with the signing-groups endpoint documented elsewhere in this reference.\n      \n      \n  </Accordion>\n  <Accordion title=\"Case: Add Trust ID (Extra Verification)\">\n    https://docapi.d4sign.com.br/docs/endpoints-2#adicionar-trust-id-verifica%C3%A7%C3%A3o-extra\n  </Accordion>\n</AccordionGroup>\n\n\n"
       operationId: documents_signatories_create
       tags:
       - Signatories
       parameters:
       - name: uuid_document
         in: path
-        description: ''
+        description: 'The document''s UUID.'
         required: true
         schema:
           type: string
       - name: tokenAPI
         in: query
-        description: ''
+        description: 'Your account''s API token.'
         required: true
         example: '{{tokenAPI}}'
         schema:
           type: string
       - name: cryptKey
         in: query
-        description: ''
+        description: 'Your account''s crypt key.'
         required: true
         example: '{{cryptKey}}'
         schema:
           type: string
       - name: Content-Type
         in: header
-        description: ''
+        description: 'The request body''s media type. Use `application/json`.'
         required: true
         example: application/json
         schema:
           type: string
       - name: Accept
         in: header
-        description: ''
+        description: 'The response media type you accept. Use `application/json`.'
         required: true
         example: application/json
         schema:
@@ -1710,7 +1727,7 @@ paths:
                 skipemail: 1(opcional)
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -1739,7 +1756,7 @@ paths:
                   success: '1'
           headers: {}
         '400':
-          description: ''
+          description: 'Error response. The `message` field explains why the request failed.'
           content:
             application/json:
               schema:
@@ -1779,7 +1796,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2030,7 +2047,7 @@ paths:
       parameters:
       - name: uuid_document
         in: path
-        description: ''
+        description: 'The document''s UUID.'
         required: true
         schema:
           type: string
@@ -2059,7 +2076,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2122,7 +2139,7 @@ paths:
               text: Cláusula que será destacada
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2148,7 +2165,7 @@ paths:
                 text: Cláusula que será destacada
           headers: {}
         '400':
-          description: ''
+          description: 'Error response. The `message` field explains why the request failed.'
           content:
             application/json:
               schema:
@@ -2182,7 +2199,7 @@ paths:
       parameters:
       - name: uuid_document
         in: path
-        description: ''
+        description: 'The document''s UUID.'
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2209,7 +2226,7 @@ paths:
               key-signer: NyWx=
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2242,7 +2259,7 @@ paths:
       parameters:
       - name: uuid_document
         in: path
-        description: ''
+        description: 'The document''s UUID.'
         required: true
         example: '{{uuid_document}}'
         schema:
@@ -2269,7 +2286,7 @@ paths:
               key-signer: NyWx=
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2324,7 +2341,7 @@ paths:
               key-signer: NyWx=
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2454,7 +2471,7 @@ paths:
               tipo: Testemunha Teste
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2491,27 +2508,27 @@ paths:
       parameters:
       - name: uuid_document
         in: path
-        description: ''
+        description: 'The document''s UUID.'
         required: true
         schema:
           type: string
       - name: tokenAPI
         in: query
-        description: ''
+        description: 'Your account''s API token.'
         required: true
         example: '{{tokenAPI}}'
         schema:
           type: string
       - name: cryptKey
         in: query
-        description: ''
+        description: 'Your account''s crypt key.'
         required: true
         example: '{{cryptKey}}'
         schema:
           type: string
       - name: Content-Type
         in: header
-        description: ''
+        description: 'The request body''s media type. Use `application/json`.'
         required: true
         example: application/json
         schema:
@@ -2546,7 +2563,7 @@ paths:
               key_signer: NwYj=
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2626,7 +2643,7 @@ paths:
                 type: 0
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2702,7 +2719,7 @@ paths:
                 type: 0
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2738,7 +2755,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2801,7 +2818,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2837,7 +2854,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2879,7 +2896,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2915,7 +2932,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2944,7 +2961,7 @@ paths:
           type: string
       - name: id_link_assinatura
         in: path
-        description: ''
+        description: 'The signer''s ID.'
         required: true
         schema:
           type: string
@@ -2957,7 +2974,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -2981,7 +2998,7 @@ paths:
       parameters:
       - name: uuid_document
         in: path
-        description: ''
+        description: 'The document''s UUID.'
         required: true
         schema:
           type: string
@@ -3000,7 +3017,7 @@ paths:
               email: client@company.com
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -3028,7 +3045,7 @@ paths:
           type: string
       - name: tokenAPI
         in: header
-        description: ''
+        description: 'Your account''s API token.'
         required: false
         example: '{{tokenAPI}}'
         schema:
@@ -3046,7 +3063,7 @@ paths:
               comment: comentário sobre o cancelamento
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -3092,7 +3109,7 @@ paths:
                 whoCanceled:
           headers: {}
         '400':
-          description: ''
+          description: 'Error response. The `message` field explains why the request failed.'
           content:
             application/json:
               schema:
@@ -3131,7 +3148,7 @@ paths:
           type: string
       - name: Content-Type
         in: header
-        description: ''
+        description: 'The request body''s media type. Use `application/json`.'
         required: true
         example: application/json
         schema:
@@ -3158,7 +3175,7 @@ paths:
               skip_email: '0'
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -3223,7 +3240,7 @@ paths:
               urgent_document: '0'
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -3254,7 +3271,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -3971,10 +3988,8 @@ paths:
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
-          description: ''
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -4002,7 +4017,7 @@ paths:
       parameters:
       - name: id_status
         in: path
-        description: ''
+        description: 'The document status to filter by. See the table above for the codes.'
         required: true
         schema:
           type: string
@@ -4023,7 +4038,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -4032,10 +4047,8 @@ paths:
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
-          description: ''
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -4067,7 +4080,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -4253,10 +4266,8 @@ paths:
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
-          description: ''
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -4296,7 +4307,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -4482,10 +4493,8 @@ paths:
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
-          description: ''
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -4508,7 +4517,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -4554,10 +4563,8 @@ paths:
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
-          description: ''
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -4580,7 +4587,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -4617,10 +4624,8 @@ paths:
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
-          description: ''
         '401':
           $ref: '#/components/responses/Not_Logged'
-          description: ''
       security:
       - tokenAPI: []
         cryptKey: []
@@ -4650,7 +4655,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -4734,7 +4739,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -4792,7 +4797,7 @@ paths:
               url: http://seuendereco.com.br
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -4893,7 +4898,7 @@ paths:
           type: string
       - name: Content-Type
         in: header
-        description: ''
+        description: 'The request body''s media type. Use `application/json`.'
         required: true
         example: application/json
         schema:
@@ -4914,7 +4919,7 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -4947,14 +4952,14 @@ paths:
       parameters:
       - name: uuid_document
         in: path
-        description: ''
+        description: 'The document''s UUID.'
         required: true
         example: '{{uuid_document}}'
         schema:
           type: string
       - name: Content-Type
         in: header
-        description: ''
+        description: 'The request body''s media type. Use `application/json`.'
         required: true
         example: application/json
         schema:
@@ -4974,7 +4979,7 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5014,7 +5019,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5062,7 +5067,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5101,7 +5106,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5144,7 +5149,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5214,7 +5219,7 @@ paths:
                 perfil: '1'
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5268,7 +5273,7 @@ paths:
               permission: '0'
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5276,7 +5281,7 @@ paths:
                 properties: {}
           headers: {}
         '400':
-          description: ''
+          description: 'Error response. The `message` field explains why the request failed.'
           content:
             application/json:
               schema:
@@ -5324,7 +5329,7 @@ paths:
               email: exemplo@d4sign.com.br
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5364,7 +5369,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5391,7 +5396,7 @@ paths:
       parameters:
       - name: content-type
         in: header
-        description: ''
+        description: 'The request body''s media type. Use `application/json`.'
         required: true
         example: application/json
         schema:
@@ -5404,7 +5409,7 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5432,7 +5437,7 @@ paths:
       parameters:
       - name: content-type
         in: header
-        description: ''
+        description: 'The request body''s media type. Use `application/json`.'
         required: true
         example: application/json
         schema:
@@ -5445,7 +5450,7 @@ paths:
         required: true
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5476,7 +5481,7 @@ paths:
             examples: {}
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5528,7 +5533,7 @@ paths:
               email_user: email@usuario.com.br
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5572,7 +5577,7 @@ paths:
               email_user: email@usuario.com.br
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5616,7 +5621,7 @@ paths:
               email_user: email@usuario.com.br
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5648,7 +5653,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5729,7 +5734,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5772,7 +5777,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content:
             application/json:
               schema:
@@ -5830,7 +5835,7 @@ paths:
               url: https://seu-servidor.com/webhook
       responses:
         '200':
-          description: ''
+          description: 'Successful response.'
           content: {}
           headers: {}
         '400':
@@ -5914,7 +5919,7 @@ paths:
               - file
       responses:
         '201':
-          description: ''
+          description: Successful response. D4Sign created the template.
           content: {}
           headers: {}
         '400':
@@ -5977,7 +5982,7 @@ webhooks:
         required: true
       responses:
         '200':
-          description: ''
+          description: Successful response.
           content:
             application/json:
               schema:
@@ -5995,11 +6000,12 @@ webhooks:
 components:
   schemas:
     Documents_Webhook_Callback_Request_Body:
+      description: The body D4Sign sends to your webhook URL when a document's state changes.
       type: object
       properties:
         uuid:
           type: string
-          description: UUID Documento
+          description: The document's UUID.
           format: uuid
         type_post:
           type: string
@@ -6025,7 +6031,7 @@ components:
           type:
           - string
           - 'null'
-          description: Em alguns tipos de mensagem o e-mail não vem
+          description: Some message types don't include the email.
           format: email
       required:
       - uuid
@@ -6033,7 +6039,7 @@ components:
       - message
   responses:
     Not_Logged:
-      description: ''
+      description: 'The `tokenAPI`/`cryptKey` pair is missing or invalid.'
       content:
         application/json:
           schema:
@@ -6053,7 +6059,7 @@ components:
                 message: 'API error: Check API user.'
                 mensagem_pt: Chave de API inválida.
     Resource_Not_Found_Or_Unknown_Method:
-      description: ''
+      description: 'The resource or method does not exist.'
       content:
         application/json:
           schema:
@@ -6073,7 +6079,7 @@ components:
                 status: false
                 error: Método desconhecido
     Bad_Request:
-      description: ''
+      description: 'The request is invalid. The `message` field explains why.'
       content:
         application/json:
           schema:
@@ -6110,13 +6116,16 @@ components:
       type: apiKey
       in: query
       name: tokenAPI
+      description: Your account's API token.
     cryptKey:
       type: apiKey
       in: query
       name: cryptKey
+      description: Your account's crypt key.
     Webhook_Basic_Auth:
       type: http
       scheme: basic
+      description: HTTP Basic credentials D4Sign sends with webhook callbacks, set when you register the webhook.
 servers:
 - url: https://secure.d4sign.com.br
   description: Production
