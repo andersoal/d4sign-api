@@ -3296,7 +3296,10 @@ paths:
                     size:
                       type: string
                     pages:
-                      type: 'null'
+                      description: The page count. D4Sign fills this in after it finishes processing the file.
+                      type:
+                      - string
+                      - 'null'
                     uuidSafe:
                       type: string
                     safeName:
@@ -3313,6 +3316,11 @@ paths:
                       type:
                       - string
                       - 'null'
+                    whoSent:
+                      description: The email address of the account user who sent the document, if it has been sent.
+                      type:
+                      - string
+                      - 'null'
                   required:
                   - uuidDoc
                   - nameDoc
@@ -3325,12 +3333,13 @@ paths:
                   - statusName
                   - statusComment
                   - whoCanceled
+                  - whoSent
               examples:
                 '1':
-                  summary: Success
+                  summary: Success (shortened — the real endpoint returns one entry per document)
                   value:
-                  - total_documents: 57
-                    total_in_this_page: 57
+                  - total_documents: 4
+                    total_in_this_page: 4
                     current_page: 1
                     total_pages: 1
                   - uuidDoc: 691d5700-7620-4c2b-97ad-2baf0fffe8fb
@@ -3367,276 +3376,6 @@ paths:
                     statusName: Cancelado
                     statusComment:
                     whoCanceled: andydasilva52+d4sign_sandbox@gmail.com
-                  - uuidDoc: 215f5808-279f-4d0c-a5e2-f063990eaa51
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: andydasilva52+d4sign_sandbox@gmail.com
-                  - uuidDoc: 82ca4299-3c97-49b0-a3ad-7ccc0be1fb16
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: andydasilva52+d4sign_sandbox@gmail.com
-                  - uuidDoc: 69ef582d-8178-4101-b957-615aad122baf
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: andydasilva52+d4sign_sandbox@gmail.com
-                  - uuidDoc: 4c60c585-94fd-46b3-8de1-044feac655e5
-                    nameDoc: Nome Documento
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: a94cb477-b302-49f5-96f9-aff0483e3168
-                    nameDoc: NDA PJ Modelo Jun 23 docx
-                    type: application/msword
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 606c5004-773a-4d83-a509-933f80afed6e
-                    nameDoc: NDA PJ Modelo Jun 23 docx
-                    type: application/msword
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 096825df-aa3c-4cfa-86c6-24495871a5c6
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 31b3046f-49aa-492e-83a3-a29e0718314a
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 3f232aae-5c56-4bbb-8c1a-46789b08e87c
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: cfb9b68a-92a2-478f-92c4-ba77cf1e76c4
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: e5a1c2b3-3bd6-433c-b4fe-17b2314a24c6
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 2feee946-28dd-4074-b250-732ca3bb9288
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 11cc68ad-de22-4ace-bd7e-18370d700bc9
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 947e01bb-1311-4159-835f-75888121097b
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 3c2b148f-8a5e-441b-a35e-bd60eba29779
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: c54f7b5d-b32e-445b-908c-b66cbea1d85c
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '3'
-                    statusName: Aguardando Assinaturas
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: df5e05d9-e56c-434d-aae1-2d8c72b8f994
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '3'
-                    statusName: Aguardando Assinaturas
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 5109f9af-9c20-4de3-aba5-3a3e2931a02b
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 9e66b932-fcb5-44ab-849d-788a23ebfc8e
-                    nameDoc: Template-Template-Oficial-Minuta-NDA Lead-4 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '45813'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '3'
-                    statusName: Aguardando Assinaturas
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: bc16148f-a2d8-411f-b083-aa06affe1971
-                    nameDoc: Template-Template-Oficial-Minuta-NDA Lead-3 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '45813'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 2fa7840e-0a4e-44ef-a332-8479b08bef0b
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '3'
-                    statusName: Aguardando Assinaturas
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: c9ba23b3-f907-4567-85b2-3f1c324541f7
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '3'
-                    statusName: Aguardando Assinaturas
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: c362f925-b29c-4b33-b4b7-30157a7726ce
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '3'
-                    statusName: Aguardando Assinaturas
-                    statusComment:
-                    whoCanceled:
                   - uuidDoc: a7a1f0ff-e616-46a1-ad1b-f29205ab6362
                     nameDoc: Invoice- Brazil -56 docx
                     type: >-
@@ -3648,340 +3387,7 @@ paths:
                     statusId: '6'
                     statusName: Cancelado
                     statusComment: Teste
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: 1b8ec6b1-c552-44fa-8e5e-098f0bb31e0e
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 1e8e78b3-df30-47de-bc16-9a3494fbbbc8
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: aaae4092-6632-47df-a01f-126d7c850723
-                    nameDoc: Invoice- Brazil -56 pdf
-                    type: application/pdf
-                    size: '35644'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 03f554a4-882e-4d57-aef1-6f90b1125408
-                    nameDoc: Invoice- Brazil -56 pdf
-                    type: application/pdf
-                    size: '35644'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: afec2ba6-ad78-4a53-b997-97f26be2c563
-                    nameDoc: Invoice- Brazil -56 pdf
-                    type: application/pdf
-                    size: '35644'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 140f7eb4-cda7-41da-a300-5154920d8749
-                    nameDoc: Invoice- Brazil -56 pdf
-                    type: application/pdf
-                    size: '35644'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment: teste
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: 04882e8c-01b4-4672-9186-014659aaaf85
-                    nameDoc: Invoice- Brazil -56 docx
-                    type: >-
-                      application/vnd.openxmlformats-officedocument.wordprocessingml.document
-                    size: '19882'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '3'
-                    statusName: Aguardando Assinaturas
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: b66d3c8d-7325-4194-9453-a6950c83c34b
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: 76ab32fc-91de-4e1c-836a-faccd3e8365d
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: e1504ad9-8d24-4858-b42b-013c90b917d8
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: 76b7a68b-1d9e-4b81-b2cb-a711408f3f3b
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: feb64583-48ab-477f-87a4-a990822d40b4
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: 6fb6df1d-4333-43d8-80c0-dc3a885064d1
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: 9e7b895a-0834-442c-8356-58c06bf1d27e
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment:
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: a1576aba-46db-418f-b53e-92365e38791e
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment: teste
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: 5b1d1ca8-63ba-4950-b3c2-89cdb23e8683
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '6'
-                    statusName: Cancelado
-                    statusComment: teste
-                    whoCanceled: maciel@smartcp.com.br
-                  - uuidDoc: b39c21d5-a1fa-45e7-8af5-b63c39b0323c
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 1b473675-0465-494b-9f72-5dc8d9117530
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 153df665-44c0-4ecf-9793-5806bff0e225
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 872682c4-e705-4e11-8dbe-5f1c0f97b583
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 9be760cd-9111-4a68-89f8-5180659a43f5
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 5521454f-f7e0-499b-979b-ede716766fa7
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 008c0525-12e7-4267-9e5d-06e377634f82
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 53984d4e-1050-4ad4-8394-fc62baedfff5
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 8d143bcb-4234-44f9-97b4-dd3f5112d763
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 5f3ae3e6-54fd-4910-acfc-751801d85991
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: c11749df-5bca-4cf8-aabc-8a2c65adc1f1
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 3de5180b-e8ed-49a6-a995-96fb3760cb8a
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: ead24b8c-74e7-492d-8c9f-1c3d3813f802
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
-                  - uuidDoc: 294a671a-57a1-4e5d-8135-ba6df4eb516d
-                    nameDoc: Documento sem título pdf
-                    type: application/pdf
-                    size: '72693'
-                    pages:
-                    uuidSafe: 651d69fa-33fe-494c-8f5a-0042f737d816
-                    safeName: 'NDA - Automação '
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                    statusComment:
-                    whoCanceled:
+                    whoCanceled: user@example.com
                 '2':
                   summary: Example from Official Doc
                   value: "[\r\n    {\r\n        \"uuidDoc\": \"9f08bf18-bf4b-410f-9701-c286e5b1cad1\",\r\n        \"nameDoc\": \"teste.pdf\",\r\n        \"type\": \"application/pdf\",\r\n        \"size\": \"118990\",\r\n        \"pages\": \"6\",\r\n        \"uuidSafe\": \"06b3ddb1-abc9-4ab8-b944-0d7c940486af\",\r\n        \"safeName\": \"Atendimento\",\r\n        \"statusId\": \"3\",\r\n        \"statusName\": \"Aguardando Assinaturas\",\r\n        \"statusComment\": \"Comentário sobre cancelamento\",\r\n        \"whoCanceled\": \"E-mail de quem cancelou o documento\"\r\n    },\r\n    {...\r\n    }\r\n]"
@@ -4038,12 +3444,53 @@ paths:
           type: string
       responses:
         '200':
-          description: 'Successful response.'
+          description: >-
+            Successful response. The first array entry is a pagination object. The rest, if any, are
+            documents with this status, in the same shape as `GET /documents/{uuid_safe}/safe`.
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                type: array
+                items:
+                  type: object
+                  properties:
+                    total_documents:
+                      type: integer
+                    total_in_this_page:
+                      type: integer
+                    current_page:
+                      type: integer
+                    total_pages:
+                      type: integer
+                    uuidDoc:
+                      type: string
+                    nameDoc:
+                      type: string
+                    type:
+                      type: string
+                    size:
+                      type: string
+                    pages:
+                      description: The page count. D4Sign fills this in after it finishes processing the file.
+                      type:
+                      - string
+                      - 'null'
+                    uuidSafe:
+                      type: string
+                    safeName:
+                      type: string
+                    statusId:
+                      type: string
+                    statusName:
+                      type: string
+              examples:
+                '1':
+                  summary: Success, no documents with this status
+                  value:
+                  - total_documents: 0
+                    total_in_this_page: 0
+                    current_page: 1
+                    total_pages: 0
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
@@ -4105,7 +3552,10 @@ paths:
                     size:
                       type: string
                     pages:
-                      type: 'null'
+                      description: The page count. D4Sign fills this in after it finishes processing the file.
+                      type:
+                      - string
+                      - 'null'
                     uuidSafe:
                       type: string
                     safeName:
@@ -4126,10 +3576,10 @@ paths:
                   - statusName
               examples:
                 '1':
-                  summary: Success
+                  summary: Success (shortened — the real endpoint returns one entry per document)
                   value:
-                  - total_documents: 13
-                    total_in_this_page: 13
+                  - total_documents: 3
+                    total_in_this_page: 3
                     current_page: 1
                     total_pages: 1
                   - uuidDoc: c00ed0f4-21ea-49ab-a771-7cdc32eb16a2
@@ -4150,97 +3600,7 @@ paths:
                     safeName: NDA - Sandbox
                     statusId: '6'
                     statusName: Cancelado
-                  - uuidDoc: 4f8fcb98-3e94-4fc6-b4e2-51fe0c14f7df
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 215f5808-279f-4d0c-a5e2-f063990eaa51
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 82ca4299-3c97-49b0-a3ad-7ccc0be1fb16
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: a23048ae-0c93-45b8-81df-f1c26839bb88
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 69ef582d-8178-4101-b957-615aad122baf
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: c13cedf4-b45f-442b-8281-01e7352fa3af
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 40375673-f18f-4cb5-a306-aa20a30d3d1a
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 3e11e4ac-18fe-4073-81d2-90769a6162c1
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 667724bc-d44a-4a36-b63c-147b6e8710a6
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
                   - uuidDoc: a94cb477-b302-49f5-96f9-aff0483e3168
-                    nameDoc: NDA PJ Modelo Jun 23 docx
-                    type: application/msword
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                  - uuidDoc: 606c5004-773a-4d83-a509-933f80afed6e
                     nameDoc: NDA PJ Modelo Jun 23 docx
                     type: application/msword
                     size: '0'
@@ -4332,7 +3692,10 @@ paths:
                     size:
                       type: string
                     pages:
-                      type: 'null'
+                      description: The page count. D4Sign fills this in after it finishes processing the file.
+                      type:
+                      - string
+                      - 'null'
                     uuidSafe:
                       type: string
                     safeName:
@@ -4353,10 +3716,10 @@ paths:
                   - statusName
               examples:
                 '1':
-                  summary: Success
+                  summary: Success (shortened — the real endpoint returns one entry per document)
                   value:
-                  - total_documents: 13
-                    total_in_this_page: 13
+                  - total_documents: 3
+                    total_in_this_page: 3
                     current_page: 1
                     total_pages: 1
                   - uuidDoc: c00ed0f4-21ea-49ab-a771-7cdc32eb16a2
@@ -4377,97 +3740,7 @@ paths:
                     safeName: NDA - Sandbox
                     statusId: '6'
                     statusName: Cancelado
-                  - uuidDoc: 4f8fcb98-3e94-4fc6-b4e2-51fe0c14f7df
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 215f5808-279f-4d0c-a5e2-f063990eaa51
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 82ca4299-3c97-49b0-a3ad-7ccc0be1fb16
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: a23048ae-0c93-45b8-81df-f1c26839bb88
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 69ef582d-8178-4101-b957-615aad122baf
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: c13cedf4-b45f-442b-8281-01e7352fa3af
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 40375673-f18f-4cb5-a306-aa20a30d3d1a
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 3e11e4ac-18fe-4073-81d2-90769a6162c1
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
-                  - uuidDoc: 667724bc-d44a-4a36-b63c-147b6e8710a6
-                    nameDoc: NDA Teste D4Sign
-                    type: application/pdf
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '6'
-                    statusName: Cancelado
                   - uuidDoc: a94cb477-b302-49f5-96f9-aff0483e3168
-                    nameDoc: NDA PJ Modelo Jun 23 docx
-                    type: application/msword
-                    size: '0'
-                    pages:
-                    uuidSafe: 6a036f94-26d5-4aa6-89d8-4fddae6b309b
-                    safeName: NDA - Sandbox
-                    statusId: '2'
-                    statusName: Aguardando Signatários
-                  - uuidDoc: 606c5004-773a-4d83-a509-933f80afed6e
                     nameDoc: NDA PJ Modelo Jun 23 docx
                     type: application/msword
                     size: '0'
@@ -4534,7 +3807,10 @@ paths:
                     size:
                       type: string
                     pages:
-                      type: 'null'
+                      description: The page count. D4Sign fills this in after it finishes processing the file.
+                      type:
+                      - string
+                      - 'null'
                     uuidSafe:
                       type: string
                     safeName:
@@ -4544,9 +3820,18 @@ paths:
                     statusName:
                       type: string
                     statusComment:
-                      type: 'null'
+                      type:
+                      - string
+                      - 'null'
                     whoCanceled:
-                      type: 'null'
+                      type:
+                      - string
+                      - 'null'
+                    whoSent:
+                      description: The email address of the account user who sent the document, if it has been sent.
+                      type:
+                      - string
+                      - 'null'
               example:
               - uuidDoc: 691d5700-7620-4c2b-97ad-2baf0fffe8fb
                 nameDoc: Invoice- Brazil -56 docx
@@ -4560,6 +3845,7 @@ paths:
                 statusName: Aguardando Signatários
                 statusComment:
                 whoCanceled:
+                whoSent: jane@example.com
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
@@ -4662,9 +3948,15 @@ paths:
                 type: object
                 properties:
                   uuid_documento_gerado:
-                    type: string
+                    description: 'Null when the document is not a power form, or has no responses yet.'
+                    type:
+                    - string
+                    - 'null'
                   nome_documento:
-                    type: string
+                    description: 'Null when the document is not a power form, or has no responses yet.'
+                    type:
+                    - string
+                    - 'null'
                   respostas:
                     type: array
                     items:
@@ -4700,21 +3992,30 @@ paths:
                 - uuid_documento_gerado
                 - nome_documento
                 - respostas
-              example:
-                uuid_documento_gerado: abcd-efgh-ijkl-123456789123
-                nome_documento: Documento Teste
-                respostas:
-                - email_preenchedor: e-mail do preenchedor 1
-                  dt_cadastro: '2025-03-24 17:04:10'
-                  campos_respostas:
-                    toke1: Resposta1
-                    token2: Resposta2
-                - whatsapp_preenchedor: whatsapp do preenchedor 2
-                  dt_cadastro: '2025-03-24 17:03:37'
-                  campos_respostas:
-                    CPF: '12345678900'
-                    Cidade: Cidade A
-                    Plano: Plano A
+              examples:
+                '1':
+                  summary: 'Power form with responses'
+                  value:
+                    uuid_documento_gerado: abcd-efgh-ijkl-123456789123
+                    nome_documento: Documento Teste
+                    respostas:
+                    - email_preenchedor: e-mail do preenchedor 1
+                      dt_cadastro: '2025-03-24 17:04:10'
+                      campos_respostas:
+                        toke1: Resposta1
+                        token2: Resposta2
+                    - whatsapp_preenchedor: whatsapp do preenchedor 2
+                      dt_cadastro: '2025-03-24 17:03:37'
+                      campos_respostas:
+                        CPF: '12345678900'
+                        Cidade: Cidade A
+                        Plano: Plano A
+                '2':
+                  summary: 'Not a power form, or no responses yet'
+                  value:
+                    uuid_documento_gerado:
+                    nome_documento:
+                    respostas: []
           headers: {}
       security:
       - tokenAPI: []
@@ -5028,7 +4329,10 @@ paths:
                   uuid_arquivo:
                     type: string
                   TAGs:
-                    type: string
+                    description: A comma-separated list of tag names, or null when the document has no tags.
+                    type:
+                    - string
+                    - 'null'
                 required:
                 - uuid_arquivo
                 - TAGs
@@ -5039,7 +4343,7 @@ paths:
                     uuid_arquivo: uuid-do-documento
                     TAGs: teste1, teste2, teste4
                 '2':
-                  summary: Example 2
+                  summary: No tags
                   value:
                     uuid_arquivo: 4b0ec628-64e4-4d27-a2c5-5524f1545df5
                     TAGs:
@@ -5224,7 +4528,41 @@ paths:
             application/json:
               schema:
                 type: object
-                properties: {}
+                properties:
+                  uuid_arquivo:
+                    type: string
+                  watchers:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                        perfil:
+                          type: string
+                      required:
+                      - email
+                      - perfil
+                required:
+                - uuid_arquivo
+                - watchers
+              examples:
+                '1':
+                  summary: Has watchers
+                  value:
+                    uuid_arquivo: c19cb80c-1233-4a1b-802e-3e6f3ffebed5
+                    watchers:
+                    - email: exemplo@d4sign.com.br
+                      perfil: '0'
+                    - email: exemplo@d4sign.com.br
+                      perfil: '1'
+                '2':
+                  summary: No watchers
+                  value:
+                    uuid_arquivo: c19cb80c-1233-4a1b-802e-3e6f3ffebed5
+                    watchers:
           headers: {}
       security:
       - tokenAPI: []
@@ -5739,7 +5077,11 @@ paths:
             application/json:
               schema:
                 type: object
-                properties: {}
+                properties:
+                  message:
+                    type: string
+                required:
+                - message
               example:
                 message: OK
           headers: {}
@@ -5754,6 +5096,8 @@ paths:
         Lists the webhook(s) registered for a safe or a document (API v2.0 — this replaces and extends v1, which covered documents only).
 
         > This endpoint was found in D4Sign's official documentation at docapi.d4sign.com.br/reference/listar-webhook-de-um-cofre-ou-documento-versao-20. It was not in the original export of this spec.
+
+        > A live call confirmed the response is a single object for the given `type` and `uuid`, not an array — each safe or document has at most one v2 webhook registered.
       operationId: webhooks_list
       tags:
       - Webhooks
@@ -5781,14 +5125,33 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    uuid:
-                      type: string
-                    url:
-                      type: string
+                type: object
+                properties:
+                  type:
+                    description: Echoes the `type` query parameter.
+                    type: string
+                  uuid:
+                    description: Echoes the `uuid` query parameter.
+                    type: string
+                  webhook_url:
+                    type: string
+                  history:
+                    description: Delivery history for this webhook. Item shape unconfirmed — empty in testing.
+                    type: array
+                    items: {}
+                required:
+                - type
+                - uuid
+                - webhook_url
+                - history
+              examples:
+                '1':
+                  summary: Success, no delivery history yet
+                  value:
+                    type: documento
+                    uuid: '{{uuid}}'
+                    webhook_url: https://example.com/webhooks/d4sign
+                    history: []
           headers: {}
         '400':
           $ref: '#/components/responses/Bad_Request'
