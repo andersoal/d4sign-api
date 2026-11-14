@@ -1,0 +1,20 @@
+/*
+ * Retheme Starlight's accent color to match D4Sign's own docs.
+ *
+ * Source: docapi.d4sign.com.br (ReadMe-hosted) sets --project-color-primary: #40404f,
+ * used for its header, buttons, and links — confirmed from its live CSS, not guessed.
+ * #40404f is hsl(240, 10%, 28%), so the scale below keeps that hue and saturation and
+ * only shifts lightness per level, the same way Starlight's own default scale does.
+ */
+:root {
+	/* Dark mode (default) */
+	--sl-color-accent-low: hsl(240, 20%, 20%);
+	--sl-color-accent: hsl(240, 12%, 50%);
+	--sl-color-accent-high: hsl(240, 25%, 85%);
+}
+
+:root[data-theme='light'] {
+	--sl-color-accent-low: hsl(240, 25%, 92%);
+	--sl-color-accent: hsl(240, 10%, 28%);
+	--sl-color-accent-high: hsl(240, 25%, 20%);
+}
